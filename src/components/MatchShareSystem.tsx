@@ -258,93 +258,131 @@ export function MatchShareSystem({ match, onClose }: MatchShareSystemProps) {
     ctx.fillStyle = labelColor;
     ctx.font = 'bold 10px monospace, monospace';
     ctx.letterSpacing = '0.15em';
+    ctx.textAlign = 'center';
     const stampText = `STAMP ID: WC-${match.year}-${match.id.toUpperCase()}`;
     ctx.fillText(stampText, 300, 92);
 
-    // 6. Grand Teams Layout
+    // 6. Dual-Column Layout: Left Column (Metadata) and Right Column (Defining Moment)
+
+    // LEFT COLUMN (Metadata)
+    const leftColCenter = 168;
+
+    // Team A
     ctx.fillStyle = textPrimary;
-    ctx.font = '900 24px Georgia, serif';
+    ctx.font = '900 17px Georgia, serif';
     ctx.letterSpacing = '0.05em';
     ctx.textAlign = 'center';
+    ctx.fillText(match.teamA.toUpperCase(), leftColCenter, 160);
     
-    // Team A
-    ctx.fillText(match.teamA.toUpperCase(), 300, 160);
-    
-    // Versus Line
+    // Versus Line (italic)
     ctx.fillStyle = borderColor;
-    ctx.font = 'italic 16px Georgia, serif';
+    ctx.font = 'italic 12px Georgia, serif';
     ctx.letterSpacing = '0.1em';
-    ctx.fillText('versus', 300, 195);
+    ctx.fillText('versus', leftColCenter, 190);
 
     // Team B
-    ctx.fillText(match.teamB.toUpperCase(), 300, 240);
+    ctx.fillStyle = textPrimary;
+    ctx.font = '900 17px Georgia, serif';
+    ctx.letterSpacing = '0.05em';
+    ctx.fillText(match.teamB.toUpperCase(), leftColCenter, 220);
 
-    // 7. Dynamic Score Display Banner
+    // Score Banner
     ctx.fillStyle = matchBannerBg;
     ctx.strokeStyle = borderColor;
-    ctx.lineWidth = 1.5;
+    ctx.lineWidth = 1.2;
     ctx.beginPath();
-    ctx.roundRect(180, 275, 240, 65, 4);
+    ctx.roundRect(65, 250, 206, 55, 4);
     ctx.fill();
     ctx.stroke();
 
     ctx.fillStyle = scoreColor;
-    ctx.font = 'bold 44px Georgia, serif';
+    ctx.font = 'bold 32px Georgia, serif';
     ctx.textBaseline = 'middle';
-    ctx.fillText(`${match.scoreA} - ${match.scoreB}`, 300, 308);
+    ctx.fillText(`${match.scoreA} - ${match.scoreB}`, leftColCenter, 278);
 
     if (match.shootoutScore) {
       ctx.fillStyle = devStyle === 'chrome' ? '#9CA3AF' : devStyle === 'sepia' ? '#D97706' : '#ef4444';
-      ctx.font = '900 9px monospace, monospace';
-      ctx.letterSpacing = '0.25em';
-      ctx.fillText(match.shootoutScore.toUpperCase(), 300, 355);
+      ctx.font = '900 8.5px monospace, monospace';
+      ctx.letterSpacing = '0.15em';
+      ctx.fillText(match.shootoutScore.toUpperCase(), leftColCenter, 322);
     }
 
-    // 8. Defining Moment Title & Segment
-    ctx.fillStyle = momentPanelBg;
-    ctx.beginPath();
-    ctx.roundRect(45, 395, 510, 190, 2);
-    ctx.fill();
-    
-    ctx.strokeStyle = momentPanelBorder;
-    ctx.beginPath();
-    ctx.roundRect(45, 395, 510, 190, 2);
-    ctx.stroke();
-
-    ctx.fillStyle = titleStampColor;
-    ctx.font = '900 10px system-ui, sans-serif';
-    ctx.letterSpacing = '0.3em';
-    ctx.fillText('DEFINING MOMENT', 300, 424);
-
-    ctx.fillStyle = textPrimary;
-    ctx.font = 'italic bold 17px Georgia, serif';
-    wrapText(ctx, `"${match.definingMoment.title}"`, 300, 460, 440, 24);
-
-    // Moment Description (Slightly smaller, muted gold/grey/amber)
-    ctx.fillStyle = textMuted;
-    ctx.font = 'normal 12px Georgia, serif';
-    wrapText(ctx, match.definingMoment.description, 300, 508, 450, 18);
-
-    // 9. Match Stamp details
+    // Secondary Left Column Details (Title, Era)
     ctx.strokeStyle = devStyle === 'chrome' ? 'rgba(255, 255, 255, 0.1)' : devStyle === 'sepia' ? 'rgba(217, 119, 6, 0.15)' : 'rgba(212, 175, 55, 0.2)';
     ctx.lineWidth = 1;
     ctx.beginPath();
-    ctx.moveTo(60, 610);
-    ctx.lineTo(540, 610);
+    ctx.moveTo(60, 345);
+    ctx.lineTo(276, 345);
     ctx.stroke();
 
+    ctx.fillStyle = labelColor;
+    ctx.font = 'bold 8.5px monospace, monospace';
+    ctx.letterSpacing = '0.15em';
+    ctx.fillText('HISTORIC CHRONICLE', leftColCenter, 365);
+
     ctx.fillStyle = textPrimary;
-    ctx.font = 'normal 13px Georgia, serif';
-    ctx.fillText(`“${match.title}”`, 300, 634);
+    ctx.font = 'italic normal 12.5px Georgia, serif';
+    wrapText(ctx, `“${match.title}”`, leftColCenter, 388, 200, 16);
+
+    ctx.fillStyle = labelColor;
+    ctx.font = 'bold 8px monospace, monospace';
+    ctx.letterSpacing = '0.12em';
+    ctx.fillText(`${match.era.toUpperCase()} ERA`, leftColCenter, 452);
+
+
+    // RIGHT COLUMN (Defining Moment Plaque)
+    ctx.fillStyle = momentPanelBg;
+    ctx.beginPath();
+    ctx.roundRect(305, 132, 255, 350, 4);
+    ctx.fill();
+    
+    ctx.strokeStyle = momentPanelBorder;
+    ctx.lineWidth = 1.2;
+    ctx.beginPath();
+    ctx.roundRect(305, 132, 255, 350, 4);
+    ctx.stroke();
+
+    ctx.fillStyle = titleStampColor;
+    ctx.font = '900 9.5px system-ui, sans-serif';
+    ctx.letterSpacing = '0.25em';
+    ctx.textAlign = 'center';
+    ctx.fillText('THE DEFINING MOMENT', 432, 162);
+
+    ctx.strokeStyle = momentPanelBorder;
+    ctx.lineWidth = 0.75;
+    ctx.beginPath();
+    ctx.moveTo(335, 178);
+    ctx.lineTo(530, 178);
+    ctx.stroke();
+
+    // Narrative Summary Left-Aligned Text
+    ctx.textAlign = 'left';
+    ctx.fillStyle = textPrimary;
+    ctx.font = 'italic bold 14px Georgia, serif';
+    const nextY = wrapText(ctx, `"${match.definingMoment.title}"`, 325, 206, 215, 20);
+
+    ctx.fillStyle = textMuted;
+    ctx.font = 'normal 11.5px Georgia, serif';
+    wrapText(ctx, match.definingMoment.description, 325, nextY + 12, 215, 17);
+
+
+    // 9. Lower Divider
+    ctx.strokeStyle = devStyle === 'chrome' ? 'rgba(255, 255, 255, 0.1)' : devStyle === 'sepia' ? 'rgba(217, 119, 6, 0.15)' : 'rgba(212, 175, 55, 0.2)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(60, 520);
+    ctx.lineTo(540, 520);
+    ctx.stroke();
 
     ctx.font = 'normal 10px system-ui, sans-serif';
     ctx.fillStyle = labelColor;
+    ctx.textAlign = 'center';
     ctx.letterSpacing = '0.05em';
-    ctx.fillText(cardDescription, 300, 660);
+    ctx.fillText(cardDescription, 300, 550);
 
     // 10. Archival Barcode at the bottom
     const barcodeXStart = 160;
-    const barcodeY = 690;
+    const barcodeY = 585;
     const barcodeHeight = 35;
     ctx.fillStyle = borderColor;
     for (let i = 0; i < 48; i++) {
@@ -356,7 +394,7 @@ export function MatchShareSystem({ match, onClose }: MatchShareSystemProps) {
     ctx.fillStyle = labelColor;
     ctx.font = 'bold 9px monospace, monospace';
     ctx.letterSpacing = '0.4em';
-    ctx.fillText(`*DECDEC-${match.year}-${match.id}*`, 300, 746);
+    ctx.fillText(`*DECDEC-${match.year}-${match.id}*`, 300, 642);
 
     // Extract temporary download URL pattern
     setDownloadUrl(canvas.toDataURL('image/png'));
@@ -612,6 +650,27 @@ export function MatchShareSystem({ match, onClose }: MatchShareSystemProps) {
     });
   };
 
+  const design = {
+    bg: devStyle === 'chrome' ? 'bg-[#030303]' : devStyle === 'sepia' ? 'bg-[#1c0f06]' : 'bg-[#060606]',
+    text: devStyle === 'chrome' ? 'text-white' : devStyle === 'sepia' ? 'text-[#FEF3C7]' : 'text-white',
+    textMuted: devStyle === 'chrome' ? 'text-[#9CA3AF]' : devStyle === 'sepia' ? 'text-[#FCD34D]' : 'text-[#BAC5CF]',
+    border: devStyle === 'chrome' ? 'border-[#D1D5DB]' : devStyle === 'sepia' ? 'border-[#D97706]' : 'border-[#D4AF37]',
+    borderStyle: devStyle === 'chrome' ? '#D1D5DB' : devStyle === 'sepia' ? '#D97706' : '#D4AF37',
+    subBorder: devStyle === 'chrome' ? 'border-[#4B5563]' : devStyle === 'sepia' ? 'border-[#B45309]' : 'border-[#D4AF37]/45',
+    watermark: devStyle === 'chrome' ? 'text-white/[0.02]' : devStyle === 'sepia' ? 'text-[#D97706]/[0.05]' : 'text-[#D4AF37]/[0.04]',
+    titleStamp: devStyle === 'chrome' ? 'text-[#F3F4F6]' : devStyle === 'sepia' ? 'text-[#FBBF24]' : 'text-[#D4AF37]',
+    label: devStyle === 'chrome' ? 'text-[#9CA3AF]' : devStyle === 'sepia' ? 'text-[#D97706]' : 'text-[#8E9AA6]',
+    bannerBg: devStyle === 'chrome' ? 'bg-[#1F2937]' : devStyle === 'sepia' ? 'bg-[#2F1809]' : 'bg-[#111111]',
+    scoreText: devStyle === 'chrome' ? 'text-[#F9FAFB]' : devStyle === 'sepia' ? 'text-[#FBBF24]' : 'text-[#D4AF37]',
+    momentPanelBg: devStyle === 'chrome' ? 'bg-white/[0.04]' : devStyle === 'sepia' ? 'bg-[#D97706]/[0.06]' : 'bg-[#D4AF37]/[0.08]',
+    momentPanelBorder: devStyle === 'chrome' ? 'border-white/20' : devStyle === 'sepia' ? 'border-[#D97706]/25' : 'border-[#D4AF37]/30',
+    description: devStyle === 'chrome' 
+      ? 'MEMENTO CHRONICLED ON CHROME • SILVER HALIDE PRINT' 
+      : devStyle === 'sepia' 
+        ? 'MEMENTO CHRONICLED ON PAPYRUS • AMBER SEPIA GLOW' 
+        : 'MEMENTO CHRONICLED ON BRONZE • WORLD CUP DECREE'
+  };
+
   return (
     <div id="match-share-overlay" className="fixed inset-0 z-[600] flex items-center justify-center bg-black/95 p-4 md:p-6 overflow-y-auto">
       <motion.div 
@@ -662,18 +721,140 @@ export function MatchShareSystem({ match, onClose }: MatchShareSystemProps) {
               ))}
             </div>
 
-            {/* Canvas Main Developing Bay */}
-            <div className="flex-1 min-w-0 bg-[#050505] relative rounded-sm group overflow-hidden aspect-[3/4]">
-              {/* Realtime HTML Mirror as loading preview before canvas is initialized/rendered */}
+            {/* Canvas Main Developing Bay with layout grid-cols-2 */}
+            <div 
+              className="flex-1 min-w-0 relative rounded-sm group overflow-hidden aspect-[3/4]"
+              style={{
+                filter: isDeveloping
+                  ? `blur(${Math.max(0, 16 - developingProgress * 0.2)}px) grayscale(${Math.max(0, 100 - developingProgress)}%) brightness(${0.25 + (developingProgress / 100) * 0.75})`
+                  : 'none'
+              }}
+            >
+              {/* Actual invisible canvas underneath to preserve rendering and file-saving behavior */}
               <canvas 
                 ref={canvasRef} 
-                className="w-full h-full object-contain block transition-all duration-300"
-                style={{
-                  filter: isDeveloping
-                    ? `blur(${Math.max(0, 16 - developingProgress * 0.2)}px) grayscale(${Math.max(0, 100 - developingProgress)}%) brightness(${0.25 + (developingProgress / 100) * 0.75})`
-                    : 'none'
-                }}
+                className="absolute pointer-events-none opacity-0 w-0 h-0"
               />
+
+              {/* The gorgeous, accessible, and responsive HTML Card with requested grid-cols-2 layout */}
+              <div className={`w-full h-full p-4 md:p-6 flex flex-col justify-between border-2 ${design.border} relative ${design.bg} ${design.text} font-serif tracking-normal leading-relaxed`}>
+                
+                {/* Vintage Double Internal Border */}
+                <div className={`absolute inset-1.5 border ${design.subBorder} pointer-events-none`} />
+
+                {/* Ambient watermark background text */}
+                <div className={`absolute inset-0 flex items-center justify-center font-bold text-[140px] md:text-[180px] font-serif ${design.watermark} select-none pointer-events-none z-0`}>
+                  {match.year}
+                </div>
+
+                <div className="relative z-10 w-full flex flex-col h-full justify-between">
+                  {/* Title Header */}
+                  <div className="text-center">
+                    <p className={`font-sans font-bold text-[8.5px] md:text-[10px] tracking-[0.4em] uppercase ${design.titleStamp}`}>
+                      HISTORIC MATCH CHRONICLES
+                    </p>
+                    <div className={`w-4/5 h-[1px] mx-auto my-1.5 ${devStyle === 'chrome' ? 'bg-white/15' : devStyle === 'sepia' ? 'bg-[#D97706]/25' : 'bg-[#D4AF37]/35'}`} />
+                    <p className={`font-mono font-bold text-[7px] md:text-[8px] tracking-[0.2em] uppercase ${design.label}`}>
+                      STAMP ID: WC-{match.year}-{match.id.toUpperCase()}
+                    </p>
+                  </div>
+
+                  {/* Dual-Column Layout: metadata on the left & narrative summary on the right */}
+                  <div className="grid grid-cols-2 gap-3.5 md:gap-5 items-stretch my-auto py-2">
+                    
+                    {/* LEFT COLUMN: Metadata Snapshot */}
+                    <div className="flex flex-col justify-center items-center text-center border-r border-[#4E5661]/15 pr-3 md:pr-4">
+                      
+                      <p className="font-serif font-black text-xs md:text-sm tracking-wide uppercase leading-tight line-clamp-1">
+                        {match.teamA}
+                      </p>
+                      
+                      <p className={`font-serif italic text-[10px] my-1 ${devStyle === 'sepia' ? 'text-[#D97706]' : 'text-[#D4AF37]'}`}>
+                        versus
+                      </p>
+                      
+                      <p className="font-serif font-black text-xs md:text-sm tracking-wide uppercase leading-tight line-clamp-1">
+                        {match.teamB}
+                      </p>
+
+                      <div className={`w-full mt-3 py-1.5 md:py-2 px-1 border ${design.border} ${design.bannerBg} flex flex-col items-center justify-center rounded-[3px] shadow-sm`}>
+                        <span className={`font-serif font-bold text-lg md:text-2xl ${design.scoreText} leading-none`}>
+                          {match.scoreA} - {match.scoreB}
+                        </span>
+                        {match.shootoutScore && (
+                          <span className={`font-mono font-black text-[6.5px] tracking-widest uppercase mt-1 ${devStyle === 'chrome' ? 'text-gray-400' : devStyle === 'sepia' ? 'text-amber-600' : 'text-red-500'}`}>
+                            {match.shootoutScore}
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="w-full my-3 border-t border-[#4E5661]/15" />
+                      
+                      <p className={`font-mono font-bold text-[7px] tracking-[0.1em] uppercase ${design.label} mb-0.5`}>
+                        HISTORIC CHRONICLE
+                      </p>
+                      <p className="text-[9px] md:text-[10px] leading-tight font-serif italic text-white font-medium line-clamp-2 text-center">
+                        “{match.title}”
+                      </p>
+                      <p className={`font-mono font-bold text-[7px] tracking-[0.12em] uppercase ${design.label} mt-1.5`}>
+                        {match.era.toUpperCase()} ERA
+                      </p>
+                    </div>
+
+                    {/* RIGHT COLUMN: Defining Moment Plaque */}
+                    <div className={`flex flex-col justify-between p-2 md:p-3 rounded-[3px] border ${design.momentPanelBorder} ${design.momentPanelBg}`}>
+                      <div className="text-center mb-1 bg-black/15 py-1 border-b border-white/5">
+                        <span className={`font-sans font-black text-[7px] md:text-[8px] tracking-[0.2em] ${design.titleStamp} uppercase block`}>
+                          THE DEFINING MOMENT
+                        </span>
+                      </div>
+
+                      <div className="flex-1 flex flex-col justify-center text-left py-1">
+                        <p className={`font-serif font-bold italic text-[9.5px] md:text-[11.5px] leading-tight mb-2 ${devStyle === 'sepia' ? 'text-amber-200' : 'text-white'}`}>
+                          "{match.definingMoment.title}"
+                        </p>
+                        <p className={`font-serif text-[8.5px] md:text-[9.5px] leading-relaxed line-clamp-[6] ${design.textMuted}`}>
+                          {match.definingMoment.description}
+                        </p>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  {/* Footstamp metadata & barcode */}
+                  <div className="text-center mt-auto">
+                    <div className="w-full border-t border-white/10 my-1.5 md:my-2" />
+                    
+                    <p className={`font-sans text-[7.5px] md:text-[8px] tracking-wider uppercase ${design.label} mb-1.5`}>
+                      {design.description}
+                    </p>
+
+                    <div className="flex justify-center items-center h-4.5 opacity-80 overflow-hidden filter contrast-125 mb-1 bg-white/5 rounded-sm px-1.5 py-1">
+                      {Array.from({ length: 48 }).map((_, i) => {
+                        const isThick = (i % 3 === 0) || (i % 7 === 0);
+                        const isSpace = Math.sin(i * 1.5) > 0;
+                        return (
+                          <div 
+                            key={`html-barcode-bar-${i}`}
+                            className="h-full bg-current"
+                            style={{
+                              color: design.borderStyle,
+                              width: isThick ? '2.2px' : '0.8px',
+                              marginLeft: isSpace ? '1.8px' : '0.5px'
+                            }}
+                          />
+                        );
+                      })}
+                    </div>
+
+                    <p className={`font-mono font-bold text-[7px] md:text-[8.5px] tracking-[0.3em] uppercase ${design.label} mt-1`}>
+                      *DECDEC-{match.year}-{match.id}*
+                    </p>
+                  </div>
+
+                </div>
+
+              </div>
 
               {/* Cinematic Developing Overlay */}
               <AnimatePresence>

@@ -752,9 +752,16 @@ export function HistoricMatchesVault({ activeMatchId, onClose }: { activeMatchId
                           className="group relative cursor-pointer flex flex-col justify-between bg-[#111] border border-[#4E5661]/20 overflow-hidden transform transition-all duration-500 hover:-translate-y-2 hover:border-[#D4AF37]/50"
                           onClick={() => setSelectedMatch(match)}
                           whileHover={{ scale: 1.01 }}
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: idx * 0.08 }}
+                          initial={{ opacity: 0, y: 40 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true, margin: "-5%" }}
+                          transition={{ 
+                            type: 'spring', 
+                            stiffness: 70, 
+                            damping: 15,
+                            delay: (idx % 3) * 0.08,
+                            duration: 0.8
+                          }}
                         >
                           {/* Image Thumbnail Header with overlay */}
                           <div className="relative h-48 overflow-hidden">
