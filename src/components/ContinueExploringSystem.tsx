@@ -58,32 +58,7 @@ export function ContinueExploringSystem({
 
   // Sound Engine feedback helper matching global tone
   const playSfx = (type: 'tick' | 'warp') => {
-    try {
-      const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      if (type === 'tick') {
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(1500, audioCtx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(150, audioCtx.currentTime + 0.015);
-        gain.gain.setValueAtTime(0.012, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.018);
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.02);
-      } else if (type === 'warp') {
-        osc.type = 'triangle';
-        osc.frequency.setValueAtTime(220, audioCtx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.2);
-        gain.gain.setValueAtTime(0.015, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.3);
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.35);
-      }
-    } catch(e) {}
+    // Audio disabled for now
   };
 
   // 1. DISCOVERY TRAILS DEFINITIONS (CURATED NARRATIVE-DRIVEN PATHWAYS THROUGH TIME)

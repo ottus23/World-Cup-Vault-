@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import { stadiumsData, Stadium, HistoricMatch, DefiningMoment, EchoEvent } from '../stadiumsData';
 import { ContinueExploringSystem } from './ContinueExploringSystem';
+import { VerifiedImage } from './VerifiedImage';
 
 interface StadiumsShowcaseProps {
   onClose: () => void;
@@ -565,24 +566,17 @@ export function StadiumsShowcase({
                         className="bg-[#0c0c0c] border border-[#4E5661]/15 overflow-hidden group hover:border-[#D4AF37]/50 transition-all duration-300 flex flex-col justify-between"
                         id={`stadium_grid_card_${stadium.id}`}
                       >
-                        <div className="relative aspect-[16/10] overflow-hidden bg-[#161616]">
-                          {/* Image Loader */}
-                          <img
-                            src={stadium.image}
-                            alt={stadium.name}
-                            onLoad={() => handleImageLoad(stadium.id)}
-                            className={`w-full h-full object-cover filter grayscale transition-transform duration-700 group-hover:scale-105 ${loadedImages[stadium.id] ? 'opacity-85' : 'opacity-0'}`}
-                            referrerPolicy="no-referrer"
+                        <div className="relative aspect-[16/10] overflow-hidden">
+                          <VerifiedImage 
+                            src={stadium.image} 
+                            alt={`${stadium.name} (Curated Archive View)`} 
+                            className="w-full h-full"
+                            aspectRatio="auto"
+                            tournament={`Est. ${stadium.yearBuilt}`}
+                            date={`${stadium.city}, ${stadium.country}`}
+                            context={stadium.about}
+                            eraStyle="cinematic"
                           />
-                          {!loadedImages[stadium.id] && (
-                            <div className="absolute inset-0 bg-[#161616] flex items-center justify-center">
-                              <span className="w-6 h-6 border-2 border-[#D4AF37]/20 border-t-[#D4AF37] rounded-full animate-spin" />
-                            </div>
-                          )}
-                          <div className="absolute inset-0 bg-gradient-to-t from-[#0c0c0c] via-transparent to-transparent opacity-90" />
-                          <span className="absolute bottom-3 left-4 font-mono text-[9px] text-[#D4AF37] uppercase tracking-widest border border-[#D4AF37]/25 px-2 py-0.5 bg-[#070707]/80">
-                            {stadium.country}
-                          </span>
                         </div>
 
                         <div className="p-6 space-y-4 flex-1 flex flex-col justify-between">
@@ -671,16 +665,20 @@ export function StadiumsShowcase({
                     {/* CHAPTER 1 — MONUMENT REVEAL */}
                     <section className="relative min-h-[90vh] flex flex-col justify-end overflow-hidden pb-12 pt-24 px-4 sm:px-8 md:px-16" id="stadium_chapter_monument_reveal">
                       {/* Dominant dynamic hero wallpaper container */}
-                      <div className="absolute inset-0 bg-black z-0">
-                        <img 
+                      <div className="absolute inset-0 z-0">
+                        <VerifiedImage 
                           src={selectedStadium.image} 
-                          alt={selectedStadium.name} 
-                          className="w-full h-full object-cover filter grayscale contrast-[1.1] scale-102 animate-[pulse_10s_ease-in-out_infinite] opacity-70"
-                          referrerPolicy="no-referrer"
+                          alt={`${selectedStadium.name} Architectural Registry`} 
+                          className="w-full h-full opacity-70"
+                          aspectRatio="auto"
+                          tournament={`STADIUM SEC NO. ST-0${selectedStadium.yearBuilt}`}
+                          date={`${selectedStadium.city}, ${selectedStadium.country}`}
+                          context={selectedStadium.about}
+                          eraStyle="cinematic"
                         />
                         {/* Immersive cinematic shadows overlays */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#070707] via-[#070707]/60 to-transparent" />
-                        <div className="absolute inset-x-0 top-0 h-64 bg-gradient-to-b from-[#070707]/90 to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#070707] via-[#070707]/40 to-[#070707]/10 pointer-events-none" />
+                        <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-[#070707]/90 to-transparent pointer-events-none" />
                       </div>
 
                       <div className="max-w-6xl w-full mx-auto relative z-10 space-y-8">

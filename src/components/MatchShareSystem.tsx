@@ -49,64 +49,14 @@ export function MatchShareSystem({ match, onClose }: MatchShareSystemProps) {
 
   // Sound/Vibe feedbacks
   const playGearTick = () => {
-    try {
-      const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      const filter = audioCtx.createBiquadFilter();
-
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(2600, audioCtx.currentTime); 
-      osc.frequency.exponentialRampToValueAtTime(150, audioCtx.currentTime + 0.01);
-
-      filter.type = 'highpass';
-      filter.frequency.setValueAtTime(1400, audioCtx.currentTime);
-
-      gain.gain.setValueAtTime(0.006, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.015);
-
-      osc.connect(filter);
-      filter.connect(gain);
-      gain.connect(audioCtx.destination);
-
-      osc.start();
-      osc.stop(audioCtx.currentTime + 0.02);
-    } catch (e) {}
+    // Audio disabled for now
   };
   const playClick = () => {
-    try {
-      const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(800, audioCtx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 0.1);
-      gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.start();
-      osc.stop(audioCtx.currentTime + 0.1);
-    } catch (e) {
-      // Ignored if browser blocks audio autoplay/context
-    }
+    // Audio disabled for now
   };
 
   const playSuccess = () => {
-    try {
-      const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
-      osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.15); // A5
-      gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.3);
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.start();
-      osc.stop(audioCtx.currentTime + 0.3);
-    } catch (e) {}
+    // Audio disabled for now
   };
 
   // Helper to wrap text cleanly inside an HTML5 Canvas context
@@ -406,33 +356,6 @@ export function MatchShareSystem({ match, onClose }: MatchShareSystemProps) {
     setIsDeveloping(true);
 
     let progressLocal = 0;
-    let audioCtx: AudioContext | null = null;
-    let osc: OscillatorNode | null = null;
-    let filter: BiquadFilterNode | null = null;
-    let gain: GainNode | null = null;
-
-    try {
-      // Initialize an organic projector vintage hum
-      audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
-      osc = audioCtx.createOscillator();
-      filter = audioCtx.createBiquadFilter();
-      gain = audioCtx.createGain();
-
-      osc.type = 'sawtooth';
-      osc.frequency.setValueAtTime(58, audioCtx.currentTime); // low 50Hz hum
-      
-      filter.type = 'lowpass';
-      filter.frequency.setValueAtTime(100, audioCtx.currentTime);
-
-      gain.gain.setValueAtTime(0.006, audioCtx.currentTime);
-
-      osc.connect(filter);
-      filter.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.start();
-    } catch (e) {
-      // Browser blocked autoplay audio
-    }
 
     const interval = setInterval(() => {
       progressLocal += Math.floor(Math.random() * 3) + 2;
@@ -441,29 +364,8 @@ export function MatchShareSystem({ match, onClose }: MatchShareSystemProps) {
         progressLocal = 100;
         clearInterval(interval);
         setIsDeveloping(false);
-        playSuccess(); // vintage exposure flash tone
-
-        if (osc && audioCtx) {
-          try {
-            gain?.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.15);
-            setTimeout(() => {
-              osc?.stop();
-              audioCtx?.close();
-            }, 200);
-          } catch (e) {}
-        }
       } else {
-        // Play satisfying high-speed mechanical film ticks during rotation progress!
-        if (progressLocal % 7 === 0 || progressLocal % 8 === 0) {
-          playGearTick();
-        }
-
-        if (osc && audioCtx) {
-          try {
-            // Procedural camera vibration frequency flutter
-            osc.frequency.setValueAtTime(58 + Math.sin(progressLocal * 0.9) * 2, audioCtx.currentTime);
-          } catch (e) {}
-        }
+        // Audio disabled
       }
 
       setDevelopingProgress(progressLocal);
@@ -522,16 +424,6 @@ export function MatchShareSystem({ match, onClose }: MatchShareSystemProps) {
 
     return () => {
       clearInterval(interval);
-      if (osc) {
-        try {
-          osc.stop();
-        } catch (e) {}
-      }
-      if (audioCtx) {
-        try {
-          audioCtx.close();
-        } catch (e) {}
-      }
     };
   }, [match, devStyle]);
 

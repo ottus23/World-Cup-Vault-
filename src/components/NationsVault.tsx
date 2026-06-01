@@ -6,82 +6,11 @@ import {
 } from 'lucide-react';
 import { nationsData, NationCivilization, NationJourneyMilestone } from '../nationsData';
 import { ContinueExploringSystem } from './ContinueExploringSystem';
+import { VerifiedImage } from './VerifiedImage';
 
 // --- Web Audio Engine for Immersive Football Cartography ---
 const playSound = (type: 'map-hover' | 'page-open' | 'gear-tick' | 'clash' | 'success') => {
-  try {
-    const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-
-    if (type === 'map-hover') {
-      // Light nautical wind sweep
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(440, audioCtx.currentTime);
-      osc.frequency.linearRampToValueAtTime(880, audioCtx.currentTime + 0.08);
-      gain.gain.setValueAtTime(0.005, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.1);
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.start();
-      osc.stop(audioCtx.currentTime + 0.1);
-    } else if (type === 'page-open') {
-      // Large vault doors clicking open
-      osc.type = 'sawtooth';
-      const filter = audioCtx.createBiquadFilter();
-      filter.type = 'lowpass';
-      filter.frequency.setValueAtTime(200, audioCtx.currentTime);
-      osc.frequency.setValueAtTime(120, audioCtx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(40, audioCtx.currentTime + 0.3);
-      gain.gain.setValueAtTime(0.02, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.45);
-      osc.connect(filter);
-      filter.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.start();
-      osc.stop(audioCtx.currentTime + 0.5);
-    } else if (type === 'gear-tick') {
-      // Vintage lens / analog projector click
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(2200, audioCtx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.015);
-      gain.gain.setValueAtTime(0.015, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.018);
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.start();
-      osc.stop(audioCtx.currentTime + 0.02);
-    } else if (type === 'clash') {
-      // High-drama dual strike sound
-      osc.type = 'triangle';
-      const delay = audioCtx.createDelay();
-      delay.delayTime.value = 0.05;
-      osc.frequency.setValueAtTime(330, audioCtx.currentTime);
-      osc.frequency.setValueAtTime(150, audioCtx.currentTime + 0.05);
-      gain.gain.setValueAtTime(0.03, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.55);
-      osc.connect(delay);
-      delay.connect(gain);
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.start();
-      osc.stop(audioCtx.currentTime + 0.6);
-    } else if (type === 'success') {
-      // Melodic chimes
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
-      osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.08); // E5
-      osc.frequency.setValueAtTime(783.99, audioCtx.currentTime + 0.16); // G5
-      gain.gain.setValueAtTime(0.01, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.4);
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.start();
-      osc.stop(audioCtx.currentTime + 0.5);
-    }
-  } catch (e) {
-    // Graceful fallback for non-supported browsers
-  }
+  // Audio disabled for now
 };
 
 export function NationsVault({ 
@@ -948,14 +877,17 @@ export function NationsVault({
                       >
                         <div className="space-y-4">
                           {/* Image Placeholder Frame */}
-                          <div className="w-full aspect-[4/3] overflow-hidden border border-zinc-900 bg-zinc-950/80 rounded-sm relative">
-                            <img 
+                          <div className="w-full aspect-[4/3] overflow-hidden border border-zinc-900 rounded-sm relative">
+                            <VerifiedImage 
                               src={legend.image} 
-                              alt={legend.name} 
-                              className="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
-                              referrerPolicy="no-referrer"
+                              alt={`${legend.name} (National Treasure)`} 
+                              className="w-full h-full"
+                              aspectRatio="auto"
+                              tournament={selectedNation.name}
+                              date={legend.years}
+                              context={legend.myth}
+                              eraStyle="retro"
                             />
-                            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black to-transparent p-3 pt-6" />
                           </div>
 
                           <div className="space-y-1">

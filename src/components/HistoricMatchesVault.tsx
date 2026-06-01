@@ -26,6 +26,7 @@ import {
 import { StadiumAudioEngine, getDefaultCommentary, speakBroadcaster, CommentarySnippet } from '../utils/audioSystem';
 import { MatchShareSystem } from './MatchShareSystem';
 import { ContinueExploringSystem } from './ContinueExploringSystem';
+import { VerifiedImage } from './VerifiedImage';
 
 // Type definitions
 export interface MatchTimelineEvent {
@@ -782,16 +783,16 @@ export function HistoricMatchesVault({
                         >
                           {/* Image Thumbnail Header with overlay */}
                           <div className="relative h-48 overflow-hidden">
-                            <img 
+                            <VerifiedImage 
                               src={match.heroImage} 
-                              alt={match.title}
-                              className={`w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110 ${eraColors.overlayClass}`}
-                              referrerPolicy="no-referrer"
+                              alt={`${match.title} Match Artifact`}
+                              className="w-full h-full"
+                              aspectRatio="auto"
+                              tournament={`${match.year} World Cup`}
+                              date="Archived Match Event"
+                              context={match.subtitle}
+                              eraStyle={match.year <= 1954 ? 'antique' : match.year <= 1986 ? 'vintage' : 'retro'}
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-transparent to-transparent" />
-                            <span className="absolute top-4 left-4 bg-black/60 backdrop-blur text-[#D4AF37] border border-[#D4AF37]/30 text-[9px] font-mono tracking-widest px-2.5 py-1 uppercase">
-                              {match.year} World Cup
-                            </span>
                           </div>
 
                           <div className="p-6 flex-1 flex flex-col justify-between">
@@ -930,15 +931,19 @@ export function HistoricMatchesVault({
 
                 {/* CHAPTER 1: MATCH INTRODUCTION */}
                 <section className="relative w-full h-[85vh] flex items-center justify-center overflow-hidden">
-                  <div className="absolute inset-0 z-0">
-                    <img 
+                  <div className="absolute inset-0 z-0 opacity-40">
+                    <VerifiedImage 
                       src={selectedMatch.heroImage} 
-                      alt={selectedMatch.title}
-                      className={`w-full h-full object-cover select-none brightness-40 saturate-[0.85] filter ${era.overlayClass}`}
-                      referrerPolicy="no-referrer"
+                      alt={`${selectedMatch.title} Historic Backdrop`}
+                      className="w-full h-full"
+                      aspectRatio="auto"
+                      tournament={`${selectedMatch.year} World Cup`}
+                      date="Match Registry Artifact"
+                      context={selectedMatch.stakes}
+                      eraStyle={selectedMatch.year <= 1954 ? 'antique' : selectedMatch.year <= 1986 ? 'vintage' : 'retro'}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/45 to-transparent" />
                   </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/45 to-transparent pointer-events-none z-10" />
 
                   <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
                     <motion.span 

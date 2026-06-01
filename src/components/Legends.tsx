@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Search, X, Scale } from 'lucide-react';
 import { legends, Legend } from '../data';
 import { ContinueExploringSystem } from './ContinueExploringSystem';
+import { VerifiedImage } from './VerifiedImage';
 
 // Styles for different eras
 const ERA_STYLES: Record<string, string> = {
@@ -20,17 +21,21 @@ function LegendExhibit({ legend, onCompare }: { legend: Legend; onCompare: () =>
     >
       {/* Portrait side */}
       <div className="w-full lg:w-1/2 h-[60vh] lg:h-screen relative overflow-hidden group">
-         <motion.img 
-            src={legend.image} 
-            className={`w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105 ${ERA_STYLES[legend.eraStyle]}`} 
-            initial={{ scale: 1.1, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: true, margin: "-10%" }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
-         />
-         <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-[#090909] via-[#090909]/60 lg:via-[#090909]/20 to-transparent opacity-90" />
+         <div className="absolute inset-0">
+           <VerifiedImage 
+              src={legend.image} 
+              alt={`${legend.name} Historical Profile`} 
+              className="w-full h-full"
+              aspectRatio="auto"
+              tournament={`${legend.nation} (${legend.era})`}
+              date="Historical Registry Plate"
+              context={legend.quote ? `"${legend.quote}"` : legend.legacyStatement}
+              eraStyle={legend.eraStyle === 'vintage' ? 'vintage' : legend.eraStyle === 'editorial' ? 'antique' : legend.eraStyle === 'modern' ? 'cinematic' : 'retro'}
+           />
+         </div>
+         <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-[#090909] via-[#090909]/60 lg:via-[#090909]/20 to-transparent opacity-90 pointer-events-none z-10" />
          
-         <div className="absolute bottom-12 lg:bottom-24 left-6 lg:left-12 pointer-events-none">
+         <div className="absolute bottom-12 lg:bottom-24 left-6 lg:left-12 pointer-events-none z-20">
             <motion.h3 
               className="font-serif text-[#F5F2EA] text-6xl md:text-8xl lg:text-[7rem] tracking-tighter leading-none mb-2 opacity-90 mix-blend-plus-lighter"
               initial={{ y: 50, opacity: 0 }}
@@ -163,7 +168,16 @@ function LegacyCompareModal({ onClose }: { onClose: () => void }) {
             ))}
           </select>
 
-          <img src={player1.image} alt={player1.name} className={`w-full h-64 object-cover mb-8 ${ERA_STYLES[player1.eraStyle]}`} referrerPolicy="no-referrer" />
+          <VerifiedImage 
+            src={player1.image} 
+            alt={`${player1.name} Comparison Exhibit`} 
+            className="w-full h-64 mb-8"
+            aspectRatio="auto"
+            tournament={player1.nation}
+            date={player1.era}
+            context={player1.legacyStatement}
+            eraStyle={player1.eraStyle === 'vintage' ? 'vintage' : player1.eraStyle === 'editorial' ? 'antique' : player1.eraStyle === 'modern' ? 'cinematic' : 'retro'}
+          />
           
           <div className="space-y-8">
             <div>
@@ -201,7 +215,16 @@ function LegacyCompareModal({ onClose }: { onClose: () => void }) {
             ))}
           </select>
 
-          <img src={player2.image} alt={player2.name} className={`w-full h-64 object-cover mb-8 ${ERA_STYLES[player2.eraStyle]}`} referrerPolicy="no-referrer" />
+          <VerifiedImage 
+            src={player2.image} 
+            alt={`${player2.name} Comparison Exhibit`} 
+            className="w-full h-64 mb-8 text-right"
+            aspectRatio="auto"
+            tournament={player2.nation}
+            date={player2.era}
+            context={player2.legacyStatement}
+            eraStyle={player2.eraStyle === 'vintage' ? 'vintage' : player2.eraStyle === 'editorial' ? 'antique' : player2.eraStyle === 'modern' ? 'cinematic' : 'retro'}
+          />
           
           <div className="space-y-8 text-right">
             <div>
