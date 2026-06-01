@@ -91,7 +91,7 @@ export interface MatchDetails {
 }
 
 // Full-scale curated elite matches data
-const CLASSIC_MATCHES: MatchDetails[] = [
+export const CLASSIC_MATCHES: MatchDetails[] = [
   {
     id: '2022-final',
     title: 'The Coronation of the King',

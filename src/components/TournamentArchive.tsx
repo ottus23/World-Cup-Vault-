@@ -1075,14 +1075,38 @@ export function TournamentArchive({
               </div>
            </div>
 
-           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+           <motion.div 
+             className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16"
+             initial="hidden"
+             whileInView="visible"
+             viewport={{ once: true, margin: "-50px" }}
+             variants={{
+               hidden: { opacity: 0 },
+               visible: {
+                 opacity: 1,
+                 transition: {
+                   staggerChildren: 0.15
+                 }
+               }
+             }}
+           >
              {details.stats?.map((stat, idx) => (
                 <motion.div
                   key={idx}
                   className="bg-[#0b0b0b] border border-[#4E5661]/15 p-8 rounded-sm text-left shadow-xl flex flex-col justify-between"
-                  initial={{ opacity: 0, scale: 0.96 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
+                  variants={{
+                    hidden: { opacity: 0, y: 30, scale: 0.95 },
+                    visible: { 
+                      opacity: 1, 
+                      y: 0, 
+                      scale: 1,
+                      transition: {
+                        type: "spring",
+                        stiffness: 80,
+                        damping: 15
+                      }
+                    }
+                  }}
                 >
                   <div>
                     <span className="block font-sans text-[10px] text-[#69707A] uppercase tracking-widest mb-4 font-semibold">{stat.label}</span>
@@ -1119,7 +1143,7 @@ export function TournamentArchive({
                   </div>
                 </motion.div>
              ))}
-           </div>
+           </motion.div>
 
            {/* Tactical Trend Breakdown */}
            <motion.div 
