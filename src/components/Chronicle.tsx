@@ -16,7 +16,7 @@ export const completeTournaments: Tournament[] = [
     keyPlayer: 'The Next Generation',
     finalScore: 'To Be Decided',
     story: 'Expanding to an unprecedented 48 nations across 16 world-class host cities, the 2026 World Cup represents a monumental landmark in the history of football. It marks a new frontier of scale, theatricality, and global unity spanning three massive co-host nations.',
-    image: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=1400&auto=format&fit=crop'
+    image: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Estadio_Azteca_Interior.jpg'
   }
 ];
 

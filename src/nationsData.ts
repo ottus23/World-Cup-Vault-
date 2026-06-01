@@ -83,8 +83,8 @@ export const nationsData: NationCivilization[] = [
       { year: 2002, result: 'Champions', players: ['Ronaldo Nazário', 'Ronaldinho', 'Rivaldo'], moment: 'R9’s redemption in Yokohama', story: 'The famous "Three Rs" tore defences apart. Ronaldo scored 8 goals, claiming absolute redemption and the fifth star.' }
     ],
     legends: [
-      { name: 'Pelé', years: '1958 - 1970', role: 'Royal King of Football', myth: 'The only person to win three FIFA World Cups. He combined physical grace, supersonic intuition, and clinical finish to write the definitive football gospel.', image: 'https://images.unsplash.com/photo-1551061985-021c5b8b939e?q=80&w=1000&auto=format&fit=crop' },
-      { name: 'Ronaldo Nazário', years: '1994 - 2006', role: 'O Fenômeno', myth: 'A blend of raw explosive speed, terrifying power, and divine dribbling skill. He resurrected his career after severe knee injuries to conquer the 2002 cup.', image: 'https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=1000&auto=format&fit=crop' }
+      { name: 'Pelé', years: '1958 - 1970', role: 'Royal King of Football', myth: 'The only person to win three FIFA World Cups. He combined physical grace, supersonic intuition, and clinical finish to write the definitive football gospel.', image: 'https://upload.wikimedia.org/wikipedia/commons/f/f3/Pel%C3%A9_%281966%29.jpg' },
+      { name: 'Ronaldo Nazário', years: '1994 - 2006', role: 'O Fenômeno', myth: 'A blend of raw explosive speed, terrifying power, and divine dribbling skill. He resurrected his career after severe knee injuries to conquer the 2002 cup.', image: 'https://upload.wikimedia.org/wikipedia/commons/b/b2/Ronaldo_Fen%C3%B4meno.jpg' }
     ],
     matches: [
       { opponent: 'Italy', year: 1970, score: '4-1', description: 'The absolute pinnacle of beautiful football. Carlos Alberto’s final goal remains the ultimate team masterpiece.', type: 'victory' },
@@ -133,8 +133,8 @@ export const nationsData: NationCivilization[] = [
       { year: 2014, result: 'Champions', players: ['Bastian Schweinsteiger', 'Thomas Müller', 'Mario Götze', 'Philipp Lahm'], moment: '7-1 Belo Horizonte Siege', story: 'A ruthless performance that broke Brazilian culture forever, culminating in Mario Götze’s elegant extra-time final winner.' }
     ],
     legends: [
-      { name: 'Franz Beckenbauer', years: '1966 - 1978', role: 'Der Kaiser', myth: 'The commander who invented the modern "Sweeper" (Libero) position. He played through a dislocated shoulder in 1970’s Match of the Century, showing unmatched mental steel.', image: 'https://images.unsplash.com/photo-1549419141-94817a58da81?q=80&w=1000&auto=format&fit=crop' },
-      { name: 'Miroslav Klose', years: '2002 - 2014', role: 'The Airborne Assassin', myth: 'A true tournament legend who specialized in peaking on the highest stage. He flipped his way to 16 historical goals, becoming the greatest target-man in World Cup play.', image: 'https://images.unsplash.com/photo-1601633519102-df98a964f58c?q=80&w=1000&auto=format&fit=crop' }
+      { name: 'Franz Beckenbauer', years: '1966 - 1978', role: 'Der Kaiser', myth: 'The commander who invented the modern "Sweeper" (Libero) position. He played through a dislocated shoulder in 1970’s Match of the Century, showing unmatched mental steel.', image: 'https://upload.wikimedia.org/wikipedia/commons/e/e8/Franz_Beckenbauer_1971.jpg' },
+      { name: 'Miroslav Klose', years: '2002 - 2014', role: 'The Airborne Assassin', myth: 'A true tournament legend who specialized in peaking on the highest stage. He flipped his way to 16 historical goals, becoming the greatest target-man in World Cup play.', image: 'https://upload.wikimedia.org/wikipedia/commons/d/df/Miroslav_Klose_2011.jpg' }
     ],
     matches: [
       { opponent: 'Brazil', year: 2014, score: '7-1', description: 'The most stunning blowout in football history. A masterclass of structural precision in front of a horrified Brazilian crowd.', type: 'victory' },
@@ -184,8 +184,8 @@ export const nationsData: NationCivilization[] = [
       { year: 2022, result: 'Champions', players: ['Lionel Messi', 'Ángel Di María', 'Emiliano Martínez'], moment: 'The Greatest Final Ever Played', story: 'Messi scored twice and Emiliano Martínez pulled off a 123rd-minute miraculous save to complete football’s ultimate epic.' }
     ],
     legends: [
-      { name: 'Diego Maradona', years: '1982 - 1994', role: 'El Pibe de Oro (Golden Boy)', myth: 'A mythical figure of untamed genius. He captured the imagination of the planet in 1986 with supernatural plays and combative charisma that defied world empires.', image: 'https://images.unsplash.com/photo-1563299723-86b6a03ff8fd?q=80&w=1000&auto=format&fit=crop' },
-      { name: 'Lionel Messi', years: '2006 - 2022', role: 'D10S Reincarnate', myth: 'The quiet titan of structural precision. He completed football by carrying the weight of Argentina to lift the 2022 trophy in Qatar, winning two World Cup Golden Balls in his tenure.', image: 'https://images.unsplash.com/photo-1583095116742-99d750fa46cb?q=80&w=1000&auto=format&fit=crop' }
+      { name: 'Diego Maradona', years: '1982 - 1994', role: 'El Pibe de Oro (Golden Boy)', myth: 'A mythical figure of untamed genius. He captured the imagination of the planet in 1986 with supernatural plays and combative charisma that defied world empires.', image: 'https://upload.wikimedia.org/wikipedia/commons/5/54/Diego_Maradona_1986.jpg' },
+      { name: 'Lionel Messi', years: '2006 - 2022', role: 'D10S Reincarnate', myth: 'The quiet titan of structural precision. He completed football by carrying the weight of Argentina to lift the 2022 trophy in Qatar, winning two World Cup Golden Balls in his tenure.', image: 'https://upload.wikimedia.org/wikipedia/commons/b/b4/Lionel-Messi-Argentina-2022-FIFA-World-Cup_%28cropped%29.jpg' }
     ],
     matches: [
       { opponent: 'France', year: 2022, score: '3-3 (4-2 p)', description: 'Widely called the greatest game in public television history. An operatic cycle of goals, penalty saves, and Messi’s ultimate triumph.', type: 'victory' },
@@ -234,8 +234,8 @@ export const nationsData: NationCivilization[] = [
       { year: 2006, result: 'Champions', players: ['Fabio Cannavaro', 'Andrea Pirlo', 'Gianluigi Buffon', 'Marco Materazzi'], moment: 'The Berlin Wall of Cannavaro', story: 'Conceding only two goals in the entire tournament (an own goal and a penalty), Cannavaro marshalled a historic defensive monument.' }
     ],
     legends: [
-      { name: 'Giuseppe Meazza', years: '1934 - 1938', role: 'The First Superstar', myth: 'A player of sublime technique, elegant stroll, and dead-ball precision. He captained Pozzo’s grand army and scored the famous falling-shorts penalty in 1938.', image: 'https://images.unsplash.com/photo-1508344928928-7165b67de128?q=80&w=1400&auto=format&fit=crop' },
-      { name: 'Fabio Cannavaro', years: '1998 - 2006', role: 'The Golden Defender', myth: 'The pocket Hercules who proved size does not register in headers. His performance in 2006 remains the benchmark for world defensive play, earning him the FIFA Player of the Year award.', image: 'https://images.unsplash.com/photo-1534065939-5047b973f7dc?q=80&w=1000&auto=format&fit=crop' }
+      { name: 'Giuseppe Meazza', years: '1934 - 1938', role: 'The First Superstar', myth: 'A player of sublime technique, elegant stroll, and dead-ball precision. He captained Pozzo’s grand army and scored the famous falling-shorts penalty in 1938.', image: 'https://upload.wikimedia.org/wikipedia/commons/d/d7/Meazza_Mondiale_1934.jpg' },
+      { name: 'Fabio Cannavaro', years: '1998 - 2006', role: 'The Golden Defender', myth: 'The pocket Hercules who proved size does not register in headers. His performance in 2006 remains the benchmark for world defensive play, earning him the FIFA Player of the Year award.', image: 'https://upload.wikimedia.org/wikipedia/commons/5/58/Fabio_Cannavaro.png' }
     ],
     matches: [
       { opponent: 'Germany', year: 2006, score: '2-0 (aet)', description: 'Two late, dramatic extra-time goals by Grosso and Del Piero in Dortmund broke German hearts in legendary fashion.', type: 'victory' },
@@ -285,8 +285,8 @@ export const nationsData: NationCivilization[] = [
       { year: 2018, result: 'Champions', players: ['Kylian Mbappé', 'Antoine Griezmann', 'Paul Pogba', 'N’Golo Kanté'], moment: 'Mbappé’s Moscow Speedrun', story: 'A young Kylian Mbappé sprinted past defenses as a clinical French team cruised to their second star in Moscow.' }
     ],
     legends: [
-      { name: 'Zinedine Zidane', years: '1998 - 2006', role: 'Le Magicien', myth: 'A ballet dancer in football cleats. His spatial awareness, technical touch, and performance in critical finals turned him into a national monument.', image: 'https://images.unsplash.com/photo-1605335198948-2612741ef063?q=80&w=1000&auto=format&fit=crop' },
-      { name: 'Kylian Mbappé', years: '2018 - Present', role: 'The Speed of Light', myth: 'An absolute cheetah who emerged in 2018 and scored a jaw-dropping final score hat-trick in 2022, becoming the greatest active threat in world sports.', image: 'https://images.unsplash.com/photo-1512411603520-2182fc657152?q=80&w=1000&auto=format&fit=crop' }
+      { name: 'Zinedine Zidane', years: '1998 - 2006', role: 'Le Magicien', myth: 'A ballet dancer in football cleats. His spatial awareness, technical touch, and performance in critical finals turned him into a national monument.', image: 'https://upload.wikimedia.org/wikipedia/commons/f/f3/Zinedine_Zidane_by_Tasnim_1.jpg' },
+      { name: 'Kylian Mbappé', years: '2018 - Present', role: 'The Speed of Light', myth: 'An absolute cheetah who emerged in 2018 and scored a jaw-dropping final score hat-trick in 2022, becoming the greatest active threat in world sports.', image: 'https://upload.wikimedia.org/wikipedia/commons/5/57/Kylian_Mbapp%C3%A9_2018.jpg' }
     ],
     matches: [
       { opponent: 'Brazil', year: 1998, score: '3-0', description: 'The absolute victory that changed French culture. Zidane’s towering performance shattered Ronaldo’s Brazil.', type: 'victory' },
@@ -335,8 +335,8 @@ export const nationsData: NationCivilization[] = [
       { year: 2010, result: 'Fourth Place', players: ['Diego Forlán', 'Luis Suárez'], moment: 'The Hand of Johannesburg & Forlán’s Jabulani', story: 'Luis Suárez’s red-card handball block on the line in the dying seconds against Ghana allowed Uruguay to win the shootout.' }
     ],
     legends: [
-      { name: 'Obdulio Varela', years: '1950 - 1954', role: 'El Negro Jefe (The Black Chief)', myth: 'One of the greatest leaders in human sport. In 1950, he delayed the game after Brazil scored, walked to the referee, and killed the crowd’s momentum before pushing his men forward.', image: 'https://images.unsplash.com/photo-1518091043644-c1d4457912c6?q=80&w=1000&auto=format&fit=crop' },
-      { name: 'Diego Forlán', years: '2002 - 2014', role: 'The Jabulani Wizard', myth: 'The only forward who completely tamed the chaotic, spinning 2010 "Jabulani" ball. He curled and dipped shots from 40 yards, scoring 5 goals and claiming Golden Ball honors.', image: 'https://images.unsplash.com/photo-1600250395350-10118b625ca4?q=80&w=1000&auto=format&fit=crop' }
+      { name: 'Obdulio Varela', years: '1950 - 1954', role: 'El Negro Jefe (The Black Chief)', myth: 'One of the greatest leaders in human sport. In 1950, he delayed the game after Brazil scored, walked to the referee, and killed the crowd’s momentum before pushing his men forward.', image: 'https://upload.wikimedia.org/wikipedia/commons/1/1b/Obdulio_Varela_1950.jpg' },
+      { name: 'Diego Forlán', years: '2002 - 2014', role: 'The Jabulani Wizard', myth: 'The only forward who completely tamed the chaotic, spinning 2010 "Jabulani" ball. He curled and dipped shots from 40 yards, scoring 5 goals and claiming Golden Ball honors.', image: 'https://upload.wikimedia.org/wikipedia/commons/2/2a/Diego_Forl%C3%A1n_2010.jpg' }
     ],
     matches: [
       { opponent: 'Brazil', year: 1950, score: '2-1', description: 'The absolute heist in Rio. Ghiggia’s late winner sent Brazil into decades of national depression.', type: 'victory' },
@@ -386,8 +386,8 @@ export const nationsData: NationCivilization[] = [
       { year: 2014, result: 'Third Place', players: ['Arjen Robben', 'Robin van Persie', 'Louis van Gaal'], moment: 'The Flying Dutchman', story: 'Robin van Persie scored a breathtaking gravity-defying header as they dismantled Spain 5-1.' }
     ],
     legends: [
-      { name: 'Johan Cruyff', years: '1974', role: 'The Pythagoras in Cleats', myth: 'A revolutionary general of spatial science. His "Cruyff Turn" split opposing defenders, and his intellectual control of the pitch created the Barca/Dutch legacy.', image: 'https://images.unsplash.com/photo-1589487391730-58f20eb2c308?q=80&w=1000&auto=format&fit=crop' },
-      { name: 'Dennis Bergkamp', years: '1994 - 1998', role: 'The Architect', myth: 'A man whose touch could tame falling objects from space. His iconic goal against Argentina in 1998—receiving a 60-yard pass, turning past Ayala, and scoring in three touches—stands as pure high-art.', image: 'https://images.unsplash.com/photo-1551958219-acbc608c6377?q=80&w=1000&auto=format&fit=crop' }
+      { name: 'Johan Cruyff', years: '1974', role: 'The Pythagoras in Cleats', myth: 'A revolutionary general of spatial science. His "Cruyff Turn" split opposing defenders, and his intellectual control of the pitch created the Barca/Dutch legacy.', image: 'https://upload.wikimedia.org/wikipedia/commons/e/e0/Cruijff_1974.jpg' },
+      { name: 'Dennis Bergkamp', years: '1994 - 1998', role: 'The Architect', myth: 'A man whose touch could tame falling objects from space. His iconic goal against Argentina in 1998—receiving a 60-yard pass, turning past Ayala, and scoring in three touches—stands as pure high-art.', image: 'https://upload.wikimedia.org/wikipedia/commons/5/5e/Dennis_Bergkamp_1993.jpg' }
     ],
     matches: [
       { opponent: 'Spain', year: 2014, score: '5-1', description: 'The ultimate tactical revenge. Van Persie’s soaring bird-header dismantled Spain’s reigning generation.', type: 'victory' },
@@ -436,8 +436,8 @@ export const nationsData: NationCivilization[] = [
       { year: 2018, result: 'Fourth Place', players: ['Harry Kane', 'Kieran Trippier'], moment: 'The Russian Renaissance', story: 'A young squad surprised the country by cruising to the semi-finals, briefly singing "It’s Coming Home" to the world.' }
     ],
     legends: [
-      { name: 'Bobby Moore', years: '1962 - 1970', role: 'The Flawless Captain', myth: 'A defender who did not tackle; he intercepted. Pelé called him the cleanest, fairest, and most intelligent defender he ever played against.', image: 'https://images.unsplash.com/photo-1605335198948-2612741ef063?q=80&w=1000&auto=format&fit=crop' },
-      { name: 'Bobby Charlton', years: '1958 - 1970', role: 'The Heart of the Nation', myth: 'Survivor of the Munich air disaster, Charlton combined incredible physical stamina, thunderbolt long-range shooting, and dignity to become England’s spiritual talisman.', image: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=1000&auto=format&fit=crop' }
+      { name: 'Bobby Moore', years: '1962 - 1970', role: 'The Flawless Captain', myth: 'A defender who did not tackle; he intercepted. Pelé called him the cleanest, fairest, and most intelligent defender he ever played against.', image: 'https://upload.wikimedia.org/wikipedia/commons/1/1e/Bobby_Moore_with_the_Jules_Rimet_trophy.jpg' },
+      { name: 'Bobby Charlton', years: '1958 - 1970', role: 'The Heart of the Nation', myth: 'Survivor of the Munich air disaster, Charlton combined incredible physical stamina, thunderbolt long-range shooting, and dignity to become England’s spiritual talisman.', image: 'https://upload.wikimedia.org/wikipedia/commons/f/fd/Bobby_Charlton_1968.jpg' }
     ],
     matches: [
       { opponent: 'West Germany', year: 1966, score: '4-2 (aet)', description: 'The absolute high point. Hurst scored a hat-trick including the "Russian Linesman-approved" crossbar bounce.', type: 'victory' },

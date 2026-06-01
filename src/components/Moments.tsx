@@ -15,6 +15,7 @@ export function Moments({ moment }: { moment: HistoricalMoment }) {
           src={moment.image} 
           alt={moment.title} 
           className="w-full h-full object-cover filter grayscale opacity-30 scale-105"
+          referrerPolicy="no-referrer"
         />
         <div className="absolute inset-0 bg-[#090909]/60 mix-blend-multiply" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#090909] via-transparent to-[#090909]" />

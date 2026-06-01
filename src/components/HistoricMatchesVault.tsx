@@ -25,6 +25,7 @@ import {
 } from 'lucide-react';
 import { StadiumAudioEngine, getDefaultCommentary, speakBroadcaster, CommentarySnippet } from '../utils/audioSystem';
 import { MatchShareSystem } from './MatchShareSystem';
+import { ContinueExploringSystem } from './ContinueExploringSystem';
 
 // Type definitions
 export interface MatchTimelineEvent {
@@ -104,7 +105,7 @@ export const CLASSIC_MATCHES: MatchDetails[] = [
     shootoutScore: '4-2 p',
     subtitle: 'Lionel Messi finishes football vs Mbappé\'s relentless army',
     era: 'cinematic',
-    heroImage: 'https://images.unsplash.com/photo-1627627256672-027a4613d028?q=80&w=1200&auto=format&fit=crop',
+    heroImage: 'https://upload.wikimedia.org/wikipedia/commons/b/b4/Lionel-Messi-Argentina-2022-FIFA-World-Cup_%28cropped%29.jpg',
     stakes: 'Lionel Messi searched for his ultimate crown. Under the desert heat in Lusail, his final obstacle was a clinical French nation led by his Paris Saint-Germain companion, the unstoppable Kylian Mbappé.',
     timeline: [
       { minute: "23'", type: "goal", title: "Messi Conquers the Spot", narrative: "Di María is clipped inside the area by Dembélé. Messi steps up under astronomical pressure, sends Lloris the wrong way, and rolls the blue-and-white home." },
@@ -164,7 +165,7 @@ export const CLASSIC_MATCHES: MatchDetails[] = [
     scoreB: 7,
     subtitle: 'Neymar-less hosts collapsed into an historic national trauma',
     era: 'cinematic',
-    heroImage: 'https://images.unsplash.com/photo-1526232761682-d26e03ac148e?q=80&w=1200&auto=format&fit=crop',
+    heroImage: 'https://upload.wikimedia.org/wikipedia/commons/5/5a/Team_Germany_World_Cup_2014.jpg',
     stakes: 'Brazil expected to march into the Maracanã final to erase the ghosts of 1950. But in Belo Horizonte, an ultra-composed, cold German engine executed a surgical demolition of national hopes.',
     timeline: [
       { minute: "11'", type: "goal", title: "Müller Stands Alone", narrative: "Thomas Müller drifts completely unmarked inside the penalty box from a corner kick, side-footing past Júlio César." },
@@ -222,7 +223,7 @@ export const CLASSIC_MATCHES: MatchDetails[] = [
     scoreB: 1,
     subtitle: 'Maradona\'s dual masterpiece of rogue genius and sheer divinity',
     era: 'broadcast',
-    heroImage: 'https://images.unsplash.com/photo-1590483864506-69ec069f0b5d?q=80&w=1200&auto=format&fit=crop',
+    heroImage: 'https://upload.wikimedia.org/wikipedia/commons/e/eb/Diego_Maradona_contra_Inglaterra_Mundial_1986.jpg',
     stakes: 'Just four years after the Falklands War (Guerra de las Malvinas), this was no longer a game. It was a proxy clash of national grief, pride, and sovereignty on the elevated stage of Mexico City.',
     timeline: [
       { minute: "51'", type: "drama", title: "The Hand of God", narrative: "Diego Maradona drives into the box, connects with an awkward clearance, and punches the ball past Peter Shilton's glove. The referee misses it, and Diego celebrates." },
@@ -275,7 +276,7 @@ export const CLASSIC_MATCHES: MatchDetails[] = [
     scoreB: 1,
     subtitle: 'The zenith of Brazilian Samba overload beats Catenaccio',
     era: 'poster',
-    heroImage: 'https://images.unsplash.com/photo-1551958219-acbc608c6377?q=80&w=1200&auto=format&fit=crop',
+    heroImage: 'https://upload.wikimedia.org/wikipedia/commons/7/70/Carlos_Alberto_Torres_1970.jpg',
     stakes: 'A battle of ideological blockbusters. The raw Samba creative freedom of Brazil went head-on against the rigid, military Catenaccio lock-and-key system of Italy.',
     timeline: [
       { minute: "18'", type: "goal", title: "Pelé Hovers in Air", narrative: "Rivelino sends a cross. Pelé leaps high, defying gravity to linger in the air before header-smashing past Albertosi." },
@@ -330,7 +331,7 @@ export const CLASSIC_MATCHES: MatchDetails[] = [
     shootoutScore: '5-3 p',
     subtitle: 'Zinedine Zidane\'s shocking exit and the Azzurri redemption',
     era: 'broadcast',
-    heroImage: 'https://images.unsplash.com/photo-1534065939-5047b973f7dc?q=80&w=1200&auto=format&fit=crop',
+    heroImage: 'https://upload.wikimedia.org/wikipedia/commons/f/f3/Zinedine_Zidane_by_Tasnim_1.jpg',
     stakes: 'Zinedine Zidane returned from retirement to carry France on one final, majestic crusade. To stop him stood an Italian nation forged in domestic scandal, ready to fight with every fiber.',
     timeline: [
       { minute: "7'", type: "penalty", title: "Zidane\'s Cold Panenka", narrative: "French penalty awarded. Zidane steps up, chips a Panenka that hits the underside of the crossbar and crosses the line. High-risk art." },
@@ -384,7 +385,7 @@ export const CLASSIC_MATCHES: MatchDetails[] = [
     scoreB: 1,
     subtitle: 'The ultimate silence of 200,000 souls at the Maracanã',
     era: 'vintage',
-    heroImage: 'https://images.unsplash.com/photo-1549419141-94817a58da81?q=80&w=1200&auto=format&fit=crop',
+    heroImage: 'https://upload.wikimedia.org/wikipedia/commons/1/1b/Obdulio_Varela_1950.jpg',
     stakes: 'Brazil only needed a draw to win the World Cup in their newly built cathedral, the Maracanã. An entire nation had already written the celebrating songs. Uruguay walked in as complete lambs to slaughter.',
     timeline: [
       { minute: "47'", type: "goal", title: "Friaça Strikes First", narrative: "The home crowd erupts as Friaça drills it in. The stadium goes wild with firecrackers and horns. Celebrations spark." },
@@ -429,7 +430,23 @@ export const CLASSIC_MATCHES: MatchDetails[] = [
   }
 ];
 
-export function HistoricMatchesVault({ activeMatchId, onClose }: { activeMatchId?: string; onClose?: () => void }) {
+export function HistoricMatchesVault({ 
+  activeMatchId, 
+  onClose,
+  onExploreMatches,
+  onExploreNations,
+  onExploreLegends,
+  onExploreStadiums,
+  onExploreTournament
+}: { 
+  activeMatchId?: string; 
+  onClose?: () => void;
+  onExploreMatches?: (matchId: string) => void;
+  onExploreNations?: (nationId: string) => void;
+  onExploreLegends?: (legendId: string) => void;
+  onExploreStadiums?: (stadiumId: string) => void;
+  onExploreTournament?: (year: number) => void;
+}) {
   const [selectedMatch, setSelectedMatch] = useState<MatchDetails | null>(
     activeMatchId ? CLASSIC_MATCHES.find(m => m.id === activeMatchId) || null : null
   );
@@ -1496,6 +1513,19 @@ export function HistoricMatchesVault({ activeMatchId, onClose }: { activeMatchId
                       >
                         Generate Match Snapshot
                       </button>
+                    </div>
+
+                    {/* CONTINUE EXPLORING SYSTEM */}
+                    <div className="w-full mt-24 pt-16 border-t border-[#4E5661]/15 text-left">
+                      <ContinueExploringSystem 
+                        currentItemType="match"
+                        currentItemId={selectedMatch.id}
+                        onExploreMatches={(mId) => { setSelectedMatch(CLASSIC_MATCHES.find(m => m.id === mId) || null); }}
+                        onExploreNations={(nId) => { setSelectedMatch(null); onClose?.(); if (onExploreNations) onExploreNations(nId); }}
+                        onExploreLegends={(lId) => { setSelectedMatch(null); onClose?.(); if (onExploreLegends) onExploreLegends(lId); }}
+                        onExploreStadiums={(sId) => { setSelectedMatch(null); onClose?.(); if (onExploreStadiums) onExploreStadiums(sId); }}
+                        onExploreTournament={(year) => { setSelectedMatch(null); onClose?.(); if (onExploreTournament) onExploreTournament(year); }}
+                      />
                     </div>
                   </div>
                 </section>

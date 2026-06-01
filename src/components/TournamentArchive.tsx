@@ -28,6 +28,7 @@ import {
 import { Tournament } from '../data';
 import { getTournamentDetails, GroupFolder, BattleMatch, HeroExhibit, StadiumExhibit, MetricStat } from '../tournamentData';
 import { StadiumAudioEngine, getDefaultCommentary, speakBroadcaster, CommentarySnippet } from '../utils/audioSystem';
+import { ContinueExploringSystem } from './ContinueExploringSystem';
 
 function getEraStyling(year: number) {
   if (year <= 1950) {
@@ -122,7 +123,8 @@ export function TournamentArchive({
   onExploreClassicMatch,
   onExploreLegend,
   onExploreNation,
-  onExploreStadium
+  onExploreStadium,
+  onExploreTournament
 }: { 
   tournament: Tournament; 
   onClose: () => void; 
@@ -130,6 +132,7 @@ export function TournamentArchive({
   onExploreLegend?: (legendId: string) => void;
   onExploreNation?: (nationId: string) => void;
   onExploreStadium?: (stadiumId: string) => void;
+  onExploreTournament?: (year: number) => void;
 }) {
   const details = getTournamentDetails(tournament.year);
   const era = getEraStyling(tournament.year);
@@ -996,7 +999,7 @@ export function TournamentArchive({
                 viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
               >
-                 <img src={moment.image} alt={moment.title} className={`w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 ${era.filterClass}`} />
+                 <img src={moment.image} alt={moment.title} className={`w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 ${era.filterClass}`} referrerPolicy="no-referrer" />
                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90" />
                  
                  <div className="absolute bottom-8 left-8 right-8">
@@ -1277,6 +1280,19 @@ export function TournamentArchive({
          <p className="font-serif text-[#F5F2EA] text-xl md:text-3xl max-w-4xl leading-relaxed opacity-90 font-light italic px-4">
            {details.legacy}
          </p>
+
+         {/* CONTINUE EXPLORING SYSTEM */}
+         <div className="w-full mt-24 border-t border-[#D4AF37]/15 pt-16 text-left">
+           <ContinueExploringSystem 
+             currentItemType="tournament"
+             currentItemId={tournament.year}
+             onExploreMatches={(mId) => { onClose(); if (onExploreClassicMatch) onExploreClassicMatch(mId); }}
+             onExploreNations={(nId) => { onClose(); if (onExploreNation) onExploreNation(nId); }}
+             onExploreLegends={(lId) => { onClose(); if (onExploreLegend) onExploreLegend(lId); }}
+             onExploreStadiums={(sId) => { onClose(); if (onExploreStadium) onExploreStadium(sId); }}
+             onExploreTournament={(year) => { if (year !== tournament.year) { onClose(); if (onExploreTournament) onExploreTournament(year); } }}
+           />
+         </div>
          
          <button 
            onClick={onClose}

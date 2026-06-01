@@ -99,8 +99,8 @@ export function getTournamentDetails(year: number): TournamentDetails {
         { stage: "Final", opponent: "France", score: "3-3 (4-2 p)", story: "An all-time classic. Messi and Di María struck first, Mbappé roared back with a hat-trick, but Argentina prevailed in the shootout." }
       ],
       definingMoments: [
-        { title: "Morocco's Atlas Lions", desc: "Becoming the first African nation to ever reach a World Cup semi-final.", image: "https://images.unsplash.com/photo-1518605368461-1e1e38ce8058?q=80&w=1000&auto=format&fit=crop" },
-        { title: "Weghorst's Free-kick", desc: "A genius pre-rehearsed free-kick routine in the 101st minute to equalize against Argentina.", image: "https://images.unsplash.com/photo-1508344928928-7165b67de128?q=80&w=1000&auto=format&fit=crop" }
+        { title: "Morocco's Atlas Lions", desc: "Becoming the first African nation to ever reach a World Cup semi-final.", image: "https://upload.wikimedia.org/wikipedia/commons/e/ec/Morocco_national_football_team_at_the_2018_World_Cup_vs_Iran.jpg" },
+        { title: "Weghorst's Free-kick", desc: "A genius pre-rehearsed free-kick routine in the 101st minute to equalize against Argentina.", image: "https://upload.wikimedia.org/wikipedia/commons/c/c5/Wout_Weghorst_2018.jpg" }
       ],
       legacy: "Qatar 2022 will be forever remembered as the crowning achievement of Lionel Messi, cementing his legacy as arguably the greatest player of all time, whilst signaling the true arrival of Kylian Mbappé as his heir apparent.",
       groups: [
@@ -171,7 +171,7 @@ export function getTournamentDetails(year: number): TournamentDetails {
             { label: "Key Passes", value: 18 }
           ],
           legacyMoment: "Scoring twice in the final and converting his shootout penalty, carrying the legacy of the late Maradona on his shoulders to lift the golden trophy.",
-          image: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=1000&auto=format&fit=crop"
+          image: "https://upload.wikimedia.org/wikipedia/commons/b/b4/Lionel-Messi-Argentina-2022-FIFA-World-Cup_%28cropped%29.jpg"
         },
         {
           name: "Kylian Mbappé",
@@ -182,7 +182,7 @@ export function getTournamentDetails(year: number): TournamentDetails {
             { label: "Sprints > 35km/h", value: 14 }
           ],
           legacyMoment: "The first hat-trick in a World Cup final since Geoff Hurst in 1966, almost single-handedly winning the cup twice over for France.",
-          image: "https://images.unsplash.com/photo-1543351611-58f69d7c1781?q=80&w=1000&auto=format&fit=crop"
+          image: "https://upload.wikimedia.org/wikipedia/commons/5/57/Kylian_Mbapp%C3%A9_2018.jpg"
         }
       ],
       stadiums: [
@@ -191,14 +191,14 @@ export function getTournamentDetails(year: number): TournamentDetails {
           location: "Lusail, Qatar",
           capacity: "88,966",
           notableMatch: "Argentina 3-3 France (The Final)",
-          image: "https://images.unsplash.com/photo-1518091043644-c1d4457912c6?q=80&w=1000&auto=format&fit=crop"
+          image: "https://upload.wikimedia.org/wikipedia/commons/d/d0/Lusail_Iconic_Stadium_2022.jpg"
         },
         {
           name: "Al Bayt Stadium",
           location: "Al Khor, Qatar",
           capacity: "68,895",
           notableMatch: "France 2-0 Morocco (Semi-final)",
-          image: "https://images.unsplash.com/photo-1431324155629-1a6edd1d227a?q=80&w=1000&auto=format&fit=crop"
+          image: "https://upload.wikimedia.org/wikipedia/commons/a/ae/Al_Bayt_Stadium_December_2021.jpg"
         }
       ],
       stats: [
@@ -236,8 +236,8 @@ export function getTournamentDetails(year: number): TournamentDetails {
         { stage: "Final", opponent: "West Germany", score: "3-2", story: "Brown and Valdano gave Argentina a 2-0 lead; West Germany fought back to 2-2, before Burruchaga scored the late winner." }
       ],
       definingMoments: [
-        { title: "The Hand of God", desc: "Maradona punches the ball over Peter Shilton, a goal born of street cunning.", image: "https://images.unsplash.com/photo-1590483864506-69ec069f0b5d?q=80&w=1000&auto=format&fit=crop" },
-        { title: "Goal of the Century", desc: "Four minutes later, Maradona dribbles past more than half the England team.", image: "https://images.unsplash.com/photo-1551958219-acbc608c6377?q=80&w=1000&auto=format&fit=crop" }
+        { title: "The Hand of God", desc: "Maradona punches the ball over Peter Shilton, a goal born of street cunning.", image: "https://upload.wikimedia.org/wikipedia/commons/5/54/Diego_Maradona_1986.jpg" },
+        { title: "Goal of the Century", desc: "Four minutes later, Maradona dribbles past more than half the England team.", image: "https://upload.wikimedia.org/wikipedia/commons/e/eb/Diego_Maradona_contra_Inglaterra_Mundial_1986.jpg" }
       ],
       legacy: "Mexico 86 definitively elevated Diego Maradona to a mythic status. It remains the gold standard for how a single player can decisively shape a World Cup.",
       groups: [
@@ -285,7 +285,7 @@ export function getTournamentDetails(year: number): TournamentDetails {
             { label: "Dribbles Completed", value: 53 }
           ],
           legacyMoment: "Individually altering the physics of the entire tournament, producing the iconic goals and captaining Argentina's golden triumph.",
-          image: "https://images.unsplash.com/photo-1590483864506-69ec069f0b5d?q=80&w=1000&auto=format&fit=crop"
+          image: "https://upload.wikimedia.org/wikipedia/commons/5/54/Diego_Maradona_1986.jpg"
         }
       ],
       stadiums: [
@@ -294,7 +294,7 @@ export function getTournamentDetails(year: number): TournamentDetails {
           location: "Mexico City",
           capacity: "114,600",
           notableMatch: "Argentina 2-1 England (Quarter-final)",
-          image: "https://images.unsplash.com/photo-1508344928928-7165b67de128?q=80&w=1000&auto=format&fit=crop"
+          image: "https://upload.wikimedia.org/wikipedia/commons/0/0e/Estadio_Azteca_Interior.jpg"
         }
       ],
       stats: [
@@ -334,7 +334,7 @@ export function getTournamentDetails(year: number): TournamentDetails {
       { stage: "Final Match", opponent: "Finalist Rivals", score: "Winning Margin", story: "Immortal champions emerged after a beautiful show of national grit and elite class." }
     ],
     definingMoments: [
-      { title: "The Turning Point", desc: "The definitive header or save that redirected the champion's path.", image: "https://images.unsplash.com/photo-1518091043644-c1d4457912c6?q=80&w=1000&auto=format&fit=crop" }
+      { title: "The Turning Point", desc: "The definitive header or save that redirected the champion's path.", image: "https://upload.wikimedia.org/wikipedia/commons/1/1d/1930_FIFA_World_Cup_Final.jpg" }
     ],
     legacy: `This tournament left an permanent, historic mark on the beautiful game. Its key goals, legendary saves, and iconic crowds went on to define the design and visual patterns of this footballing era.`,
     groups: [
@@ -381,7 +381,7 @@ export function getTournamentDetails(year: number): TournamentDetails {
           { label: "Distance Covered", value: "34km" }
         ],
         legacyMoment: "A series of decisive long-range passes and direct free-kick goals when the stadium was carrying extreme pressure.",
-        image: "https://images.unsplash.com/photo-1551958219-acbc608c6377?q=80&w=1000&auto=format&fit=crop"
+        image: "https://upload.wikimedia.org/wikipedia/commons/f/f3/Pel%C3%A9_%281966%29.jpg"
       }
     ],
     stadiums: [
@@ -390,7 +390,7 @@ export function getTournamentDetails(year: number): TournamentDetails {
         location: defaultHost,
         capacity: "75,000",
         notableMatch: "The Dramatic Final",
-        image: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=1000&auto=format&fit=crop"
+        image: "https://upload.wikimedia.org/wikipedia/commons/4/4b/Estadio_Centenario_Uruguay.jpg"
       }
     ],
     stats: [

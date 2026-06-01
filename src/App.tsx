@@ -197,6 +197,11 @@ export default function App() {
                 setMatchesVaultOpen(false);
                 setActiveClassicMatchId(undefined);
               }}
+              onExploreMatches={handleExploreClassicMatch}
+              onExploreNations={handleExploreNation}
+              onExploreLegends={handleExploreLegend}
+              onExploreStadiums={handleExploreStadium}
+              onExploreTournament={setActiveTournamentYear}
             />
           </motion.div>
         )}
@@ -218,6 +223,11 @@ export default function App() {
                 setInitialNationId(undefined);
               }}
               initialNationId={initialNationId}
+              onExploreMatches={handleExploreClassicMatch}
+              onExploreNations={handleExploreNation}
+              onExploreLegends={handleExploreLegend}
+              onExploreStadiums={handleExploreStadium}
+              onExploreTournament={setActiveTournamentYear}
             />
           </motion.div>
         )}
@@ -239,6 +249,11 @@ export default function App() {
                 setInitialLegendId(undefined);
               }}
               initialLegendId={initialLegendId}
+              onExploreMatches={handleExploreClassicMatch}
+              onExploreNations={handleExploreNation}
+              onExploreLegends={handleExploreLegend}
+              onExploreStadiums={handleExploreStadium}
+              onExploreTournament={setActiveTournamentYear}
             />
           </motion.div>
         )}
@@ -277,6 +292,11 @@ export default function App() {
                 setInitialStadiumId(undefined);
               }}
               initialStadiumId={initialStadiumId}
+              onExploreMatches={handleExploreClassicMatch}
+              onExploreNations={handleExploreNation}
+              onExploreLegends={handleExploreLegend}
+              onExploreStadiums={handleExploreStadium}
+              onExploreTournament={setActiveTournamentYear}
             />
           </motion.div>
         )}
@@ -292,6 +312,7 @@ export default function App() {
             onExploreLegend={handleExploreLegend}
             onExploreNation={handleExploreNation}
             onExploreStadium={handleExploreStadium}
+            onExploreTournament={setActiveTournamentYear}
           />
         )}
       </AnimatePresence>

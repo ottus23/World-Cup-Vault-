@@ -1086,7 +1086,7 @@ export function TimeMachine({
 
                     <div className="relative aspect-[4/3] rounded-sm overflow-hidden border border-white/5">
                       <img 
-                        src={completeTournaments.find(t => t.year === activeYear)?.image || 'https://images.unsplash.com/photo-1518091043644-c1d4457912c6?q=80&w=1400&auto=format&fit=crop'} 
+                        src={completeTournaments.find(t => t.year === activeYear)?.image || 'https://upload.wikimedia.org/wikipedia/commons/1/1d/1930_FIFA_World_Cup_Final.jpg'} 
                         alt={`${activeYear} World Cup Poster`}
                         className="w-full h-full object-cover grayscale-[0.2] transition-colors"
                       />

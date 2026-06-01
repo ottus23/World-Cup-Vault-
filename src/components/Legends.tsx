@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Search, X, Scale } from 'lucide-react';
 import { legends, Legend } from '../data';
+import { ContinueExploringSystem } from './ContinueExploringSystem';
 
 // Styles for different eras
 const ERA_STYLES: Record<string, string> = {
@@ -162,7 +163,7 @@ function LegacyCompareModal({ onClose }: { onClose: () => void }) {
             ))}
           </select>
 
-          <img src={player1.image} alt={player1.name} className={`w-full h-64 object-cover mb-8 ${ERA_STYLES[player1.eraStyle]}`} />
+          <img src={player1.image} alt={player1.name} className={`w-full h-64 object-cover mb-8 ${ERA_STYLES[player1.eraStyle]}`} referrerPolicy="no-referrer" />
           
           <div className="space-y-8">
             <div>
@@ -200,7 +201,7 @@ function LegacyCompareModal({ onClose }: { onClose: () => void }) {
             ))}
           </select>
 
-          <img src={player2.image} alt={player2.name} className={`w-full h-64 object-cover mb-8 ${ERA_STYLES[player2.eraStyle]}`} />
+          <img src={player2.image} alt={player2.name} className={`w-full h-64 object-cover mb-8 ${ERA_STYLES[player2.eraStyle]}`} referrerPolicy="no-referrer" />
           
           <div className="space-y-8 text-right">
             <div>
@@ -252,7 +253,23 @@ function LegacyConstellation() {
   );
 }
 
-export function LegendsVault({ onClose, initialLegendId }: { onClose?: () => void; initialLegendId?: string }) {
+export function LegendsVault({ 
+  onClose, 
+  initialLegendId,
+  onExploreMatches,
+  onExploreNations,
+  onExploreLegends,
+  onExploreStadiums,
+  onExploreTournament
+}: { 
+  onClose?: () => void; 
+  initialLegendId?: string;
+  onExploreMatches?: (matchId: string) => void;
+  onExploreNations?: (nationId: string) => void;
+  onExploreLegends?: (legendId: string) => void;
+  onExploreStadiums?: (stadiumId: string) => void;
+  onExploreTournament?: (year: number) => void;
+}) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [showCompare, setShowCompare] = useState(false);
@@ -337,6 +354,19 @@ export function LegendsVault({ onClose, initialLegendId }: { onClose?: () => voi
         {legends.map((legend) => (
           <LegendExhibit key={legend.id} legend={legend} onCompare={() => setShowCompare(true)} />
         ))}
+      </div>
+
+      {/* CONTINUE EXPLORING SYSTEM */}
+      <div className="relative z-10 mt-16">
+        <ContinueExploringSystem 
+          currentItemType="legend"
+          currentItemId={initialLegendId || "pele"}
+          onExploreMatches={onExploreMatches}
+          onExploreNations={onExploreNations}
+          onExploreLegends={onExploreLegends}
+          onExploreStadiums={onExploreStadiums}
+          onExploreTournament={onExploreTournament}
+        />
       </div>
 
       {/* Archive Search Modal */}

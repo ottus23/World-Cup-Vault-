@@ -5,6 +5,7 @@ import {
   Tv, History, Scale, Zap, Info, ArrowLeft, Heart, Sparkles, ChevronRight, Play
 } from 'lucide-react';
 import { nationsData, NationCivilization, NationJourneyMilestone } from '../nationsData';
+import { ContinueExploringSystem } from './ContinueExploringSystem';
 
 // --- Web Audio Engine for Immersive Football Cartography ---
 const playSound = (type: 'map-hover' | 'page-open' | 'gear-tick' | 'clash' | 'success') => {
@@ -83,7 +84,23 @@ const playSound = (type: 'map-hover' | 'page-open' | 'gear-tick' | 'clash' | 'su
   }
 };
 
-export function NationsVault({ onClose, initialNationId }: { onClose: () => void; initialNationId?: string }) {
+export function NationsVault({ 
+  onClose, 
+  initialNationId,
+  onExploreMatches,
+  onExploreNations,
+  onExploreLegends,
+  onExploreStadiums,
+  onExploreTournament
+}: { 
+  onClose: () => void; 
+  initialNationId?: string;
+  onExploreMatches?: (matchId: string) => void;
+  onExploreNations?: (nationId: string) => void;
+  onExploreLegends?: (legendId: string) => void;
+  onExploreStadiums?: (stadiumId: string) => void;
+  onExploreTournament?: (year: number) => void;
+}) {
   const [selectedNation, setSelectedNation] = useState<NationCivilization | null>(
     initialNationId ? nationsData.find(n => n.id === initialNationId) || null : null
   );
@@ -936,6 +953,7 @@ export function NationsVault({ onClose, initialNationId }: { onClose: () => void
                               src={legend.image} 
                               alt={legend.name} 
                               className="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
+                              referrerPolicy="no-referrer"
                             />
                             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black to-transparent p-3 pt-6" />
                           </div>
@@ -1187,6 +1205,19 @@ export function NationsVault({ onClose, initialNationId }: { onClose: () => void
                     })()}
                   </div>
                 </div>
+              </div>
+
+              {/* CONTINUE EXPLORING SYSTEM */}
+              <div className="mt-12">
+                <ContinueExploringSystem 
+                  currentItemType="nation"
+                  currentItemId={selectedNation.id}
+                  onExploreMatches={onExploreMatches}
+                  onExploreNations={onExploreNations}
+                  onExploreLegends={onExploreLegends}
+                  onExploreStadiums={onExploreStadiums}
+                  onExploreTournament={onExploreTournament}
+                />
               </div>
 
               {/* End Screen prompt quote */}

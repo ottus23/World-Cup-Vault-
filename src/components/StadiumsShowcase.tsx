@@ -19,13 +19,27 @@ import {
   LayoutGrid
 } from 'lucide-react';
 import { stadiumsData, Stadium, HistoricMatch, DefiningMoment, EchoEvent } from '../stadiumsData';
+import { ContinueExploringSystem } from './ContinueExploringSystem';
 
 interface StadiumsShowcaseProps {
   onClose: () => void;
   initialStadiumId?: string;
+  onExploreMatches?: (matchId: string) => void;
+  onExploreNations?: (nationId: string) => void;
+  onExploreLegends?: (legendId: string) => void;
+  onExploreStadiums?: (stadiumId: string) => void;
+  onExploreTournament?: (year: number) => void;
 }
 
-export function StadiumsShowcase({ onClose, initialStadiumId }: StadiumsShowcaseProps) {
+export function StadiumsShowcase({ 
+  onClose, 
+  initialStadiumId,
+  onExploreMatches,
+  onExploreNations,
+  onExploreLegends,
+  onExploreStadiums,
+  onExploreTournament
+}: StadiumsShowcaseProps) {
   // Navigation states
   const [showIntroduction, setShowIntroduction] = useState<boolean>(!initialStadiumId);
   const [selectedStadiumId, setSelectedStadiumId] = useState<string | null>(initialStadiumId || null);
@@ -1122,6 +1136,19 @@ export function StadiumsShowcase({ onClose, initialStadiumId }: StadiumsShowcase
                               );
                             })}
                           </div>
+                        </div>
+
+                        {/* CONTINUE EXPLORING SYSTEM */}
+                        <div className="w-full mt-16 mb-16 text-left">
+                          <ContinueExploringSystem 
+                            currentItemType="stadium"
+                            currentItemId={selectedStadium.id}
+                            onExploreMatches={(mId) => { setSelectedStadiumId(null); onClose(); if (onExploreMatches) onExploreMatches(mId); }}
+                            onExploreNations={(nId) => { setSelectedStadiumId(null); onClose(); if (onExploreNations) onExploreNations(nId); }}
+                            onExploreLegends={(lId) => { setSelectedStadiumId(null); onClose(); if (onExploreLegends) onExploreLegends(lId); }}
+                            onExploreStadiums={(sId) => { setSelectedStadiumId(sId); }}
+                            onExploreTournament={(year) => { setSelectedStadiumId(null); onClose(); if (onExploreTournament) onExploreTournament(year); }}
+                          />
                         </div>
 
                         {/* Closing Action Back up to selection */}
