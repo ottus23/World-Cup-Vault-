@@ -2,7 +2,7 @@ import { motion } from 'motion/react';
 import { useRef } from 'react';
 import { recordHalls, RecordMonolith } from '../data';
 
-function Monolith({ record, idx }: { record: RecordMonolith; idx: number }) {
+function Monolith({ record, idx }: { record: RecordMonolith; idx: number; key?: string }) {
   return (
     <motion.div 
       className="relative flex flex-col md:flex-row items-center border border-[#4E5661]/20 bg-[#090909] group overflow-hidden"

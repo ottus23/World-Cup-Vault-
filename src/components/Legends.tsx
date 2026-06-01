@@ -11,7 +11,7 @@ const ERA_STYLES: Record<string, string> = {
   modern: 'contrast-[1.1] saturate-[1.1] brightness-95'
 };
 
-function LegendExhibit({ legend, onCompare }: { legend: Legend; onCompare: () => void }) {
+function LegendExhibit({ legend, onCompare }: { legend: Legend; onCompare: () => void; key?: string }) {
   return (
     <section 
       id={`legend-${legend.id}`}

@@ -3,6 +3,7 @@ import { useRef, useState } from 'react';
 import { Trophy, ArrowRight, X } from 'lucide-react';
 import { tournaments, moments, Tournament } from '../data';
 import { Moments } from './Moments';
+import { TournamentArchive } from './TournamentArchive';
 
 function getEraStyling(year: number) {
   if (year <= 1950) return 'sepia-[0.5] grayscale contrast-[1.2] opacity-80'; // Vintage
@@ -149,48 +150,7 @@ function TournamentChapter({ tournament, isLeft }: { tournament: Tournament, isL
 
       <AnimatePresence>
         {isDrawerOpen && (
-          <motion.div 
-            className="fixed inset-0 z-[200] bg-[#090909]/90 backdrop-blur-md flex items-center justify-center p-6 md:p-12"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <motion.div 
-              className="w-full max-w-4xl bg-[#111111] border border-[#D4AF37]/20 p-8 md:p-16 relative shadow-2xl"
-              initial={{ y: 50, opacity: 0, scale: 0.95 }}
-              animate={{ y: 0, opacity: 1, scale: 1 }}
-              exit={{ y: 20, opacity: 0, scale: 0.95 }}
-              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            >
-              <button 
-                onClick={() => setIsDrawerOpen(false)}
-                className="absolute top-6 right-6 text-[#69707A] hover:text-[#D4AF37] transition-colors"
-                aria-label="Close drawer"
-              >
-                <X size={32} />
-              </button>
-
-              <p className="font-sans text-[#D4AF37] tracking-[0.2em] uppercase text-sm mb-2">Vault Archives</p>
-              <h2 className="font-serif text-[#F5F2EA] text-4xl md:text-6xl mb-12 border-b border-[#4E5661]/30 pb-6">{tournament.year} {tournament.host}</h2>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div>
-                  <p className="font-sans text-[#69707A] text-xs uppercase tracking-widest mb-2">Key Player</p>
-                  <p className="font-serif text-[#DDD7C8] text-2xl">{tournament.keyPlayer}</p>
-                </div>
-                <div>
-                  <p className="font-sans text-[#69707A] text-xs uppercase tracking-widest mb-2">Final Match Result</p>
-                  <p className="font-serif text-[#DDD7C8] text-2xl">{tournament.champion} {tournament.finalScore} {tournament.runnerUp}</p>
-                </div>
-                <div className="md:col-span-2 mt-4 pt-8 border-t border-[#4E5661]/20">
-                  <p className="font-sans text-[#69707A] text-xs uppercase tracking-widest mb-4">Historical Context</p>
-                  <p className="font-serif text-[#F5F2EA] text-xl leading-relaxed italic opacity-90">
-                    "{tournament.story}"
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
+          <TournamentArchive tournament={tournament} onClose={() => setIsDrawerOpen(false)} />
         )}
       </AnimatePresence>
     </motion.section>
