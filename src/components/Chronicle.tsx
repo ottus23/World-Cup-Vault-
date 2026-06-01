@@ -47,7 +47,7 @@ function EraDivider({ title, subtitle, id }: { title: string, subtitle: string, 
   );
 }
 
-function TournamentChapter({ tournament, isLeft }: { tournament: Tournament, isLeft: boolean }) {
+function TournamentChapter({ tournament, isLeft, onExploreClassicMatch }: { tournament: Tournament, isLeft: boolean, onExploreClassicMatch?: (matchId: string) => void }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const filterStyle = getEraStyling(tournament.year);
 
@@ -150,14 +150,21 @@ function TournamentChapter({ tournament, isLeft }: { tournament: Tournament, isL
 
       <AnimatePresence>
         {isDrawerOpen && (
-          <TournamentArchive tournament={tournament} onClose={() => setIsDrawerOpen(false)} />
+          <TournamentArchive 
+            tournament={tournament} 
+            onClose={() => setIsDrawerOpen(false)} 
+            onExploreClassicMatch={(id) => {
+              setIsDrawerOpen(false);
+              if (onExploreClassicMatch) onExploreClassicMatch(id);
+            }} 
+          />
         )}
       </AnimatePresence>
     </motion.section>
   );
 }
 
-export function Chronicle() {
+export function Chronicle({ onExploreClassicMatch }: { onExploreClassicMatch?: (matchId: string) => void }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -192,7 +199,11 @@ export function Chronicle() {
           return (
             <div key={tournament.year}>
               {eraDivider}
-              <TournamentChapter tournament={tournament} isLeft={isLeft} />
+              <TournamentChapter 
+                tournament={tournament} 
+                isLeft={isLeft} 
+                onExploreClassicMatch={onExploreClassicMatch} 
+              />
               
               {/* Insert historic moment scenes optionally */}
               {idx > 0 && idx % 4 === 0 && moments[(idx / 4) - 1] && (

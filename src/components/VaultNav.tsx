@@ -1,15 +1,32 @@
 import { motion } from 'motion/react';
 
 const archives = [
-  { title: 'Tournaments', icon: '🏆', desc: 'The Complete History' },
-  { title: 'Legends', icon: '👑', desc: 'Hall of Immortals' },
-  { title: 'Records', icon: '📊', desc: 'Numbers that Define' },
-  { title: 'Nations', icon: '🌍', desc: 'Flags of Glory' },
-  { title: 'Matches', icon: '🎬', desc: 'Cinematic Classics' },
-  { title: 'Stadiums', icon: '🏟️', desc: 'The Grand Stages' }
+  { id: 'tournaments', title: 'Tournaments', icon: '🏆', desc: 'The Complete History' },
+  { id: 'legends', title: 'Legends', icon: '👑', desc: 'Hall of Immortals' },
+  { id: 'records', title: 'Records', icon: '📊', desc: 'Numbers that Define' },
+  { id: 'nations', title: 'Nations', icon: '🌍', desc: 'Flags of Glory' },
+  { id: 'matches', title: 'Matches', icon: '🎬', desc: 'Cinematic Classics' },
+  { id: 'stadiums', title: 'Stadiums', icon: '🏟️', desc: 'The Grand Stages' }
 ];
 
-export function VaultNav() {
+export function VaultNav({ onExploreMatches }: { onExploreMatches?: () => void }) {
+  const handleArchiveClick = (archiveId: string) => {
+    if (archiveId === 'matches' && onExploreMatches) {
+      onExploreMatches();
+    } else {
+      // Smooth scroll to relevant elements of the general page based on other buttons if desired
+      const idMap: Record<string, string> = {
+        tournaments: 'era-vintage',
+        legends: 'legend-pele',
+        records: 'records-vault-section'
+      };
+      if (idMap[archiveId]) {
+        const el = document.getElementById(idMap[archiveId]);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
   return (
     <section className="relative py-48 bg-[#171717] px-6 border-t border-[#4E5661]/20">
       <div className="max-w-7xl mx-auto">
@@ -41,6 +58,7 @@ export function VaultNav() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10%" }}
               transition={{ duration: 0.8, delay: idx * 0.1 }}
+              onClick={() => handleArchiveClick(archive.id)}
             >
               <div className="relative p-12 flex flex-col items-center text-center border border-[#4E5661]/30 bg-[#090909] transition-all duration-500 hover:border-[#D4AF37]/50 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#D4AF37]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

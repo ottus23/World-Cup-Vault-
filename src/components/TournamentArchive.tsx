@@ -76,7 +76,7 @@ function getEraStyling(year: number) {
   };
 }
 
-export function TournamentArchive({ tournament, onClose }: { tournament: Tournament; onClose: () => void }) {
+export function TournamentArchive({ tournament, onClose, onExploreClassicMatch }: { tournament: Tournament; onClose: () => void; onExploreClassicMatch?: (matchId: string) => void }) {
   const details = getTournamentDetails(tournament.year);
   const era = getEraStyling(tournament.year);
   
@@ -532,6 +532,48 @@ export function TournamentArchive({ tournament, onClose }: { tournament: Tournam
            </motion.div>
         </div>
       </section>
+
+            {/* Direct Vault Match Link if available */}
+            {(() => {
+              const matchesMap: Record<number, string> = {
+                2002: '2002-final', // compatibility fallback if needed
+                2022: '2022-final',
+                2014: '2014-semi',
+                1986: '1986-quarter',
+                1970: '1970-final',
+                2006: '2006-final',
+                1950: '1950-decider'
+              };
+              const matchId = matchesMap[tournament.year];
+              if (matchId && onExploreClassicMatch) {
+                return (
+                  <div className="flex justify-center bg-[#0a0a0a] pb-24 px-6 relative z-10">
+                    <motion.div 
+                      className="w-full max-w-2xl p-6 border border-double border-[#D4AF37]/50 bg-black/85 flex flex-col sm:flex-row items-center justify-between gap-4 text-left shadow-2xl"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.8 }}
+                    >
+                      <div>
+                        <span className="font-sans text-[8px] tracking-[0.25em] text-[#D4AF37] uppercase font-bold block mb-1">IMMEDIATE TRANSFER AVAILABLE</span>
+                        <h4 className="font-serif text-[#F5F2EA] text-md font-bold">Relive the Full Cinematic Match Documentary</h4>
+                        <p className="font-sans text-[#7e9ba9] text-[11px] leading-relaxed mt-1">
+                          Interact with the Momentum River and timeline chronicles inside the Matches Vault.
+                        </p>
+                      </div>
+                      <button
+                        onClick={() => onExploreClassicMatch(matchId)}
+                        className="px-5 py-2.5 bg-[#D4AF37] text-[#090909] font-sans text-[10px] uppercase tracking-widest font-bold hover:bg-[#fff] transition-all transform active:scale-95 shrink-0 cursor-pointer"
+                      >
+                        Enter Cinema Room
+                      </button>
+                    </motion.div>
+                  </div>
+                );
+              }
+              return null;
+            })()}
 
       {/* Chapter 3 - Group Stage Atlas (Interactive Folder Explorer) */}
       <section className="relative w-full bg-[#111] py-32 px-6 md:px-12 border-t border-[#4E5661]/10">

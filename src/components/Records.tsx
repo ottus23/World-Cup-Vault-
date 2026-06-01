@@ -61,7 +61,7 @@ export function RecordsVault() {
   const containerRef = useRef<HTMLDivElement>(null);
   
   return (
-    <section ref={containerRef} className="relative w-full bg-[#111111] pb-48 pt-32 border-y border-[#4E5661]/20 overflow-hidden">
+    <section id="records-vault-section" ref={containerRef} className="relative w-full bg-[#111111] pb-48 pt-32 border-y border-[#4E5661]/20 overflow-hidden">
       
       {/* Entry Statement */}
       <div className="min-h-[80vh] flex flex-col items-center justify-center text-center px-6 relative mb-24">

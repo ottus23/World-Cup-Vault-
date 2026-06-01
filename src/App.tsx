@@ -5,16 +5,29 @@ import { RecordsVault } from './components/Records';
 import { LegendsVault } from './components/Legends';
 import { VaultNav } from './components/VaultNav';
 import { EraNav } from './components/EraNav';
+import { HistoricMatchesVault } from './components/HistoricMatchesVault';
 import { motion, AnimatePresence } from 'motion/react';
 
 export default function App() {
   const [entered, setEntered] = useState(false);
+  const [matchesVaultOpen, setMatchesVaultOpen] = useState(false);
+  const [activeClassicMatchId, setActiveClassicMatchId] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     if (entered) {
       window.scrollTo(0, 0);
     }
   }, [entered]);
+
+  const handleExploreClassicMatch = (matchId: string) => {
+    setActiveClassicMatchId(matchId);
+    setMatchesVaultOpen(true);
+  };
+
+  const handleOpenMatchesFromNav = () => {
+    setActiveClassicMatchId(undefined);
+    setMatchesVaultOpen(true);
+  };
 
   return (
     <div className="bg-[#090909] min-h-screen text-[#F5F2EA] font-sans selection:bg-[#D4AF37] selection:text-[#090909]">
@@ -27,6 +40,7 @@ export default function App() {
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
         }}
       />
+      
       <AnimatePresence>
         {!entered && (
           <motion.div 
@@ -46,10 +60,10 @@ export default function App() {
         style={{ pointerEvents: entered ? 'auto' : 'none' }}
       >
         <EraNav />
-        <Chronicle />
+        <Chronicle onExploreClassicMatch={handleExploreClassicMatch} />
         <RecordsVault />
         <LegendsVault />
-        <VaultNav />
+        <VaultNav onExploreMatches={handleOpenMatchesFromNav} />
         
         <footer className="bg-[#090909] text-center py-12 border-t border-[#4E5661]/20">
           <p className="font-serif text-[#69707A] text-sm tracking-widest uppercase">
@@ -57,6 +71,27 @@ export default function App() {
           </p>
         </footer>
       </motion.div>
+
+      {/* Cinematic Slide-in Overlay for Matches Vault Cinema Screen */}
+      <AnimatePresence>
+        {matchesVaultOpen && (
+          <motion.div 
+            className="fixed inset-0 z-[500] bg-[#090909] overflow-y-auto"
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            transition={{ type: 'spring', stiffness: 220, damping: 26 }}
+          >
+            <HistoricMatchesVault 
+              activeMatchId={activeClassicMatchId}
+              onClose={() => {
+                setMatchesVaultOpen(false);
+                setActiveClassicMatchId(undefined);
+              }}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
