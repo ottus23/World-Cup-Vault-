@@ -12,9 +12,11 @@ import {
   Calendar,
   Sparkles,
   Trophy,
-  Award
+  Award,
+  BookOpen
 } from 'lucide-react';
 import { MatchDetails } from './HistoricMatchesVault';
+import { TacticalReportView } from './TacticalReportView';
 
 interface MatchShareSystemProps {
   match: MatchDetails;
@@ -38,6 +40,7 @@ export function MatchShareSystem({ match, onClose }: MatchShareSystemProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [copied, setCopied] = useState(false);
   const [savedLocally, setSavedLocally] = useState(false);
+  const [showFullReport, setShowFullReport] = useState(false);
   const [downloadUrl, setDownloadUrl] = useState<string>('');
   const [localHistory, setLocalHistory] = useState<SavedSnapshot[]>([]);
 
@@ -590,7 +593,7 @@ export function MatchShareSystem({ match, onClose }: MatchShareSystemProps) {
         </button>
 
         {/* 1. Ticket Card Canvas Stage Preview Column (Left) with Tactile Film Reel Borders */}
-        <div className="col-span-1 md:col-span-6 flex flex-col items-center justify-center relative z-10 w-full">
+        <div className={`col-span-1 md:col-span-6 flex flex-col items-center justify-center relative z-10 w-full ${showFullReport ? 'hidden' : ''}`}>
           
           {/* Complete Film Strip Outer Container */}
           <div className="w-full max-w-[430px] flex items-stretch bg-neutral-950 border border-neutral-800 rounded-sm p-2 shadow-[0_0_60px_rgba(0,0,0,0.85)] select-none">
@@ -898,7 +901,7 @@ export function MatchShareSystem({ match, onClose }: MatchShareSystemProps) {
         </div>
 
         {/* 2. Custom Interactions & Keepsake Collection Drawer (Right) */}
-        <div className="col-span-1 md:col-span-6 flex flex-col justify-between space-y-8 relative z-10 h-full">
+        <div className={`col-span-1 md:col-span-6 flex flex-col justify-between space-y-8 relative z-10 h-full ${showFullReport ? 'hidden' : ''}`}>
           <div>
             <div className="flex items-center gap-2 mb-2">
               <Sparkles size={16} className="text-[#D4AF37]" />
@@ -999,6 +1002,15 @@ export function MatchShareSystem({ match, onClose }: MatchShareSystemProps) {
 
             {/* Action buttons list */}
             <div className="flex flex-col gap-3 mt-5">
+              {!showFullReport && (
+                <button 
+                  onClick={() => setShowFullReport(true)}
+                  className="w-full flex items-center justify-center gap-2.5 bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 hover:border-neutral-700 font-sans text-xs font-bold uppercase tracking-widest py-3 transition-colors cursor-pointer text-[#69707A] hover:text-[#D4AF37]"
+                >
+                  <BookOpen size={14} />
+                  <span>View Full Match Report</span>
+                </button>
+              )}
               {/* BUTTON 1: Download Snapshot PNG */}
               {isDeveloping ? (
                 <div className="w-full flex items-center justify-center gap-2.5 bg-[#121212] border border-[#D4AF37]/15 text-[#69707A] font-sans text-xs font-bold uppercase tracking-widest py-3 select-none">
@@ -1099,7 +1111,29 @@ export function MatchShareSystem({ match, onClose }: MatchShareSystemProps) {
             )}
           </div>
         </div>
+        {showFullReport && (
+          <TacticalReportView match={match} onBack={() => setShowFullReport(false)} />
+        )}
       </motion.div>
+      
+      {/* Toast Notification */}
+      <AnimatePresence>
+        {copied && (
+          <motion.div
+            initial={{ opacity: 0, y: 50, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.9 }}
+            className="fixed bottom-8 left-1/2 -translate-x-1/2 z-[700] bg-[#121212] border border-[#D4AF37]/50 shadow-[0_0_20px_rgba(212,175,55,0.15)] flex items-center gap-3 px-5 py-3 rounded-full"
+          >
+            <div className="bg-[#D4AF37]/20 p-1.5 rounded-full text-[#D4AF37]">
+              <Check size={16} />
+            </div>
+            <span className="font-sans font-bold text-xs uppercase tracking-widest text-white">
+              Link Copied to Clipboard
+            </span>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
