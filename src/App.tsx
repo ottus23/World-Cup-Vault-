@@ -10,6 +10,7 @@ import { NationsVault } from './components/NationsVault';
 import { FeaturedPreviews } from './components/FeaturedPreviews';
 import { StadiumsShowcase } from './components/StadiumsShowcase';
 import { motion, AnimatePresence } from 'motion/react';
+import { Analytics } from '@vercel/analytics/react';
 
 export default function App() {
   const [entered, setEntered] = useState(false);
@@ -175,6 +176,8 @@ export default function App() {
           />
         )}
       </AnimatePresence>
+      
+      <Analytics />
     </div>
   );
 }
