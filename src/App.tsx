@@ -4,6 +4,7 @@ import { Chronicle } from './components/Chronicle';
 import { Records } from './components/Records';
 import { Legends } from './components/Legends';
 import { VaultNav } from './components/VaultNav';
+import { EraNav } from './components/EraNav';
 import { motion, AnimatePresence } from 'motion/react';
 
 export default function App() {
@@ -44,6 +45,7 @@ export default function App() {
         transition={{ duration: 1.5, delay: entered ? 1 : 0, ease: 'easeOut' }}
         style={{ pointerEvents: entered ? 'auto' : 'none' }}
       >
+        <EraNav />
         <Chronicle />
         <Records />
         <Legends />
