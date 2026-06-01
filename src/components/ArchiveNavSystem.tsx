@@ -653,10 +653,10 @@ export function ArchiveNavSystem({
           <motion.div 
             id="the-vault-index-overlay"
             className="fixed inset-0 z-[600] bg-[#050505]/98 flex flex-col justify-between overflow-y-auto p-6 md:p-16 lg:p-24 selection:bg-[#D4AF37] selection:text-[#050505]"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.45, ease: 'easeInOut' }}
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            transition={{ type: 'spring', stiffness: 220, damping: 26 }}
           >
             {/* Elegant Background Stamp Sheet */}
             <div className="absolute inset-0 opacity-[0.012] bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
@@ -759,10 +759,10 @@ export function ArchiveNavSystem({
           <motion.div 
             id="the-archive-search-overlay"
             className="fixed inset-0 z-[600] bg-[#060606] flex flex-col selection:bg-[#D4AF37] selection:text-[#090909] overflow-hidden"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.35 }}
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            transition={{ type: 'spring', stiffness: 220, damping: 26 }}
           >
             {/* Library Grid subtle nodes */}
             <div className="absolute inset-0 opacity-[0.015] bg-[linear-gradient(to_right,#D4AF37_1px,transparent_1px),linear-gradient(to_bottom,#D4AF37_1px,transparent_1px)] [background-size:32px_32px] pointer-events-none" />

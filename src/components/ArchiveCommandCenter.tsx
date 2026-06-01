@@ -869,10 +869,10 @@ export function ArchiveCommandCenter({
             id="archive-command-center-overlay"
             ref={overlayRef}
             className="fixed inset-0 z-[600] bg-[#060606]/98 backdrop-blur-md overflow-hidden flex flex-col focus:outline-none"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            transition={{ type: 'spring', stiffness: 220, damping: 26 }}
             role="dialog"
             aria-modal="true"
             tabIndex={-1}

@@ -15,6 +15,7 @@ import { TimeMachine } from './components/TimeMachine';
 import { FootballAtlas } from './components/FootballAtlas';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArchiveCommandCenter } from './components/ArchiveCommandCenter';
+import { MediaAuthoritySystem } from './components/MediaAuthoritySystem';
 
 export default function App() {
   const [entered, setEntered] = useState(false);
@@ -281,10 +282,10 @@ export default function App() {
         {stadiumsVaultOpen && (
           <motion.div 
             className="fixed inset-0 z-[500] bg-[#050505] overflow-y-auto"
-            initial={{ opacity: 0, y: '100%' }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: '100%' }}
-            transition={{ type: 'spring', stiffness: 180, damping: 24 }}
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            transition={{ type: 'spring', stiffness: 220, damping: 26 }}
           >
             <StadiumsShowcase 
               onClose={() => {
@@ -320,14 +321,22 @@ export default function App() {
       {/* THE WORLD CUP TIME MACHINE SIGNATURE IMMERSIVE EXPERIENCE */}
       <AnimatePresence>
         {timeMachineOpen && (
-          <TimeMachine 
-            onClose={() => setTimeMachineOpen(false)}
-            onExploreClassicMatch={handleExploreClassicMatch}
-            onExploreLegend={handleExploreLegend}
-            onExploreNation={handleExploreNation}
-            onExploreStadium={handleExploreStadium}
-            onExploreRecords={handleExploreRecords}
-          />
+          <motion.div
+            className="fixed inset-0 z-[600]"
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            transition={{ type: 'spring', stiffness: 220, damping: 26 }}
+          >
+            <TimeMachine 
+              onClose={() => setTimeMachineOpen(false)}
+              onExploreClassicMatch={handleExploreClassicMatch}
+              onExploreLegend={handleExploreLegend}
+              onExploreNation={handleExploreNation}
+              onExploreStadium={handleExploreStadium}
+              onExploreRecords={handleExploreRecords}
+            />
+          </motion.div>
         )}
       </AnimatePresence>
 
@@ -336,10 +345,10 @@ export default function App() {
         {footballAtlasOpen && (
           <motion.div
             className="fixed inset-0 z-[500] bg-[#0c0d10] overflow-hidden"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ ease: 'easeInOut', duration: 0.4 }}
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            transition={{ type: 'spring', stiffness: 220, damping: 26 }}
           >
             <FootballAtlas 
               onClose={() => setFootballAtlasOpen(false)}
@@ -368,6 +377,9 @@ export default function App() {
         onExploreHistory={handleBeginJourney}
         onExploreAtlas={() => setFootballAtlasOpen(true)}
       />
+
+      {/* OFFICIAL MEDIA INTEGRITY & SECURITY SYSTEM */}
+      <MediaAuthoritySystem />
     </div>
   );
 }

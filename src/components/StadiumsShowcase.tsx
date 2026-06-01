@@ -485,11 +485,14 @@ export function StadiumsShowcase({
                               >
                                 <div className="space-y-2">
                                   <div className="relative h-20 overflow-hidden bg-[#161616] border border-[#4E5661]/15 leading-[0]">
-                                    <img 
+                                    <VerifiedImage 
                                       src={stadium.image} 
-                                      alt="" 
-                                      className="w-full h-full object-cover filter grayscale"
-                                      referrerPolicy="no-referrer"
+                                      alt={`${stadium.name} Plate`} 
+                                      className="w-full h-full"
+                                      aspectRatio="auto"
+                                      tournament={stadium.country}
+                                      date={stadium.city}
+                                      context={stadium.legacy}
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-80" />
                                     <span className="absolute bottom-1 right-2 text-[8px] font-mono tracking-widest text-[#D4AF37] uppercase">

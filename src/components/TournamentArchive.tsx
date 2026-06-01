@@ -280,10 +280,10 @@ export function TournamentArchive({
   return (
     <motion.div
       className={`fixed inset-0 z-[400] ${era.bgColor} overflow-y-auto overflow-x-hidden selection:bg-[#D4AF37] selection:text-[#090909] text-[#F5F2EA]`}
-      initial={{ opacity: 0, y: 100 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 100 }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      initial={{ opacity: 0, x: "100%" }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: "100%" }}
+      transition={{ type: "spring", stiffness: 220, damping: 26 }}
     >
       {/* Decorative grain/dust overlay for historic vibes */}
       <div className="fixed inset-0 pointer-events-none opacity-5 mix-blend-overlay bg-[url('data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'1.2\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E')] z-[410]" />
