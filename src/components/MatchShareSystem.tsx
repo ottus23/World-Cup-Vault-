@@ -737,89 +737,105 @@ export function MatchShareSystem({ match, onClose }: MatchShareSystemProps) {
               />
 
               {/* The gorgeous, accessible, and responsive HTML Card with requested grid-cols-2 layout */}
-              <div className={`w-full h-full p-4 md:p-6 flex flex-col justify-between border-2 ${design.border} relative ${design.bg} ${design.text} font-serif tracking-normal leading-relaxed`}>
+              <div className={`w-full h-full p-4 md:p-6 flex flex-col justify-between border-2 ${design.border} relative ${design.bg} ${design.text} font-serif tracking-normal leading-relaxed transition-all duration-500`}>
                 
                 {/* Vintage Double Internal Border */}
-                <div className={`absolute inset-1.5 border ${design.subBorder} pointer-events-none`} />
+                <div className={`absolute inset-1.5 border ${design.subBorder} pointer-events-none transition-all duration-500`} />
 
                 {/* Ambient watermark background text */}
-                <div className={`absolute inset-0 flex items-center justify-center font-bold text-[140px] md:text-[180px] font-serif ${design.watermark} select-none pointer-events-none z-0`}>
+                <div className={`absolute inset-0 flex items-center justify-center font-bold text-[140px] md:text-[180px] font-serif ${design.watermark} select-none pointer-events-none z-0 transition-all duration-500`}>
                   {match.year}
                 </div>
 
                 <div className="relative z-10 w-full flex flex-col h-full justify-between">
                   {/* Title Header */}
                   <div className="text-center">
-                    <p className={`font-sans font-bold text-[8.5px] md:text-[10px] tracking-[0.4em] uppercase ${design.titleStamp}`}>
+                    <p className={`font-sans font-bold text-[8.5px] md:text-[10px] tracking-[0.4em] uppercase ${design.titleStamp} transition-colors duration-500`}>
                       HISTORIC MATCH CHRONICLES
                     </p>
-                    <div className={`w-4/5 h-[1px] mx-auto my-1.5 ${devStyle === 'chrome' ? 'bg-white/15' : devStyle === 'sepia' ? 'bg-[#D97706]/25' : 'bg-[#D4AF37]/35'}`} />
-                    <p className={`font-mono font-bold text-[7px] md:text-[8px] tracking-[0.2em] uppercase ${design.label}`}>
+                    <div className={`w-4/5 h-[1px] mx-auto my-1.5 transition-all duration-500 ${devStyle === 'chrome' ? 'bg-white/15' : devStyle === 'sepia' ? 'bg-[#D97706]/25' : 'bg-[#D4AF37]/35'}`} />
+                    <p className={`font-mono font-bold text-[7px] md:text-[8px] tracking-[0.2em] uppercase ${design.label} transition-colors duration-500`}>
                       STAMP ID: WC-{match.year}-{match.id.toUpperCase()}
                     </p>
                   </div>
 
                   {/* Dual-Column Layout: metadata on the left & narrative summary on the right */}
-                  <div className="grid grid-cols-2 gap-3.5 md:gap-5 items-stretch my-auto py-2">
+                  <motion.div 
+                    layout
+                    transition={{ type: "spring", stiffness: 220, damping: 25 }}
+                    className="grid grid-cols-2 gap-3.5 md:gap-5 items-stretch my-auto py-2"
+                  >
                     
                     {/* LEFT COLUMN: Metadata Snapshot */}
-                    <div className="flex flex-col justify-center items-center text-center border-r border-[#4E5661]/15 pr-3 md:pr-4">
+                    <motion.div 
+                      layout
+                      initial={{ opacity: 0, x: -12 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.5, ease: "easeOut" }}
+                      className="flex flex-col justify-center items-center text-center border-r border-[#4E5661]/15 pr-3 md:pr-4"
+                    >
                       
-                      <p className="font-serif font-black text-xs md:text-sm tracking-wide uppercase leading-tight line-clamp-1">
+                      <motion.p layout className="font-serif font-black text-xs md:text-sm tracking-wide uppercase leading-tight line-clamp-1">
                         {match.teamA}
-                      </p>
+                      </motion.p>
                       
-                      <p className={`font-serif italic text-[10px] my-1 ${devStyle === 'sepia' ? 'text-[#D97706]' : 'text-[#D4AF37]'}`}>
+                      <motion.p layout className={`font-serif italic text-[10px] my-1 transition-colors duration-500 ${devStyle === 'sepia' ? 'text-[#D97706]' : 'text-[#D4AF37]'}`}>
                         versus
-                      </p>
+                      </motion.p>
                       
-                      <p className="font-serif font-black text-xs md:text-sm tracking-wide uppercase leading-tight line-clamp-1">
+                      <motion.p layout className="font-serif font-black text-xs md:text-sm tracking-wide uppercase leading-tight line-clamp-1">
                         {match.teamB}
-                      </p>
+                      </motion.p>
 
-                      <div className={`w-full mt-3 py-1.5 md:py-2 px-1 border ${design.border} ${design.bannerBg} flex flex-col items-center justify-center rounded-[3px] shadow-sm`}>
-                        <span className={`font-serif font-bold text-lg md:text-2xl ${design.scoreText} leading-none`}>
+                      <motion.div layout className={`w-full mt-3 py-1.5 md:py-2 px-1 border transition-all duration-500 ${design.border} ${design.bannerBg} flex flex-col items-center justify-center rounded-[3px] shadow-sm`}>
+                        <span className={`font-serif font-bold text-lg md:text-2xl transition-colors duration-500 ${design.scoreText} leading-none`}>
                           {match.scoreA} - {match.scoreB}
                         </span>
                         {match.shootoutScore && (
-                          <span className={`font-mono font-black text-[6.5px] tracking-widest uppercase mt-1 ${devStyle === 'chrome' ? 'text-gray-400' : devStyle === 'sepia' ? 'text-amber-600' : 'text-red-500'}`}>
+                          <span className={`font-mono font-black text-[6.5px] tracking-widest uppercase mt-1 transition-colors duration-500 ${devStyle === 'chrome' ? 'text-gray-400' : devStyle === 'sepia' ? 'text-amber-600' : 'text-red-500'}`}>
                             {match.shootoutScore}
                           </span>
                         )}
-                      </div>
+                      </motion.div>
 
-                      <div className="w-full my-3 border-t border-[#4E5661]/15" />
+                      <motion.div layout className="w-full my-3 border-t border-[#4E5661]/15" />
                       
-                      <p className={`font-mono font-bold text-[7px] tracking-[0.1em] uppercase ${design.label} mb-0.5`}>
+                      <motion.p layout className={`font-mono font-bold text-[7px] tracking-[0.1em] uppercase ${design.label} mb-0.5 transition-colors duration-500`}>
                         HISTORIC CHRONICLE
-                      </p>
-                      <p className="text-[9px] md:text-[10px] leading-tight font-serif italic text-white font-medium line-clamp-2 text-center">
+                      </motion.p>
+                      <motion.p layout className="text-[9px] md:text-[10px] leading-tight font-serif italic text-white font-medium line-clamp-2 text-center">
                         “{match.title}”
-                      </p>
-                      <p className={`font-mono font-bold text-[7px] tracking-[0.12em] uppercase ${design.label} mt-1.5`}>
+                      </motion.p>
+                      <motion.p layout className={`font-mono font-bold text-[7px] tracking-[0.12em] uppercase ${design.label} mt-1.5 transition-colors duration-500`}>
                         {match.era.toUpperCase()} ERA
-                      </p>
-                    </div>
+                      </motion.p>
+                    </motion.div>
 
                     {/* RIGHT COLUMN: Defining Moment Plaque */}
-                    <div className={`flex flex-col justify-between p-2 md:p-3 rounded-[3px] border ${design.momentPanelBorder} ${design.momentPanelBg}`}>
-                      <div className="text-center mb-1 bg-black/15 py-1 border-b border-white/5">
-                        <span className={`font-sans font-black text-[7px] md:text-[8px] tracking-[0.2em] ${design.titleStamp} uppercase block`}>
+                    <motion.div 
+                      layout
+                      initial={{ opacity: 0, x: 12 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.5, ease: "easeOut" }}
+                      className={`flex flex-col justify-between p-2 md:p-3 rounded-[3px] border transition-all duration-500 ${design.momentPanelBorder} ${design.momentPanelBg}`}
+                    >
+                      <motion.div layout className="text-center mb-1 bg-black/15 py-1 border-b border-white/5">
+                        <span className={`font-sans font-black text-[7px] md:text-[8px] tracking-[0.2em] ${design.titleStamp} uppercase block transition-colors duration-500`}>
                           THE DEFINING MOMENT
                         </span>
-                      </div>
+                      </motion.div>
 
-                      <div className="flex-1 flex flex-col justify-center text-left py-1">
-                        <p className={`font-serif font-bold italic text-[9.5px] md:text-[11.5px] leading-tight mb-2 ${devStyle === 'sepia' ? 'text-amber-200' : 'text-white'}`}>
+                      <motion.div layout className="flex-1 flex flex-col justify-center text-left py-1">
+                        <p className={`font-serif font-bold italic text-[9.5px] md:text-[11.5px] leading-tight mb-2 transition-colors duration-500 ${devStyle === 'sepia' ? 'text-amber-200' : 'text-white'}`}>
                           "{match.definingMoment.title}"
                         </p>
-                        <p className={`font-serif text-[8.5px] md:text-[9.5px] leading-relaxed line-clamp-[6] ${design.textMuted}`}>
+                        <p className={`font-serif text-[8.5px] md:text-[9.5px] leading-relaxed line-clamp-[6] transition-colors duration-500 ${design.textMuted}`}>
                           {match.definingMoment.description}
                         </p>
-                      </div>
-                    </div>
+                      </motion.div>
+                    </motion.div>
 
-                  </div>
+                  </motion.div>
 
                   {/* Footstamp metadata & barcode */}
                   <div className="text-center mt-auto">

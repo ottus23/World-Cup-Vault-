@@ -1,12 +1,49 @@
 import { motion } from 'motion/react';
+import { Trophy, Award, BarChart3, Globe, Film, Map } from 'lucide-react';
 
 const archives = [
-  { id: 'tournaments', title: 'Tournaments', icon: '🏆', desc: 'The Complete History' },
-  { id: 'legends', title: 'Legends', icon: '👑', desc: 'Hall of Immortals' },
-  { id: 'records', title: 'Records', icon: '📊', desc: 'Numbers that Define' },
-  { id: 'nations', title: 'Nations', icon: '🌍', desc: 'Flags of Glory' },
-  { id: 'matches', title: 'Matches', icon: '🎬', desc: 'Cinematic Classics' },
-  { id: 'stadiums', title: 'Stadiums', icon: '🏟️', desc: 'The Grand Stages' }
+  { 
+    id: 'tournaments', 
+    title: 'Tournaments', 
+    chamber: 'CHAMBER I', 
+    desc: 'The Complete History portfolio from 1930 onwards',
+    Icon: Trophy 
+  },
+  { 
+    id: 'legends', 
+    title: 'Legends', 
+    chamber: 'CHAMBER II', 
+    desc: 'The Hall of Immortals celebrating game-defining kings',
+    Icon: Award 
+  },
+  { 
+    id: 'records', 
+    title: 'Records', 
+    chamber: 'CHAMBER III', 
+    desc: 'The Monolith of athletic giants and permanent scores',
+    Icon: BarChart3 
+  },
+  { 
+    id: 'nations', 
+    title: 'Nations', 
+    chamber: 'CHAMBER IV', 
+    desc: 'Interactive global maps tracking every participating nation',
+    Icon: Globe 
+  },
+  { 
+    id: 'matches', 
+    title: 'Historic Matches', 
+    chamber: 'CHAMBER V', 
+    desc: 'Widescreen Cinema Mode of the ultimate drama clashes',
+    Icon: Film 
+  },
+  { 
+    id: 'stadiums', 
+    title: 'Stadiums', 
+    chamber: 'CHAMBER VI', 
+    desc: 'An architectural catalog of legendary football coliseums',
+    Icon: Map 
+  }
 ];
 
 export function VaultNav({ 
@@ -34,7 +71,7 @@ export function VaultNav({
     } else if (archiveId === 'stadiums' && onExploreStadiums) {
       onExploreStadiums();
     } else if (archiveId === 'tournaments') {
-      const el = document.getElementById('era-vintage');
+      const el = document.getElementById('history-start');
       if (el) {
         el.scrollIntoView({ behavior: 'smooth' });
       } else {
@@ -44,28 +81,53 @@ export function VaultNav({
   };
 
   return (
-    <section className="relative py-48 bg-[#171717] px-6 border-t border-[#4E5661]/20">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-24">
+    <section className="relative py-36 bg-[#030303] px-6 border-t border-[#D4AF37]/15 overflow-hidden">
+      {/* Delicate linear blueprint accent background */}
+      <div className="absolute inset-0 opacity-[0.012] bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none" />
+      
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="text-center mb-24 max-w-2xl mx-auto">
+          <motion.p
+            className="font-sans text-[#D4AF37] tracking-[0.4em] uppercase text-xs mb-3 font-bold select-none"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            DOCUMENTARY CONCLUDED
+          </motion.p>
+          
           <motion.h2 
-            className="font-serif text-3xl md:text-5xl text-[#F5F2EA] mb-4"
-            initial={{ opacity: 0, y: 20 }}
+            className="font-serif text-4xl sm:text-5xl md:text-6xl text-[#F5F2EA] tracking-wide mb-4 leading-tight font-black uppercase"
+            initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            Explore the Vault
+            CONTINUE EXPLORING
           </motion.h2>
+          
+          <motion.p 
+            className="font-serif italic text-[#AFA58D] text-lg opacity-80"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 0.9 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.2 }}
+          >
+            "Dive deeper into football history."
+          </motion.p>
+          
           <motion.div 
-            className="h-px w-24 bg-[#D4AF37] mx-auto opacity-50"
+            className="h-[2px] w-16 bg-[#D4AF37] mx-auto mt-6 opacity-40"
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.2 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
           />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+        {/* Heavy Neoclassical Chambers entries */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
           {archives.map((archive, idx) => (
             <motion.div
               key={archive.title}
@@ -73,27 +135,61 @@ export function VaultNav({
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10%" }}
-              transition={{ duration: 0.8, delay: idx * 0.1 }}
+              transition={{ duration: 0.8, delay: idx * 0.08 }}
               onClick={() => handleArchiveClick(archive.id)}
             >
-              <div className="relative p-12 flex flex-col items-center text-center border border-[#4E5661]/30 bg-[#090909] transition-all duration-500 hover:border-[#D4AF37]/50 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#D4AF37]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              {/* Massive Outer Vault heavy frame border */}
+              <div className="relative p-10 flex flex-col justify-between min-h-[290px] border border-[#D4AF37]/20 bg-[#060607]/90 shadow-2xl transition-all duration-700 hover:border-[#D4AF37]/60 group-hover:shadow-[0_0_30px_rgba(212,175,55,0.06)] overflow-hidden">
                 
-                <span className="text-4xl mb-6 opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 filter grayscale group-hover:grayscale-0">{archive.icon}</span>
+                {/* Internal warm glow on hover */}
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(212,175,55,0.04),transparent_60%)] opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none" />
                 
-                <h3 className="font-serif text-[#F5F2EA] text-2xl tracking-wide mb-3 group-hover:text-[#D4AF37] transition-colors duration-500">
-                  {archive.title}
-                </h3>
-                
-                <p className="font-sans text-[#69707A] text-xs uppercase tracking-[0.2em]">
-                  {archive.desc}
-                </p>
+                <div className="space-y-4">
+                  {/* Chamber Code Header */}
+                  <div className="flex justify-between items-center pb-4 border-b border-[#D4AF37]/10">
+                    <span className="font-mono text-[10px] text-[#D4AF37] tracking-[0.25em] font-black">{archive.chamber}</span>
+                    
+                    {/* Metal rivet circles mimicking heavy gates */}
+                    <div className="flex gap-1.5 opacity-40">
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
+                    </div>
+                  </div>
+                  
+                  {/* Archive icon block */}
+                  <div className="w-12 h-12 rounded-full border border-[#D4AF37]/15 flex items-center justify-center bg-black/40 text-[#AFA58D] group-hover:text-[#D4AF37] group-hover:border-[#D4AF37]/45 transition-colors duration-500">
+                    <archive.Icon size={18} strokeWidth={1.5} />
+                  </div>
 
-                {/* Corner Accents */}
-                <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[#69707A] group-hover:border-[#D4AF37] transition-colors duration-500"></div>
-                <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#69707A] group-hover:border-[#D4AF37] transition-colors duration-500"></div>
-                <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[#69707A] group-hover:border-[#D4AF37] transition-colors duration-500"></div>
-                <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[#69707A] group-hover:border-[#D4AF37] transition-colors duration-500"></div>
+                  {/* Title and descriptions */}
+                  <div>
+                    <h3 className="font-serif text-[#F5F2EA] text-2xl tracking-wide group-hover:text-[#D4AF37] transition-colors duration-500 font-extrabold uppercase mb-2">
+                      {archive.title}
+                    </h3>
+                    <p className="font-sans text-xs text-[#69707A] leading-relaxed font-light">
+                      {archive.desc}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="pt-6 border-t border-[#D4AF37]/5 flex justify-between items-center">
+                  <span className="font-mono text-[9px] tracking-[0.3em] uppercase text-[#D4AF37]/40 group-hover:text-[#D4AF37] transition-colors duration-500 font-bold">UNLATCH PORTAL</span>
+                  <div className="w-4 h-4 text-[#D4AF37]/35 group-hover:translate-x-1.5 group-hover:text-[#D4AF37] transition-all duration-500">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                  </div>
+                </div>
+
+                {/* Neoclassical Heavy Corner Accent Framing L-Plates */}
+                {/* Top-Left */}
+                <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-[#D4AF37]/25 group-hover:border-[#D4AF37] transition-colors duration-500" />
+                {/* Top-Right */}
+                <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-[#D4AF37]/25 group-hover:border-[#D4AF37] transition-colors duration-500" />
+                {/* Bottom-Left */}
+                <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-[#D4AF37]/25 group-hover:border-[#D4AF37] transition-colors duration-500" />
+                {/* Bottom-Right */}
+                <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-[#D4AF37]/25 group-hover:border-[#D4AF37] transition-colors duration-500" />
               </div>
             </motion.div>
           ))}

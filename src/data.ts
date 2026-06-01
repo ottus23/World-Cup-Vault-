@@ -251,9 +251,9 @@ export const recordHalls: RecordCategory[] = [
       {
         title: "Most Clean Sheets",
         value: "10",
-        holder: "Rui Patrício & Hugo Lloris & Fabien Barthez & Peter Shilton",
-        nation: "Various",
-        year: "1970-2022",
+        holder: "Fabien Barthez & Peter Shilton",
+        nation: "France / England",
+        year: "1982-2006",
         story: "The ultimate defensive metric. Barthez and Shilton both recorded 10 clean sheets, forming impassable walls for their respective nations.",
       },
       {
