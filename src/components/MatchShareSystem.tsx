@@ -763,7 +763,7 @@ export function MatchShareSystem({ match, onClose }: MatchShareSystemProps) {
                   <motion.div 
                     layout
                     transition={{ type: "spring", stiffness: 220, damping: 25 }}
-                    className="grid grid-cols-2 gap-3.5 md:gap-5 items-stretch my-auto py-2"
+                    className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 md:gap-5 items-stretch my-auto py-2"
                   >
                     
                     {/* LEFT COLUMN: Metadata Snapshot */}
@@ -771,8 +771,11 @@ export function MatchShareSystem({ match, onClose }: MatchShareSystemProps) {
                       layout
                       initial={{ opacity: 0, x: -12 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.5, ease: "easeOut" }}
-                      className="flex flex-col justify-center items-center text-center border-r border-[#4E5661]/15 pr-3 md:pr-4"
+                      transition={{ 
+                        layout: { type: "spring", stiffness: 220, damping: 25 },
+                        default: { duration: 0.5, ease: "easeOut" }
+                      }}
+                      className="flex flex-col justify-center items-center text-center border-b sm:border-b-0 sm:border-r border-[#4E5661]/15 pb-3.5 sm:pb-0 pr-0 sm:pr-4"
                     >
                       
                       <motion.p layout className="font-serif font-black text-xs md:text-sm tracking-wide uppercase leading-tight line-clamp-1">
@@ -787,7 +790,11 @@ export function MatchShareSystem({ match, onClose }: MatchShareSystemProps) {
                         {match.teamB}
                       </motion.p>
 
-                      <motion.div layout className={`w-full mt-3 py-1.5 md:py-2 px-1 border transition-all duration-500 ${design.border} ${design.bannerBg} flex flex-col items-center justify-center rounded-[3px] shadow-sm`}>
+                      <motion.div 
+                        layout 
+                        transition={{ layout: { type: "spring", stiffness: 220, damping: 25 } }}
+                        className={`w-full mt-3 py-1.5 md:py-2 px-1 border transition-colors duration-500 ${design.border} ${design.bannerBg} flex flex-col items-center justify-center rounded-[3px] shadow-sm`}
+                      >
                         <span className={`font-serif font-bold text-lg md:text-2xl transition-colors duration-500 ${design.scoreText} leading-none`}>
                           {match.scoreA} - {match.scoreB}
                         </span>
@@ -816,8 +823,11 @@ export function MatchShareSystem({ match, onClose }: MatchShareSystemProps) {
                       layout
                       initial={{ opacity: 0, x: 12 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.5, ease: "easeOut" }}
-                      className={`flex flex-col justify-between p-2 md:p-3 rounded-[3px] border transition-all duration-500 ${design.momentPanelBorder} ${design.momentPanelBg}`}
+                      transition={{ 
+                        layout: { type: "spring", stiffness: 220, damping: 25 },
+                        default: { duration: 0.5, ease: "easeOut" }
+                      }}
+                      className={`flex flex-col justify-between p-2 md:p-3 rounded-[3px] border transition-colors duration-500 ${design.momentPanelBorder} ${design.momentPanelBg}`}
                     >
                       <motion.div layout className="text-center mb-1 bg-black/15 py-1 border-b border-white/5">
                         <span className={`font-sans font-black text-[7px] md:text-[8px] tracking-[0.2em] ${design.titleStamp} uppercase block transition-colors duration-500`}>

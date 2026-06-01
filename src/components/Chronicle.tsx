@@ -5,7 +5,7 @@ import { tournaments as originalTournaments, Tournament } from '../data';
 import { TournamentArchive } from './TournamentArchive';
 
 // Add 2026 to the complete timeline list
-const completeTournaments: Tournament[] = [
+export const completeTournaments: Tournament[] = [
   ...originalTournaments,
   {
     year: 2026,
@@ -540,9 +540,10 @@ interface ChapterProps {
   tournament: Tournament;
   isLeft: boolean;
   onExploreClassicMatch?: (matchId: string) => void;
+  onExploreTournament?: (year: number) => void;
 }
 
-function TournamentChapter({ tournament, isLeft, onExploreClassicMatch }: ChapterProps) {
+function TournamentChapter({ tournament, isLeft, onExploreClassicMatch, onExploreTournament }: ChapterProps) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const visuals = getEraVisuals(tournament.year);
   const addons = timelineAddons[tournament.year] || {
@@ -735,7 +736,13 @@ function TournamentChapter({ tournament, isLeft, onExploreClassicMatch }: Chapte
             {/* Standard Year Explorer (Drawer) */}
             {tournament.year !== 2026 && (
               <button 
-                onClick={() => setIsDrawerOpen(true)}
+                onClick={() => {
+                  if (onExploreTournament) {
+                    onExploreTournament(tournament.year);
+                  } else {
+                    setIsDrawerOpen(true);
+                  }
+                }}
                 className="inline-flex items-center gap-3 font-sans text-[10px] md:text-xs tracking-[0.2em] font-medium uppercase text-[#DDD7C8] border-b border-[#DDD7C8]/20 pb-2 hover:border-[#D4AF37] hover:text-[#D4AF37] transition-all group/btn cursor-pointer"
               >
                 <span>EXPLORE {tournament.year} PORTFOLIO</span>
@@ -762,7 +769,7 @@ function TournamentChapter({ tournament, isLeft, onExploreClassicMatch }: Chapte
   );
 }
 
-export function Chronicle({ onExploreClassicMatch }: { onExploreClassicMatch?: (matchId: string) => void }) {
+export function Chronicle({ onExploreClassicMatch, onExploreTournament }: { onExploreClassicMatch?: (matchId: string) => void; onExploreTournament?: (year: number) => void }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
 
@@ -910,6 +917,7 @@ export function Chronicle({ onExploreClassicMatch }: { onExploreClassicMatch?: (
                 tournament={tournament} 
                 isLeft={isLeft} 
                 onExploreClassicMatch={onExploreClassicMatch} 
+                onExploreTournament={onExploreTournament}
               />
             </div>
           );

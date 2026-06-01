@@ -83,8 +83,17 @@ const playSound = (type: 'map-hover' | 'page-open' | 'gear-tick' | 'clash' | 'su
   }
 };
 
-export function NationsVault({ onClose }: { onClose: () => void }) {
-  const [selectedNation, setSelectedNation] = useState<NationCivilization | null>(null);
+export function NationsVault({ onClose, initialNationId }: { onClose: () => void; initialNationId?: string }) {
+  const [selectedNation, setSelectedNation] = useState<NationCivilization | null>(
+    initialNationId ? nationsData.find(n => n.id === initialNationId) || null : null
+  );
+
+  useEffect(() => {
+    if (initialNationId) {
+      const nat = nationsData.find(n => n.id === initialNationId);
+      if (nat) setSelectedNation(nat);
+    }
+  }, [initialNationId]);
   const [searchQuery, setSearchQuery] = useState('');
   const [continentFilter, setContinentFilter] = useState<string>('All');
   const [minTitlesFilter, setMinTitlesFilter] = useState<number>(-1);

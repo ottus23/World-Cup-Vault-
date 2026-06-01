@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Search, X, Scale } from 'lucide-react';
 import { legends, Legend } from '../data';
@@ -252,10 +252,22 @@ function LegacyConstellation() {
   );
 }
 
-export function LegendsVault({ onClose }: { onClose?: () => void }) {
+export function LegendsVault({ onClose, initialLegendId }: { onClose?: () => void; initialLegendId?: string }) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [showCompare, setShowCompare] = useState(false);
+
+  useEffect(() => {
+    if (initialLegendId) {
+      const scrollTimer = setTimeout(() => {
+        const el = document.getElementById(`legend-${initialLegendId}`);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 700);
+      return () => clearTimeout(scrollTimer);
+    }
+  }, [initialLegendId]);
 
   const filteredLegends = legends.filter(l => 
     l.name.toLowerCase().includes(searchQuery.toLowerCase()) || 

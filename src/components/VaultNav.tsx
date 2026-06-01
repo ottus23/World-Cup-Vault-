@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { Trophy, Award, BarChart3, Globe, Film, Map } from 'lucide-react';
+import { Trophy, Award, BarChart3, Globe, Film, Map, Compass } from 'lucide-react';
 
 const archives = [
   { 
@@ -24,11 +24,11 @@ const archives = [
     Icon: BarChart3 
   },
   { 
-    id: 'nations', 
-    title: 'Nations', 
+    id: 'atlas', 
+    title: 'Football Atlas', 
     chamber: 'CHAMBER IV', 
-    desc: 'Interactive global maps tracking every participating nation',
-    Icon: Globe 
+    desc: 'An artistic cartographic world tracking nations, stadiums, legends, and migration',
+    Icon: Compass 
   },
   { 
     id: 'matches', 
@@ -51,19 +51,23 @@ export function VaultNav({
   onExploreNations,
   onExploreLegends,
   onExploreRecords,
-  onExploreStadiums
+  onExploreStadiums,
+  onExploreAtlas
 }: { 
   onExploreMatches?: () => void; 
   onExploreNations?: () => void; 
   onExploreLegends?: () => void; 
   onExploreRecords?: () => void; 
   onExploreStadiums?: () => void; 
+  onExploreAtlas?: () => void;
 }) {
   const handleArchiveClick = (archiveId: string) => {
     if (archiveId === 'matches' && onExploreMatches) {
       onExploreMatches();
     } else if (archiveId === 'nations' && onExploreNations) {
       onExploreNations();
+    } else if (archiveId === 'atlas' && onExploreAtlas) {
+      onExploreAtlas();
     } else if (archiveId === 'legends' && onExploreLegends) {
       onExploreLegends();
     } else if (archiveId === 'records' && onExploreRecords) {

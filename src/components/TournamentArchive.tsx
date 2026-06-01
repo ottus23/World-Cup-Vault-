@@ -21,7 +21,9 @@ import {
   Volume2,
   VolumeX,
   Radio,
-  Megaphone
+  Megaphone,
+  ChevronDown,
+  ChevronUp
 } from 'lucide-react';
 import { Tournament } from '../data';
 import { getTournamentDetails, GroupFolder, BattleMatch, HeroExhibit, StadiumExhibit, MetricStat } from '../tournamentData';
@@ -76,12 +78,69 @@ function getEraStyling(year: number) {
   };
 }
 
-export function TournamentArchive({ tournament, onClose, onExploreClassicMatch }: { tournament: Tournament; onClose: () => void; onExploreClassicMatch?: (matchId: string) => void }) {
+function getStatHistoricalWeight(year: number, label: string): string {
+  const lbl = label.toLowerCase();
+  
+  if (year === 2022) {
+    if (lbl.includes('goal')) {
+      return "The absolute peak of attacking speed. Refined VAR tracking, prolonged stoppage times, and explosive vertical playmakers broke the previous World Cup scoring thresholds in Qatar, culminating in a historic 3-3 final match.";
+    }
+    if (lbl.includes('expected') || lbl.includes('xg')) {
+      return "Reflects a highly calculated, efficiency-driven era of football. Modern analytics and positional play led teams to optimize passing channels, creating high-probability shooting conditions instead of speculative long shots.";
+    }
+    if (lbl.includes('attendance')) {
+      return "Qatar’s unique compact layout made this the most accessible World Cup geographically. Over 3.4 million total spectators traveled seamlessly between massive architectural coliseums, maximizing average per-match attendance.";
+    }
+  }
+  
+  if (year === 1986) {
+    if (lbl.includes('goal')) {
+      return "A remarkable tally given the brutal midday Mexican heat and high altitude. Attacking geniuses, captained by Diego Maradona, bypassed defensive structures with direct, solo brilliance.";
+    }
+    if (lbl.includes('shot')) {
+      return "The combination of high elevation, lower atmospheric density, and the classic synthetic Adidas Azteca match ball inspired players to unleash explosive long-range shots that tested goalkeepers' reactions.";
+    }
+    if (lbl.includes('yellow') || lbl.includes('red') || lbl.includes('point')) {
+      return "High card infractions highlight the extreme physical targeting of playmakers like Maradona. This high-contact friction directly convinced FIFA to introduce more protective slide-tackle reforms and rules for future tournaments.";
+    }
+  }
+
+  // Fallback / Other years
+  if (lbl.includes('goal')) {
+    return `In ${year}, offensive play style reached a fascinating level, showing how tactical systems of this era adapted to generate high scoring efficiency or contain elite playmakers on grand stages.`;
+  }
+  if (lbl.includes('clean') || lbl.includes('defens') || lbl.includes('sheet')) {
+    return `Clean sheets in ${year} proved absolutely critical to tournament progression, reflecting the structural rise of disciplined sweeper systems and coordinated low-blocks during this era of football.`;
+  }
+  
+  return `This metric showcases the specific physical and tactical challenges of the ${year} tournament, marking his place in football's evolutionary story.`;
+}
+
+export function TournamentArchive({ 
+  tournament, 
+  onClose, 
+  onExploreClassicMatch,
+  onExploreLegend,
+  onExploreNation,
+  onExploreStadium
+}: { 
+  tournament: Tournament; 
+  onClose: () => void; 
+  onExploreClassicMatch?: (matchId: string) => void;
+  onExploreLegend?: (legendId: string) => void;
+  onExploreNation?: (nationId: string) => void;
+  onExploreStadium?: (stadiumId: string) => void;
+}) {
   const details = getTournamentDetails(tournament.year);
   const era = getEraStyling(tournament.year);
   
   const [activeGroupIndex, setActiveGroupIndex] = useState(0);
   const [timeCapsuleSealed, setTimeCapsuleSealed] = useState(true);
+  const [expandedStats, setExpandedStats] = useState<Record<number, boolean>>({});
+
+  useEffect(() => {
+    setExpandedStats({});
+  }, [tournament.year]);
 
   // Immersive sound states and refs
   const audioEngineRef = useRef<StadiumAudioEngine | null>(null);
@@ -296,7 +355,21 @@ export function TournamentArchive({ tournament, onClose, onExploreClassicMatch }
         </div>
 
         <div className="relative z-20 w-full max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-end gap-12">
-          <div className="w-full md:w-2/3">
+          <div className="w-full md:w-2/3 mt-32 md:mt-0">
+             {/* IMMERSIVE HISTORICAL JOURNEY BREADCRUMBS */}
+             <motion.div 
+               className="flex items-center gap-2 font-mono text-[9px] text-[#AFA58D]/60 tracking-wider uppercase mb-6"
+               initial={{ opacity: 0 }}
+               animate={{ opacity: 0.8 }}
+               transition={{ duration: 0.8, delay: 0.6 }}
+             >
+               <span className="hover:text-[#D4AF37] cursor-pointer transition-colors" onClick={onClose}>VAULT REGISTER</span>
+               <span className="text-[#4E5661]/45">/</span>
+               <span className="hover:text-[#D4AF37] cursor-pointer transition-colors" onClick={onClose}>CHRONICLE TIMESLIP</span>
+               <span className="text-[#4E5661]/45">/</span>
+               <span className="text-[#D4AF37] font-bold">{tournament.year} PORTFOLIO DOCUMENT</span>
+             </motion.div>
+
              <motion.p 
                className="font-sans text-[#D4AF37] tracking-[0.3em] uppercase text-xs md:text-sm mb-6 flex items-center gap-2"
                initial={{ opacity: 0, x: -30 }}
@@ -1006,14 +1079,44 @@ export function TournamentArchive({ tournament, onClose, onExploreClassicMatch }
              {details.stats?.map((stat, idx) => (
                 <motion.div
                   key={idx}
-                  className="bg-[#0b0b0b] border border-[#4E5661]/15 p-8 rounded-sm text-left shadow-xl"
+                  className="bg-[#0b0b0b] border border-[#4E5661]/15 p-8 rounded-sm text-left shadow-xl flex flex-col justify-between"
                   initial={{ opacity: 0, scale: 0.96 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                 >
-                  <span className="block font-sans text-[10px] text-[#69707A] uppercase tracking-widest mb-4 font-semibold">{stat.label}</span>
-                  <p className="font-serif text-5xl font-extrabold text-[#D4AF37] mb-4 tracking-tighter">{stat.value}</p>
-                  <p className="font-serif text-sm text-[#DDD7C8]/80 leading-relaxed italic">{stat.subText}</p>
+                  <div>
+                    <span className="block font-sans text-[10px] text-[#69707A] uppercase tracking-widest mb-4 font-semibold">{stat.label}</span>
+                    <p className="font-serif text-5xl font-extrabold text-[#D4AF37] mb-4 tracking-tighter">{stat.value}</p>
+                    <p className="font-serif text-sm text-[#DDD7C8]/80 leading-relaxed italic">{stat.subText}</p>
+                  </div>
+
+                  <div className="mt-6 border-t border-white/5 pt-4">
+                    <button
+                      id={`expand-btn-${idx}`}
+                      onClick={() => setExpandedStats(prev => ({ ...prev, [idx]: !prev[idx] }))}
+                      className="w-full flex items-center justify-between py-2 px-3 border border-white/5 hover:border-[#D4AF37]/30 bg-white/[0.01] hover:bg-white/[0.04] text-[11px] font-sans font-medium text-[#AFA58D] hover:text-[#D4AF37] rounded-sm transition-all duration-300 focus:outline-none cursor-pointer"
+                    >
+                      <span>Historical Context Analysis</span>
+                      {expandedStats[idx] ? <ChevronUp size={14} className="text-[#D4AF37]" /> : <ChevronDown size={14} className="text-[#69707A]" />}
+                    </button>
+
+                    <AnimatePresence initial={false}>
+                      {expandedStats[idx] && (
+                        <motion.div
+                          key="expanded-analysis"
+                          initial={{ height: 0, opacity: 0, marginTop: 0 }}
+                          animate={{ height: "auto", opacity: 1, marginTop: 12 }}
+                          exit={{ height: 0, opacity: 0, marginTop: 0 }}
+                          transition={{ duration: 0.25, ease: "easeInOut" }}
+                          className="overflow-hidden"
+                        >
+                          <p className="font-sans text-xs text-[#DDD7C8]/90 leading-relaxed bg-black/45 p-3.5 border-l border-[#D4AF37] rounded-[2px] italic">
+                            {getStatHistoricalWeight(tournament.year, stat.label)}
+                          </p>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
                 </motion.div>
              ))}
            </div>
@@ -1040,6 +1143,109 @@ export function TournamentArchive({ tournament, onClose, onExploreClassicMatch }
       <section className="relative w-full bg-[#090909] py-48 px-6 md:px-12 flex flex-col justify-center items-center text-center border-t border-[#4E5661]/15">
          <div className="absolute inset-0 opacity-10 pointer-events-none bg-[url('data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.8\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E')] mix-blend-overlay"></div>
          
+          {/* Intertwined Catalogue Discovery Deck */}
+          <div className="w-full max-w-4xl mt-8 mb-24 border-t border-[#4E5661]/20 pt-16 text-left relative z-10 mx-auto px-6">
+            <span className="font-mono text-[#D4AF37] text-[9px] tracking-[0.25em] uppercase font-bold block mb-4">
+              CROSS-EXHIBITION ROUTING SERVICE // CONTINUE EXPLORING
+            </span>
+            <h3 className="font-serif text-[#F5F2EA] text-2xl uppercase tracking-wide mb-8 font-black">
+              Connected Archival Documents
+            </h3>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* 1. Related Legend */}
+              {(() => {
+                const legendMap: Record<number, { id: string; name: string; tag: string }> = {
+                  1930: { id: 'pele', name: 'Pelé', tag: 'Chamber Standard of Immortality' },
+                  1954: { id: 'pele', name: 'Pelé', tag: 'Chamber Standard of Immortality' },
+                  1958: { id: 'pele', name: 'Pelé', tag: 'The Golden Boy’s Emergence' },
+                  1962: { id: 'pele', name: 'Pelé', tag: 'Double-Crown Dynastic Champion' },
+                  1970: { id: 'pele', name: 'Pelé', tag: 'The Zenith of Jôgo Bonito' },
+                  1982: { id: 'rossi', name: 'Paolo Rossi', tag: 'The Golden Boy who humbled Brazil' },
+                  1986: { id: 'maradona', name: 'Diego Maradona', tag: 'Cosmic Barrilete Cósmico' },
+                  1998: { id: 'zidane', name: 'Zinedine Zidane', tag: 'Double Header of St. Denis' },
+                  2002: { id: 'ronaldo', name: 'Ronaldo Nazário', tag: 'Double Stroke of Redemption' },
+                  2006: { id: 'zidane', name: 'Zinedine Zidane', tag: 'The Majestic Tragedy Final' },
+                  2014: { id: 'messi', name: 'Lionel Messi', tag: 'The Near Miss in Rio' },
+                  2022: { id: 'messi', name: 'Lionel Messi', tag: 'The Path to Soccer Divinity' }
+                };
+                const relLegend = legendMap[tournament.year] || { id: 'pele', name: 'Pelé', tag: 'The Standard of Immortality' };
+                return (
+                  <div 
+                    onClick={() => {
+                      onClose();
+                      if (onExploreLegend) onExploreLegend(relLegend.id);
+                    }}
+                    className="group p-5 border border-[#4E5661]/15 hover:border-[#D4AF37]/50 bg-black/45 cursor-pointer rounded-sm hover:-translate-y-1 transition-all duration-300 animate-fadeIn"
+                  >
+                    <span className="font-mono text-[8px] text-[#AFA58D] font-black uppercase block mb-1 font-bold">CHAMBER II • IMMORTAL TITAN</span>
+                    <h4 className="font-serif text-lg text-[#F5F2EA] group-hover:text-[#D4AF37] font-black uppercase transition-colors">{relLegend.name}</h4>
+                    <p className="font-sans text-xs text-[#69707A] font-light mt-1.5 leading-relaxed">{relLegend.tag}</p>
+                  </div>
+                );
+              })()}
+
+              {/* 2. Related Stadium Arena */}
+              {(() => {
+                const stadiumMap: Record<number, { id: string; name: string; country: string }> = {
+                  1930: { id: 'centenario', name: 'Estadio Centenario', country: 'Uruguay' },
+                  1950: { id: 'maracana', name: 'Maracanã Stadium', country: 'Brazil' },
+                  1970: { id: 'azteca', name: 'Estadio Azteca', country: 'Mexico' },
+                  1986: { id: 'azteca', name: 'Estadio Azteca', country: 'Mexico' },
+                  1998: { id: 'stade-france', name: 'Stade de France', country: 'France' },
+                  2006: { id: 'olympiastadion', name: 'Olympiastadion Berlin', country: 'Germany' },
+                  2014: { id: 'maracana', name: 'Maracanã Stadium', country: 'Brazil' },
+                  2022: { id: 'lusail', name: 'Lusail Stadium', country: 'Qatar' }
+                };
+                const relStadium = stadiumMap[tournament.year] || { id: 'azteca', name: 'Estadio Azteca', country: 'Mexico' };
+                return (
+                  <div 
+                    onClick={() => {
+                      onClose();
+                      if (onExploreStadium) onExploreStadium(relStadium.id);
+                    }}
+                    className="group p-5 border border-[#4E5661]/15 hover:border-[#D4AF37]/50 bg-black/45 cursor-pointer rounded-sm hover:-translate-y-1 transition-all duration-300 animate-fadeIn"
+                  >
+                    <span className="font-mono text-[8px] text-[#AFA58D] font-black uppercase block mb-1 font-bold">CHAMBER VI • ARCHITECTURAL COLISEUM</span>
+                    <h4 className="font-serif text-lg text-[#F5F2EA] group-hover:text-[#D4AF37] font-black uppercase transition-colors">{relStadium.name}</h4>
+                    <p className="font-sans text-xs text-[#69707A] font-light mt-1.5 leading-relaxed">Historic coliseum in {relStadium.country}.</p>
+                  </div>
+                );
+              })()}
+
+              {/* 3. Related Nation Civilization */}
+              {(() => {
+                const nationMap: Record<number, { id: string; name: string; dynasty: string }> = {
+                  1930: { id: 'uruguay', name: 'Uruguay', dynasty: 'Inaugural Golden Pioneers' },
+                  1950: { id: 'uruguay', name: 'Uruguay', dynasty: 'Slayer of Maracanazo' },
+                  1958: { id: 'brazil', name: 'Brazil', dynasty: 'Samba Invention Era' },
+                  1962: { id: 'brazil', name: 'Brazil', dynasty: 'Back-to-Back Sovereigns' },
+                  1970: { id: 'brazil', name: 'Brazil', dynasty: 'The Greatest XI Dynasty' },
+                  1982: { id: 'italy', name: 'Italy', dynasty: 'Rossi’s Counter-Attack Symphony' },
+                  1986: { id: 'argentina', name: 'Argentina', dynasty: 'Maradona’s Solo Supremacy' },
+                  1998: { id: 'france', name: 'France', dynasty: 'The Rainbow Revolution' },
+                  2002: { id: 'brazil', name: 'Brazil', dynasty: 'The Pentacampeão Masterpiece' },
+                  2014: { id: 'germany', name: 'Germany', dynasty: 'The Engineered 7-1 Blitzkrieg' },
+                  2022: { id: 'argentina', name: 'Argentina', dynasty: 'Messi’s Crown of Divinity' }
+                };
+                const relNation = nationMap[tournament.year] || { id: 'brazil', name: 'Brazil', dynasty: 'Samba Dynastic Giants' };
+                return (
+                  <div 
+                    onClick={() => {
+                      onClose();
+                      if (onExploreNation) onExploreNation(relNation.id);
+                    }}
+                    className="group p-5 border border-[#4E5661]/15 hover:border-[#D4AF37]/50 bg-black/45 cursor-pointer rounded-sm hover:-translate-y-1 transition-all duration-300 animate-fadeIn"
+                  >
+                    <span className="font-mono text-[8px] text-[#AFA58D] font-black uppercase block mb-1 font-bold">CHAMBER IV • FOOTBALL DYNASTY</span>
+                    <h4 className="font-serif text-lg text-[#F5F2EA] group-hover:text-[#D4AF37] font-black uppercase transition-colors">{relNation.name}</h4>
+                    <p className="font-sans text-xs text-[#69707A] font-light mt-1.5 leading-relaxed">{relNation.dynasty}</p>
+                  </div>
+                );
+              })()}
+            </div>
+          </div>
+
          <p className="font-sans text-[#69707A] tracking-[0.3em] uppercase text-[10px] mb-8 font-semibold">Chapter X • Eternal Epilogue</p>
          <h2 className="font-serif text-[#D4AF37] text-4xl sm:text-5xl md:text-7xl mb-12 italic opacity-95 border-y border-[#4E5661]/20 py-8 max-w-4xl tracking-wide">
            Why the {tournament.year} Matters

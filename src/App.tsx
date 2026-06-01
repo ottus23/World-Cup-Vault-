@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Hero } from './components/Hero';
-import { Chronicle } from './components/Chronicle';
+import { Chronicle, completeTournaments } from './components/Chronicle';
 import { RecordsVault } from './components/Records';
 import { LegendsVault } from './components/Legends';
 import { VaultNav } from './components/VaultNav';
@@ -9,16 +9,28 @@ import { HistoricMatchesVault } from './components/HistoricMatchesVault';
 import { NationsVault } from './components/NationsVault';
 import { FeaturedPreviews } from './components/FeaturedPreviews';
 import { StadiumsShowcase } from './components/StadiumsShowcase';
+import { TournamentArchive } from './components/TournamentArchive';
+import { ArchiveNavSystem } from './components/ArchiveNavSystem';
+import { TimeMachine } from './components/TimeMachine';
+import { FootballAtlas } from './components/FootballAtlas';
 import { motion, AnimatePresence } from 'motion/react';
 
 export default function App() {
   const [entered, setEntered] = useState(false);
   const [matchesVaultOpen, setMatchesVaultOpen] = useState(false);
   const [nationsVaultOpen, setNationsVaultOpen] = useState(false);
+  const [footballAtlasOpen, setFootballAtlasOpen] = useState(false);
   const [legendsVaultOpen, setLegendsVaultOpen] = useState(false);
   const [recordsVaultOpen, setRecordsVaultOpen] = useState(false);
   const [stadiumsVaultOpen, setStadiumsVaultOpen] = useState(false);
+  const [timeMachineOpen, setTimeMachineOpen] = useState(false);
   const [activeClassicMatchId, setActiveClassicMatchId] = useState<string | undefined>(undefined);
+
+  // New deep link state parameters for cross-exhibition travel
+  const [activeTournamentYear, setActiveTournamentYear] = useState<number | null>(null);
+  const [initialLegendId, setInitialLegendId] = useState<string | undefined>(undefined);
+  const [initialNationId, setInitialNationId] = useState<string | undefined>(undefined);
+  const [initialStadiumId, setInitialStadiumId] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     if (entered) {
@@ -31,16 +43,32 @@ export default function App() {
     setMatchesVaultOpen(true);
   };
 
-  const handleOpenMatchesFromNav = () => {
-    setActiveClassicMatchId(undefined);
+  const handleOpenMatchesFromNav = (matchId?: string) => {
+    setActiveClassicMatchId(matchId);
     setMatchesVaultOpen(true);
   };
 
+  const handleExploreLegend = (legendId?: string) => {
+    setInitialLegendId(legendId);
+    setLegendsVaultOpen(true);
+  };
+
+  const handleExploreNation = (nationId?: string) => {
+    setInitialNationId(nationId);
+    setNationsVaultOpen(true);
+  };
+
+  const handleExploreStadium = (stadiumId?: string) => {
+    setInitialStadiumId(stadiumId);
+    setStadiumsVaultOpen(true);
+  };
+
+  const handleExploreRecords = (recordId?: string) => {
+    setRecordsVaultOpen(true);
+  };
+
   const handleBeginJourney = () => {
-    const el = document.getElementById('history-start');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
+    setTimeMachineOpen(true);
   };
 
   return (
@@ -52,21 +80,37 @@ export default function App() {
         }}
       />
       
+      {/* GLOBAL PERSISTENT ARCHIVE CATALOG NAVIGATION */}
+      <ArchiveNavSystem 
+        onExploreMatches={handleOpenMatchesFromNav}
+        onExploreNations={handleExploreNation}
+        onExploreLegends={handleExploreLegend}
+        onExploreRecords={handleExploreRecords}
+        onExploreStadiums={handleExploreStadium}
+        onExploreTournament={setActiveTournamentYear}
+        onExploreHistory={handleBeginJourney}
+        onExploreAtlas={() => setFootballAtlasOpen(true)}
+      />
+
       {/* SECTION 1 — HERO */}
       <Hero onBegin={handleBeginJourney} />
 
       {/* NEW STORYTELLING STREAMLINED HOMEPAGE */}
       <div className="w-full relative">
         {/* SECTION 2 — THE HISTORY OF THE FIFA WORLD CUP */}
-        <Chronicle onExploreClassicMatch={handleExploreClassicMatch} />
+        <Chronicle 
+          onExploreClassicMatch={handleExploreClassicMatch} 
+          onExploreTournament={setActiveTournamentYear} 
+        />
         
         {/* SECTION 3 — EXPLORE THE VAULT */}
         <VaultNav 
           onExploreMatches={handleOpenMatchesFromNav} 
-          onExploreNations={() => setNationsVaultOpen(true)}
-          onExploreLegends={() => setLegendsVaultOpen(true)}
-          onExploreRecords={() => setRecordsVaultOpen(true)}
-          onExploreStadiums={() => setStadiumsVaultOpen(true)}
+          onExploreNations={handleExploreNation}
+          onExploreLegends={handleExploreLegend}
+          onExploreRecords={handleExploreRecords}
+          onExploreStadiums={handleExploreStadium}
+          onExploreAtlas={() => setFootballAtlasOpen(true)}
         />
         
         {/* SECTION 4 — FOOTER */}
@@ -127,7 +171,11 @@ export default function App() {
             transition={{ type: 'spring', stiffness: 220, damping: 26 }}
           >
             <NationsVault 
-              onClose={() => setNationsVaultOpen(false)}
+              onClose={() => {
+                setNationsVaultOpen(false);
+                setInitialNationId(undefined);
+              }}
+              initialNationId={initialNationId}
             />
           </motion.div>
         )}
@@ -144,7 +192,11 @@ export default function App() {
             transition={{ type: 'spring', stiffness: 220, damping: 26 }}
           >
             <LegendsVault 
-              onClose={() => setLegendsVaultOpen(false)}
+              onClose={() => {
+                setLegendsVaultOpen(false);
+                setInitialLegendId(undefined);
+              }}
+              initialLegendId={initialLegendId}
             />
           </motion.div>
         )}
@@ -170,9 +222,75 @@ export default function App() {
       {/* Cinematic Slide-in Overlay for Stadiums Exhibit */}
       <AnimatePresence>
         {stadiumsVaultOpen && (
-          <StadiumsShowcase 
-            onClose={() => setStadiumsVaultOpen(false)}
+          <motion.div 
+            className="fixed inset-0 z-[500] bg-[#050505] overflow-y-auto"
+            initial={{ opacity: 0, y: '100%' }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: '100%' }}
+            transition={{ type: 'spring', stiffness: 180, damping: 24 }}
+          >
+            <StadiumsShowcase 
+              onClose={() => {
+                setStadiumsVaultOpen(false);
+                setInitialStadiumId(undefined);
+              }}
+              initialStadiumId={initialStadiumId}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Cinematic Center-Scale Drawer for global Tournament Archives */}
+      <AnimatePresence>
+        {activeTournamentYear && (
+          <TournamentArchive 
+            tournament={completeTournaments.find(t => t.year === activeTournamentYear)!} 
+            onClose={() => setActiveTournamentYear(null)} 
+            onExploreClassicMatch={handleExploreClassicMatch} 
+            onExploreLegend={handleExploreLegend}
+            onExploreNation={handleExploreNation}
+            onExploreStadium={handleExploreStadium}
           />
+        )}
+      </AnimatePresence>
+
+      {/* THE WORLD CUP TIME MACHINE SIGNATURE IMMERSIVE EXPERIENCE */}
+      <AnimatePresence>
+        {timeMachineOpen && (
+          <TimeMachine 
+            onClose={() => setTimeMachineOpen(false)}
+            onExploreClassicMatch={handleExploreClassicMatch}
+            onExploreLegend={handleExploreLegend}
+            onExploreNation={handleExploreNation}
+            onExploreStadium={handleExploreStadium}
+            onExploreRecords={handleExploreRecords}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* THE WORLD CUP FOOTBALL ATLAS EXPERIENCE */}
+      <AnimatePresence>
+        {footballAtlasOpen && (
+          <motion.div
+            className="fixed inset-0 z-[500] bg-[#0c0d10] overflow-hidden"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ ease: 'easeInOut', duration: 0.4 }}
+          >
+            <FootballAtlas 
+              onClose={() => setFootballAtlasOpen(false)}
+              onExploreClassicMatch={handleExploreClassicMatch}
+              onExploreLegend={handleExploreLegend}
+              onExploreNation={handleExploreNation}
+              onExploreStadium={handleExploreStadium}
+              onExploreTournament={setActiveTournamentYear}
+              onExploreHistory={() => {
+                setFootballAtlasOpen(false);
+                setTimeMachineOpen(true);
+              }}
+            />
+          </motion.div>
         )}
       </AnimatePresence>
     </div>
