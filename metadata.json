@@ -1,0 +1,6 @@
+{
+  "name": "World Cup Vault",
+  "description": "A premium FIFA World Cup archive and interactive storytelling platform.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
