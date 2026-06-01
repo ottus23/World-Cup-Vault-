@@ -285,8 +285,8 @@ export const nationsData: NationCivilization[] = [
       { year: 2018, result: 'Champions', players: ['Kylian Mbappé', 'Antoine Griezmann', 'Paul Pogba', 'N’Golo Kanté'], moment: 'Mbappé’s Moscow Speedrun', story: 'A young Kylian Mbappé sprinted past defenses as a clinical French team cruised to their second star in Moscow.' }
     ],
     legends: [
-      { name: 'Zinedine Zidane', years: '1998 - 2006', role: 'Le Magicien', myth: 'A ballet dancer in football cleats. His spatial awareness, technical touch, and performance in critical finals turned him into a national monument.', image: 'https://upload.wikimedia.org/wikipedia/commons/f/f3/Zinedine_Zidane_by_Tasnim_1.jpg' },
-      { name: 'Kylian Mbappé', years: '2018 - Present', role: 'The Speed of Light', myth: 'An absolute cheetah who emerged in 2018 and scored a jaw-dropping final score hat-trick in 2022, becoming the greatest active threat in world sports.', image: 'https://upload.wikimedia.org/wikipedia/commons/5/57/Kylian_Mbapp%C3%A9_2018.jpg' }
+      { name: 'Zinedine Zidane', years: '1998 - 2006', role: 'Le Magicien', myth: 'A ballet dancer in football cleats. His spatial awareness, technical touch, and performance in critical finals turned him into a national monument.', image: 'https://upload.wikimedia.org/wikipedia/commons/b/b8/Zinedine_Zidane_photo.jpg' },
+      { name: 'Kylian Mbappé', years: '2018 - Present', role: 'The Speed of Light', myth: 'An absolute cheetah who emerged in 2018 and scored a jaw-dropping final score hat-trick in 2022, becoming the greatest active threat in world sports.', image: 'https://upload.wikimedia.org/wikipedia/commons/e/e0/Kylian_Mbapp%C3%A9_-_France_vs._Poland_-_FIFA_World_Cup_2022.jpg' }
     ],
     matches: [
       { opponent: 'Brazil', year: 1998, score: '3-0', description: 'The absolute victory that changed French culture. Zidane’s towering performance shattered Ronaldo’s Brazil.', type: 'victory' },

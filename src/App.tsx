@@ -4,7 +4,6 @@ import { Chronicle, completeTournaments } from './components/Chronicle';
 import { VaultNav } from './components/VaultNav';
 import { ArchiveNavSystem } from './components/ArchiveNavSystem';
 import { motion, AnimatePresence } from 'motion/react';
-import { MediaAuthoritySystem } from './components/MediaAuthoritySystem';
 
 const RecordsVault = lazy(() => import('./components/Records').then(m => ({ default: m.RecordsVault })));
 const LegendsVault = lazy(() => import('./components/Legends').then(m => ({ default: m.LegendsVault })));
@@ -14,16 +13,14 @@ const StadiumsShowcase = lazy(() => import('./components/StadiumsShowcase').then
 const TournamentArchive = lazy(() => import('./components/TournamentArchive').then(m => ({ default: m.TournamentArchive })));
 const TimeMachine = lazy(() => import('./components/TimeMachine').then(m => ({ default: m.TimeMachine })));
 const FootballAtlas = lazy(() => import('./components/FootballAtlas').then(m => ({ default: m.FootballAtlas })));
-const ArchiveCommandCenter = lazy(() => import('./components/ArchiveCommandCenter').then(m => ({ default: m.ArchiveCommandCenter })));
 
 const SuspenseFallback = () => (
   <div className="min-h-screen flex items-center justify-center bg-[#050505] text-[#D4AF37] font-mono text-sm tracking-widest uppercase animate-pulse">
-    Unleashing Archival Records...
+    Loading Archives...
   </div>
 );
 
 export default function App() {
-  const [entered, setEntered] = useState(false);
   const [matchesVaultOpen, setMatchesVaultOpen] = useState(false);
   const [nationsVaultOpen, setNationsVaultOpen] = useState(false);
   const [footballAtlasOpen, setFootballAtlasOpen] = useState(false);
@@ -33,58 +30,10 @@ export default function App() {
   const [timeMachineOpen, setTimeMachineOpen] = useState(false);
   const [activeClassicMatchId, setActiveClassicMatchId] = useState<string | undefined>(undefined);
 
-  // New deep link state parameters for cross-exhibition travel
   const [activeTournamentYear, setActiveTournamentYear] = useState<number | null>(null);
   const [initialLegendId, setInitialLegendId] = useState<string | undefined>(undefined);
   const [initialNationId, setInitialNationId] = useState<string | undefined>(undefined);
   const [initialStadiumId, setInitialStadiumId] = useState<string | undefined>(undefined);
-
-  useEffect(() => {
-    if (entered) {
-      window.scrollTo(0, 0);
-    }
-  }, [entered]);
-
-  // Reactive telemetry to feed explorations directly to the Command Center
-  useEffect(() => {
-    if (activeTournamentYear) {
-      window.dispatchEvent(new CustomEvent('track-vault-explore', { 
-        detail: { type: 'tournament', id: activeTournamentYear, label: `${activeTournamentYear} World Cup` } 
-      }));
-    }
-  }, [activeTournamentYear]);
-
-  useEffect(() => {
-    if (activeClassicMatchId) {
-      window.dispatchEvent(new CustomEvent('track-vault-explore', { 
-        detail: { type: 'match', id: activeClassicMatchId, label: activeClassicMatchId === '2022-final' ? 'Argentina 3-3 France (2022)' : activeClassicMatchId } 
-      }));
-    }
-  }, [activeClassicMatchId]);
-
-  useEffect(() => {
-    if (initialLegendId) {
-      window.dispatchEvent(new CustomEvent('track-vault-explore', { 
-        detail: { type: 'legend', id: initialLegendId, label: initialLegendId === 'pele' ? 'Pelé' : initialLegendId === 'maradona' ? 'Diego Maradona' : initialLegendId.toUpperCase() } 
-      }));
-    }
-  }, [initialLegendId]);
-
-  useEffect(() => {
-    if (initialNationId) {
-      window.dispatchEvent(new CustomEvent('track-vault-explore', { 
-        detail: { type: 'nation', id: initialNationId, label: initialNationId === 'argentina' ? 'Argentina' : initialNationId === 'brazil' ? 'Brazil' : initialNationId.toUpperCase() } 
-      }));
-    }
-  }, [initialNationId]);
-
-  useEffect(() => {
-    if (initialStadiumId) {
-      window.dispatchEvent(new CustomEvent('track-vault-explore', { 
-        detail: { type: 'stadium', id: initialStadiumId, label: initialStadiumId === 'maracana' ? 'Maracanã' : initialStadiumId === 'azteca' ? 'Estadio Azteca' : initialStadiumId.toUpperCase() } 
-      }));
-    }
-  }, [initialStadiumId]);
 
   const handleExploreClassicMatch = (matchId: string) => {
     setActiveClassicMatchId(matchId);
@@ -111,7 +60,7 @@ export default function App() {
     setStadiumsVaultOpen(true);
   };
 
-  const handleExploreRecords = (recordId?: string) => {
+  const handleExploreRecords = () => {
     setRecordsVaultOpen(true);
   };
 
@@ -404,23 +353,6 @@ export default function App() {
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* GLOBAL PERSISTENT ARCHIVE COMMAND CENTER */}
-      <Suspense fallback={null}>
-        <ArchiveCommandCenter 
-          onExploreMatches={handleOpenMatchesFromNav}
-          onExploreNations={handleExploreNation}
-          onExploreLegends={handleExploreLegend}
-          onExploreRecords={handleExploreRecords}
-          onExploreStadiums={handleExploreStadium}
-          onExploreTournament={setActiveTournamentYear}
-          onExploreHistory={handleBeginJourney}
-          onExploreAtlas={() => setFootballAtlasOpen(true)}
-        />
-      </Suspense>
-
-      {/* OFFICIAL MEDIA INTEGRITY & SECURITY SYSTEM */}
-      <MediaAuthoritySystem />
     </div>
   );
 }

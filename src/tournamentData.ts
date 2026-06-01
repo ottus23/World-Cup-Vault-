@@ -99,8 +99,8 @@ export function getTournamentDetails(year: number): TournamentDetails {
         { stage: "Final", opponent: "France", score: "3-3 (4-2 p)", story: "An all-time classic. Messi and Di María struck first, Mbappé roared back with a hat-trick, but Argentina prevailed in the shootout." }
       ],
       definingMoments: [
-        { title: "Morocco's Atlas Lions", desc: "Becoming the first African nation to ever reach a World Cup semi-final.", image: "https://upload.wikimedia.org/wikipedia/commons/e/ec/Morocco_national_football_team_at_the_2018_World_Cup_vs_Iran.jpg" },
-        { title: "Weghorst's Free-kick", desc: "A genius pre-rehearsed free-kick routine in the 101st minute to equalize against Argentina.", image: "https://upload.wikimedia.org/wikipedia/commons/c/c5/Wout_Weghorst_2018.jpg" }
+        { title: "Morocco's Atlas Lions", desc: "Becoming the first African nation to ever reach a World Cup semi-final.", image: "https://upload.wikimedia.org/wikipedia/commons/d/d4/Morocco_vs_Spain_2022-12-06.jpg" },
+        { title: "Weghorst's Free-kick", desc: "A genius pre-rehearsed free-kick routine in the 101st minute to equalize against Argentina.", image: "https://upload.wikimedia.org/wikipedia/commons/2/23/Wout_Weghorst_2022.jpg" }
       ],
       legacy: "Qatar 2022 will be forever remembered as the crowning achievement of Lionel Messi, cementing his legacy as arguably the greatest player of all time, whilst signaling the true arrival of Kylian Mbappé as his heir apparent.",
       groups: [
@@ -182,7 +182,7 @@ export function getTournamentDetails(year: number): TournamentDetails {
             { label: "Sprints > 35km/h", value: 14 }
           ],
           legacyMoment: "The first hat-trick in a World Cup final since Geoff Hurst in 1966, almost single-handedly winning the cup twice over for France.",
-          image: "https://upload.wikimedia.org/wikipedia/commons/5/57/Kylian_Mbapp%C3%A9_2018.jpg"
+          image: "https://upload.wikimedia.org/wikipedia/commons/e/e0/Kylian_Mbapp%C3%A9_-_France_vs._Poland_-_FIFA_World_Cup_2022.jpg"
         }
       ],
       stadiums: [
@@ -215,6 +215,111 @@ export function getTournamentDetails(year: number): TournamentDetails {
         topScorer: "Kylian Mbappé (8 Goals)",
         definingMoment: "Emi Martínez's legendary extra-time stop and tournament shootout mind games.",
         historicalSignificance: "Secured Messi’s status as undisputed king of modern football and completed football's ultimate narrative arc."
+      }
+    };
+  }
+
+  if (year === 2014) {
+    return {
+      year: 2014,
+      dates: "Jun 12 - Jul 13",
+      teamsCount: 32,
+      goldenBall: "Lionel Messi",
+      goldenBoot: "James Rodríguez",
+      goldenBootGoals: 6,
+      storyExtended: "Hosted in the spiritual home of football, the 2014 World Cup was a high-scoring, vibrant tournament. It featured the most shocking result in modern history—Germany's 7-1 demolition of Brazil—and concluded with a tactical, high-stakes final that saw Europe triumph on South American soil for the first time.",
+      roadToGlory: [
+        { stage: "Group Stage", opponent: "Portugal, Ghana, USA", score: "7 Pts", story: "Germany began with a 4-0 statement against Portugal, navigating a 'Group of Death' with calm precision." },
+        { stage: "Round of 16", opponent: "Algeria", score: "2-1 (aet)", story: "A grueling encounter where Manuel Neuer redefined the 'sweeper-keeper' role, frequently charging out of his box." },
+        { stage: "Quarter-final", opponent: "France", score: "1-0", story: "A tactical masterclass secured by Mats Hummels' towering header and a late point-blank Neuer save." },
+        { stage: "Semi-final", opponent: "Brazil", score: "7-1", story: "The 'Mineirazo'. Germany scored five goals in 29 minutes, inflicting the heaviest defeat in Brazil's history." },
+        { stage: "Final", opponent: "Argentina", score: "1-0 (aet)", story: "A deadlocked clash of titans at the Maracanã. Mario Götze's 113th-minute chest and volley wrote him into history." }
+      ],
+      definingMoments: [
+        { title: "The Mineirazo", desc: "The scoreboard in Belo Horizonte reading 7-1, a reality that broke Brazilian football culture.", image: "https://upload.wikimedia.org/wikipedia/commons/1/1a/Team_Germany_World_Cup_2014_Rio.jpg" },
+        { title: "The Flying Dutchman", desc: "Robin van Persie's gravity-defying diving header against Spain that signaled the end of Tiki-Taka's dominance.", image: "https://upload.wikimedia.org/wikipedia/commons/a/ae/Robin_van_Persie_2014.jpg" }
+      ],
+      legacy: "Germany 2014 represented the ultimate victory of structural team chemistry over individual genius, whilst Manuel Neuer revolutionized the goalkeeper position forever.",
+      groups: [
+        {
+          name: "Group G",
+          standings: [
+            { team: "Germany", w: 2, d: 1, l: 0, pts: 7 },
+            { team: "USA", w: 1, d: 1, l: 1, pts: 4 },
+            { team: "Portugal", w: 1, d: 1, l: 1, pts: 4 },
+            { team: "Ghana", w: 0, d: 1, l: 2, pts: 1 }
+          ],
+          matches: [
+            { home: "Germany", away: "Portugal", score: "4 - 0", story: "Müller strikes three as Pepe is sent off in a complete German clinical demolition." },
+            { home: "USA", away: "Portugal", score: "2 - 2", story: "A thrilling encounter in the Amazon humidity, decided by a last-second Varela equalizer." }
+          ],
+          keyMoment: "Müller’s hat-trick in the opening game that established Germany's status as favorites."
+        }
+      ],
+      knockoutDrama: [
+        {
+          stage: "Semi-Final",
+          home: "Brazil",
+          away: "Germany",
+          score: "1 - 7",
+          mapNote: "Total collapse of the Brazilian structural block without Thiago Silva and Neymar. Kroos and Khedira exploited central vertical gaps with ruthless efficiency.",
+          moment: "Toni Kroos scoring two goals in 69 seconds, causing a visible panic in the Brazilian ranks."
+        },
+        {
+          stage: "Final",
+          home: "Germany",
+          away: "Argentina",
+          score: "1 - 0",
+          mapNote: "Argentina's low block nearly held firm. Messi had chances, but Germany's superior depth allowed Götze to arrive fresh and find the gap in the 113th minute.",
+          moment: "Mario Götze controlling Schürrle's cross on his chest and volleying past Romero."
+        }
+      ],
+      heroes: [
+        {
+          name: "Manuel Neuer",
+          role: "The Sweeper Keeper",
+          stats: [
+            { label: "Saves", value: 24 },
+            { label: "Clean Sheets", value: 4 },
+            { label: "Successful Passes", value: 244 }
+          ],
+          legacyMoment: "His performance against Algeria, where he operated as a 5th defender, changed the modern definition of a goalkeeper's role.",
+          image: "https://upload.wikimedia.org/wikipedia/commons/1/10/Manuel_Neuer_2014.jpg"
+        },
+        {
+          name: "Thomas Müller",
+          role: "The Space Investigator",
+          stats: [
+            { label: "Goals", value: 5 },
+            { label: "Assists", value: 3 },
+            { label: "Distance", value: "84km" }
+          ],
+          legacyMoment: "Being at the right place at the right time in almost every major German attack, defining the 'Raumdeuter' role.",
+          image: "https://upload.wikimedia.org/wikipedia/commons/d/df/Thomas_M%C3%BCller_2014.jpg"
+        }
+      ],
+      stadiums: [
+        {
+          name: "Maracanã",
+          location: "Rio de Janeiro",
+          capacity: "74,738",
+          notableMatch: "Germany 1-0 Argentina (The Final)",
+          image: "https://upload.wikimedia.org/wikipedia/commons/e/ec/Maracan%C3%A3_Stadium_in_Rio_de_Janeiro.jpg"
+        }
+      ],
+      stats: [
+        { label: "Total Goals Scored", value: "171", subText: "Equaling the all-time record set in France 98" },
+        { label: "Pass Completion", value: "82%", subText: "Highlighting a shift towards high-possession tactical dominance" }
+      ],
+      tacticalTrend: "The 'False 9' or late runner arrival. Germany phased out traditional target men for fluid, interchanging attackers like Götze and Müller.",
+      capsule: {
+        champion: "Germany",
+        runnerUp: "Argentina",
+        host: "Brazil",
+        mvp: "Lionel Messi",
+        topScorer: "James Rodríguez (6 Goals)",
+        definingMoment: "Götze's golden volley in the Rio twilight.",
+        historicalSignificance: "Confirming Germany's 10-year project of national youth reform reached its absolute peak."
       }
     };
   }

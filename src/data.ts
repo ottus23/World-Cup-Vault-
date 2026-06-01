@@ -647,7 +647,7 @@ export const moments: HistoricalMoment[] = [
       "West Germany achieves the impossible, coming back against the Mighty Magyars in the driving rain of Switzerland.",
     year: 1954,
     image:
-      "https://upload.wikimedia.org/wikipedia/commons/9/91/Fritz_Walter_1952.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/8/8a/Deutschland_Kader_1954.jpg",
   },
   {
     id: "brazil-1970",
