@@ -441,7 +441,7 @@ export function FootballAtlas({
             <button
               key={m.id}
               onClick={() => setActiveMode(m.id as any)}
-              className={`px-3 py-1.5 text-[10px] font-mono uppercase tracking-wide rounded-[2px] flex items-center gap-2 border cursor-pointer transition-all ${
+              className={`min-h-[44px] px-3 py-1.5 text-[10px] font-mono uppercase tracking-wide rounded-[2px] flex items-center gap-2 border cursor-pointer transition-all ${
                 activeMode === m.id 
                   ? 'bg-[#D4AF37]/10 text-[#D4AF37] border-[#D4AF37]' 
                   : 'bg-transparent text-gray-400 hover:text-white border-transparent'
@@ -456,7 +456,7 @@ export function FootballAtlas({
         {/* EXIT ACTION */}
         <button
           onClick={onClose}
-          className="px-3 py-1.5 border border-white/10 hover:border-[#D4AF37]/30 text-xs font-mono rounded bg-black/30 hover:text-white transition-all flex items-center gap-1.5 uppercase cursor-pointer"
+          className="min-h-[44px] px-3 py-1.5 border border-white/10 hover:border-[#D4AF37]/30 text-xs font-mono rounded bg-black/30 hover:text-white transition-all flex items-center gap-1.5 uppercase cursor-pointer"
         >
           <X size={12} /> Close Museum Atlas
         </button>
@@ -474,7 +474,7 @@ export function FootballAtlas({
           <button
             key={m.id}
             onClick={() => setActiveMode(m.id as any)}
-            className={`px-2.5 py-1 text-[9.5px] font-mono uppercase tracking-normal rounded flex items-center gap-1.5 border flex-shrink-0 transition-all ${
+            className={`min-h-[44px] px-2.5 py-1 text-[9.5px] font-mono uppercase tracking-normal rounded flex items-center gap-1.5 border flex-shrink-0 transition-all ${
               activeMode === m.id 
                 ? 'bg-[#D4AF37]/10 text-[#D4AF37] border-[#D4AF37]' 
                 : 'bg-black/40 text-gray-400 hover:text-white border-white/5'
@@ -515,7 +515,7 @@ export function FootballAtlas({
             <div className="relative">
               <button 
                 onClick={() => setLayersOpen(!layersOpen)}
-                className="px-3 py-1.5 bg-[#141416]/90 hover:bg-[#1a1a1e] border border-[#D4AF37]/35 rounded-[3px] text-[10px] font-mono text-[#D4AF37] flex items-center gap-1.5 cursor-pointer uppercase transition-all shadow-md"
+                className="px-3 py-1.5 bg-[#141416]/90 hover:bg-[#1a1a1e] border border-[#D4AF37]/35 rounded-[3px] text-[10px] font-mono text-[#D4AF37] flex items-center gap-1.5 cursor-pointer uppercase transition-all shadow-md min-h-[44px]"
               >
                 <Layers size={11} /> Map Legend & Layers
               </button>
@@ -551,11 +551,11 @@ export function FootballAtlas({
           </div>
 
           {/* HISTORICAL CARTOGRAPHY MAP PLOT (DYNAMIC SVG DESIGNED TO BE AN ARTWORK) */}
-          <div className="flex-1 w-full relative flex items-center justify-center">
+          <div className="flex-1 w-full relative overflow-auto scrollbar-none flex items-center justify-start lg:justify-center touch-pan-x touch-pan-y">
             
             <svg 
               viewBox="0 0 1000 500" 
-              className="w-full h-auto select-none max-h-full"
+              className="min-w-[900px] lg:min-w-0 lg:w-full h-auto select-none max-h-full"
               style={{ background: 'radial-gradient(circle, #0e0f14 0%, #060608 100%)' }}
             >
               {/* VINTAGE MERIDIAN AND LONGITUDE DRAWINGS */}
@@ -1016,7 +1016,7 @@ export function FootballAtlas({
                           triggerAudioTick();
                           link.action();
                         }}
-                        className="w-full text-left py-2.5 px-3 bg-white/[0.02] hover:bg-[#D4AF37]/5 border border-white/5 hover:border-[#D4AF37]/40 text-xs font-mono text-[#DDD7C8] hover:text-[#D4AF37] rounded transition-all cursor-pointer flex justify-between items-center group"
+                        className="w-full text-left py-2.5 px-3 bg-white/[0.02] hover:bg-[#D4AF37]/5 border border-white/5 hover:border-[#D4AF37]/40 text-xs font-mono text-[#DDD7C8] hover:text-[#D4AF37] rounded transition-all cursor-pointer flex justify-between items-center group min-h-[44px]"
                       >
                         <span>{link.label}</span>
                         <ArrowUpRight size={13} className="text-gray-500 group-hover:text-[#D4AF37] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
@@ -1063,7 +1063,7 @@ export function FootballAtlas({
                       triggerAudioTick();
                       setPlaybackActive(!playbackActive);
                     }}
-                    className={`flex-1 py-2 rounded font-mono text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+                    className={`flex-1 py-2 rounded font-mono text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all cursor-pointer min-h-[44px] ${
                       playbackActive 
                         ? 'bg-red-950/45 text-red-400 border border-red-500/30' 
                         : 'bg-[#D4AF37]/15 text-[#D4AF37] border border-[#D4AF37]/30 hover:bg-[#D4AF37]/25'
@@ -1079,7 +1079,7 @@ export function FootballAtlas({
                       handleSelectMigrationStop(0);
                       setPlaybackActive(false);
                     }}
-                    className="p-2 bg-black/40 hover:bg-black/85 border border-white/5 hover:border-white/20 text-gray-400 hover:text-white rounded transition-all cursor-pointer"
+                    className="p-2 bg-black/40 hover:bg-black/85 border border-white/5 hover:border-white/20 text-gray-400 hover:text-white rounded transition-all cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
                     title="Reset Timeline Index"
                   >
                     <RotateCcw size={12} />
@@ -1103,7 +1103,7 @@ export function FootballAtlas({
                 triggerAudioTick();
                 onExploreHistory();
               }}
-              className="mt-4 w-full py-3.5 bg-transparent hover:bg-[#D4AF37]/10 text-[#D4AF37] border border-[#D4AF37]/45 hover:border-[#D4AF37] rounded-[3px] font-serif text-[11px] font-black tracking-[0.25em] uppercase hover:shadow-[0_0_15px_rgba(212,175,55,0.08)] flex items-center justify-center gap-2 transition-all cursor-pointer duration-300"
+              className="mt-4 w-full py-3.5 bg-transparent hover:bg-[#D4AF37]/10 text-[#D4AF37] border border-[#D4AF37]/45 hover:border-[#D4AF37] rounded-[3px] font-serif text-[11px] font-black tracking-[0.25em] uppercase hover:shadow-[0_0_15px_rgba(212,175,55,0.08)] flex items-center justify-center gap-2 transition-all cursor-pointer duration-300 min-h-[44px]"
             >
               <History size={13} />
               <span>Launch Immersive Time Machine</span>

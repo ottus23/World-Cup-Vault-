@@ -944,37 +944,6 @@ export function ArchiveCommandCenter({
               </div>
             </div>
 
-            {/* MOBILE ONLY BOTTOM NAVIGATION BAR */}
-            <div className="lg:hidden flex items-center bg-[#111111] border-b border-white/5 p-2 gap-1 font-mono text-[9px] tracking-wider uppercase justify-around z-10 select-none">
-              <button
-                className={`flex-1 py-2 text-center rounded-[2px] ${activeTab === "directory" ? "bg-[#D4AF37] text-[#050505] font-semibold" : "text-[#69707A]"}`}
-                onClick={() => setActiveTab("directory")}
-              >
-                🗺️ Index
-              </button>
-              <button
-                className={`flex-1 py-2 text-center rounded-[2px] ${activeTab === "compare" ? "bg-[#D4AF37] text-[#050505] font-semibold" : "text-[#69707A]"}`}
-                onClick={() => {
-                  setActiveTab("compare");
-                  triggerCompareLabUnlock();
-                }}
-              >
-                ⚔️ Compare
-              </button>
-              <button
-                className={`flex-1 py-2 text-center rounded-[2px] ${activeTab === "quiz" ? "bg-[#D4AF37] text-[#050505] font-semibold" : "text-[#69707A]"}`}
-                onClick={() => setActiveTab("quiz")}
-              >
-                🏅 Quiz
-              </button>
-              <button
-                className={`flex-1 py-2 text-center rounded-[2px] ${activeTab === "profile" ? "bg-[#D4AF37] text-[#050505] font-semibold" : "text-[#69707A]"}`}
-                onClick={() => setActiveTab("profile")}
-              >
-                🛡️ Passport
-              </button>
-            </div>
-
             {/* MAIN CONTAINER LAYOUT */}
             <div className="flex-1 overflow-y-auto px-6 md:px-12 py-8 z-10 flex flex-col lg:grid lg:grid-cols-12 gap-8">
               {/* LEFT COLUMN: ARCHIVE TELEMETRY AND PERSONAL PASSPORT STATUS (4 COLS) */}
@@ -1035,7 +1004,7 @@ export function ArchiveCommandCenter({
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-2.5">
                     {/* Last Tournament */}
                     <button
-                      className="bg-[#121212] hover:bg-[#1a1a1a] border border-white/5 p-3 rounded-none text-left flex items-center justify-between transition-all group cursor-pointer"
+                      className="bg-[#121212] hover:bg-[#1a1a1a] border border-white/5 p-3 rounded-none text-left flex items-center justify-between transition-all group cursor-pointer min-h-[56px]"
                       onClick={() =>
                         handleItemNavigation(
                           "tournament",
@@ -1057,7 +1026,7 @@ export function ArchiveCommandCenter({
 
                     {/* Last Legend */}
                     <button
-                      className="bg-[#121212] hover:bg-[#1a1a1a] border border-white/5 p-3 rounded-none text-left flex items-center justify-between transition-all group cursor-pointer"
+                      className="bg-[#121212] hover:bg-[#1a1a1a] border border-white/5 p-3 rounded-none text-left flex items-center justify-between transition-all group cursor-pointer min-h-[56px]"
                       onClick={() =>
                         handleItemNavigation(
                           "legend",
@@ -1079,7 +1048,7 @@ export function ArchiveCommandCenter({
 
                     {/* Last Nation */}
                     <button
-                      className="bg-[#121212] hover:bg-[#1a1a1a] border border-white/5 p-3 rounded-none text-left flex items-center justify-between transition-all group cursor-pointer"
+                      className="bg-[#121212] hover:bg-[#1a1a1a] border border-white/5 p-3 rounded-none text-left flex items-center justify-between transition-all group cursor-pointer min-h-[56px]"
                       onClick={() =>
                         handleItemNavigation(
                           "nation",
@@ -1101,7 +1070,7 @@ export function ArchiveCommandCenter({
 
                     {/* Last Stadium */}
                     <button
-                      className="bg-[#121212] hover:bg-[#1a1a1a] border border-white/5 p-3 rounded-none text-left flex items-center justify-between transition-all group cursor-pointer"
+                      className="bg-[#121212] hover:bg-[#1a1a1a] border border-white/5 p-3 rounded-none text-left flex items-center justify-between transition-all group cursor-pointer min-h-[56px]"
                       onClick={() =>
                         handleItemNavigation(
                           "stadium",
@@ -1146,7 +1115,7 @@ export function ArchiveCommandCenter({
                       {favorites.map((fav, i) => (
                         <div
                           key={i}
-                          className="bg-[#121212] border border-white/5 p-2 px-3 flex items-center justify-between gap-2.5 relative group hover:border-[#D4AF37]/20 transition-all cursor-pointer"
+                          className="bg-[#121212] border border-white/5 p-2 px-3 flex items-center justify-between gap-2.5 relative group hover:border-[#D4AF37]/20 transition-all cursor-pointer min-h-[44px]"
                           onClick={() =>
                             handleItemNavigation(fav.type, fav.id, fav.label)
                           }
@@ -1189,8 +1158,8 @@ export function ArchiveCommandCenter({
                           id="command-center-search-input"
                           ref={searchInputRef}
                           type="text"
-                          className="w-full bg-[#121212] border border-[#4E5661]/15 focus:border-[#D4AF37]/50 p-4 pl-12 rounded-none text-sm text-[#F5F2EA] tracking-wide placeholder-[#69707A] focus:outline-none transition-all font-sans"
-                          placeholder="Search the archive (e.g. 1970, Pelé, Maracanã, Argentina)..."
+                          className="w-full bg-[#121212] border border-[#4E5661]/15 focus:border-[#D4AF37]/50 p-4 pl-12 rounded-none text-base text-[#F5F2EA] tracking-wide placeholder-[#69707A] focus:outline-none transition-all font-sans min-h-[48px]"
+                          placeholder="Search the archive (e.g. 1970, Pelé, Maracanã)..."
                           value={searchQuery}
                           onChange={(e) => setSearchQuery(e.target.value)}
                         />
@@ -1243,7 +1212,7 @@ export function ArchiveCommandCenter({
                                 </div>
                                 <div className="flex items-center gap-3">
                                   <button
-                                    className="p-2 bg-[#121212] hover:bg-[#D4AF37]/10 text-[#69707A] hover:text-[#D4AF37] border border-white/5 transition-all cursor-pointer"
+                                    className="p-2 bg-[#121212] hover:bg-[#D4AF37]/10 text-[#69707A] hover:text-[#D4AF37] border border-white/5 transition-all cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
                                     onClick={(e) =>
                                       toggleFavorite(
                                         item.type,
@@ -1288,7 +1257,7 @@ export function ArchiveCommandCenter({
                         </div>
                         <div className="space-y-2">
                           <button
-                            className="w-full text-left bg-[#121212] hover:bg-[#D4AF37]/5 border border-white/5 p-3 rounded-none flex items-center justify-between group transition-all cursor-pointer"
+                            className="w-full text-left bg-[#121212] hover:bg-[#D4AF37]/5 border border-white/5 p-3 rounded-none flex items-center justify-between group transition-all cursor-pointer min-h-[56px]"
                             onClick={() => {
                               onExploreHistory();
                               setIsOpen(false);
@@ -1304,7 +1273,7 @@ export function ArchiveCommandCenter({
                           </button>
 
                           <button
-                            className="w-full text-left bg-[#121212] hover:bg-[#D4AF37]/5 border border-white/5 p-3 rounded-none flex items-center justify-between group transition-all cursor-pointer"
+                            className="w-full text-left bg-[#121212] hover:bg-[#D4AF37]/5 border border-white/5 p-3 rounded-none flex items-center justify-between group transition-all cursor-pointer min-h-[56px]"
                             onClick={() => {
                               onExploreHistory();
                               setIsOpen(false);
@@ -1320,7 +1289,7 @@ export function ArchiveCommandCenter({
                           </button>
 
                           <button
-                            className="w-full text-left bg-[#121212] hover:bg-[#D4AF37]/5 border border-white/5 p-3 rounded-none flex items-center justify-between group transition-all cursor-pointer"
+                            className="w-full text-left bg-[#121212] hover:bg-[#D4AF37]/5 border border-white/5 p-3 rounded-none flex items-center justify-between group transition-all cursor-pointer min-h-[56px]"
                             onClick={() => {
                               onExploreAtlas();
                               setIsOpen(false);
@@ -1392,7 +1361,7 @@ export function ArchiveCommandCenter({
                               onExploreRecords();
                               setIsOpen(false);
                             }}
-                            className="bg-[#121212] hover:bg-[#D4AF37]/5 border border-white/5 p-2 rounded-none text-center block transition-all text-[11px] font-medium text-[#AFA58D] hover:text-white cursor-pointer col-span-2"
+                            className="bg-[#121212] hover:bg-[#D4AF37]/5 border border-white/5 p-2 rounded-none text-center block transition-all text-[11px] font-medium text-[#AFA58D] hover:text-white cursor-pointer col-span-2 min-h-[44px] flex items-center justify-center"
                           >
                             🏅 Records Vault
                           </button>
@@ -1463,7 +1432,7 @@ export function ArchiveCommandCenter({
                                   `${t.year} World Cup`,
                                 )
                               }
-                              className="bg-[#121212] hover:bg-[#D4AF37] border border-white/5 hover:border-transparent px-3 py-1.5 rounded-none text-center font-mono text-[10px] tracking-wider text-[#AFA58D] hover:text-[#050505] transition-all duration-150 font-medium cursor-pointer"
+                              className="bg-[#121212] hover:bg-[#D4AF37] border border-white/5 hover:border-transparent px-3 py-1.5 rounded-none text-center font-mono text-[10px] tracking-wider text-[#AFA58D] hover:text-[#050505] transition-all duration-150 font-medium cursor-pointer min-h-[44px] flex items-center justify-center min-w-[60px]"
                             >
                               {t.year}
                             </button>
@@ -1490,13 +1459,13 @@ export function ArchiveCommandCenter({
                       {/* Type Toggle Slider */}
                       <div className="flex items-center bg-[#111111] border border-white/5 p-1 rounded-[3px] mt-3 sm:mt-0 font-mono text-[9px] tracking-wider uppercase select-none">
                         <button
-                          className={`px-3 py-1 rounded-[2px] transition-all cursor-pointer ${compareType === "legend" ? "bg-[#D4AF37] text-[#050505] font-semibold" : "text-[#69707A]"}`}
+                          className={`min-h-[44px] px-3 py-1 rounded-[2px] transition-all cursor-pointer ${compareType === "legend" ? "bg-[#D4AF37] text-[#050505] font-semibold" : "text-[#69707A]"}`}
                           onClick={() => setCompareType("legend")}
                         >
                           Legends Duel
                         </button>
                         <button
-                          className={`px-3 py-1 rounded-[2px] transition-all cursor-pointer ${compareType === "nation" ? "bg-[#D4AF37] text-[#050505] font-semibold" : "text-[#69707A]"}`}
+                          className={`min-h-[44px] px-3 py-1 rounded-[2px] transition-all cursor-pointer ${compareType === "nation" ? "bg-[#D4AF37] text-[#050505] font-semibold" : "text-[#69707A]"}`}
                           onClick={() => setCompareType("nation")}
                         >
                           Nations Duel
@@ -1506,7 +1475,7 @@ export function ArchiveCommandCenter({
 
                     {/* SELECTORS GRID */}
                     {compareType === "legend" ? (
-                      <div className="grid grid-cols-2 gap-4 select-none">
+                      <div className="flex flex-col sm:grid sm:grid-cols-2 gap-4 select-none">
                         {/* Selector Legend A */}
                         <div className="flex flex-col">
                           <label className="font-mono text-[9px] uppercase tracking-widest text-[#69707A] mb-1.5">
@@ -1560,7 +1529,7 @@ export function ArchiveCommandCenter({
                         </div>
                       </div>
                     ) : (
-                      <div className="grid grid-cols-2 gap-4 select-none">
+                      <div className="flex flex-col sm:grid sm:grid-cols-2 gap-4 select-none">
                         {/* Selector Nation A */}
                         <div className="flex flex-col">
                           <label className="font-mono text-[9px] uppercase tracking-widest text-[#69707A] mb-1.5">
@@ -1685,14 +1654,14 @@ export function ArchiveCommandCenter({
                           <div className="space-y-3.5">
                             {/* World Cup Titles Comparison */}
                             <div>
-                              <div className="flex justify-between text-xs font-mono mb-1">
-                                <span className="text-[#AFA58D]">
+                              <div className="flex justify-between items-center text-xs font-mono mb-1">
+                                <span className="text-[#AFA58D] text-left w-1/3 truncate">
                                   {legendsComparison.statsA.titles} Titles
                                 </span>
-                                <span className="uppercase tracking-wider text-xs font-serif font-bold text-[#F5F2EA] py-0.5">
-                                  WORLD CUP CHAMPIONSHIPS
+                                <span className="uppercase tracking-wider text-[10px] font-serif font-bold text-[#F5F2EA] py-0.5 w-1/3 text-center truncate">
+                                  CHAMPIONSHIPS
                                 </span>
-                                <span className="text-[#AFA58D]">
+                                <span className="text-[#AFA58D] text-right w-1/3 truncate">
                                   {legendsComparison.statsB.titles} Titles
                                 </span>
                               </div>
@@ -1714,14 +1683,14 @@ export function ArchiveCommandCenter({
 
                             {/* World Cup Goals */}
                             <div>
-                              <div className="flex justify-between text-xs font-mono mb-1">
-                                <span className="text-[#AFA58D]">
+                              <div className="flex justify-between items-center text-xs font-mono mb-1">
+                                <span className="text-[#AFA58D] text-left w-1/3 truncate">
                                   {legendsComparison.statsA.goals} Goals
                                 </span>
-                                <span className="uppercase tracking-wider text-xs font-serif font-bold text-[#F5F2EA] py-0.5">
-                                  TOURNAMENT GOALS REGISTERED
+                                <span className="uppercase tracking-wider text-[10px] font-serif font-bold text-[#F5F2EA] py-0.5 w-1/3 text-center truncate">
+                                  GOALS
                                 </span>
-                                <span className="text-[#AFA58D]">
+                                <span className="text-[#AFA58D] text-right w-1/3 truncate">
                                   {legendsComparison.statsB.goals} Goals
                                 </span>
                               </div>
@@ -1743,14 +1712,14 @@ export function ArchiveCommandCenter({
 
                             {/* Legacy Rating Gauge */}
                             <div>
-                              <div className="flex justify-between text-xs font-mono mb-1">
-                                <span className="text-[#AFA58D]">
+                              <div className="flex justify-between items-center text-xs font-mono mb-1">
+                                <span className="text-[#AFA58D] text-left w-1/3 truncate">
                                   Rating {legendsComparison.statsA.rating}
                                 </span>
-                                <span className="uppercase tracking-wider text-xs font-serif font-bold text-[#F5F2EA] py-0.5">
-                                  LEGACY RATING INDEX
+                                <span className="uppercase tracking-wider text-[10px] font-serif font-bold text-[#F5F2EA] py-0.5 w-1/3 text-center truncate">
+                                  LEGACY RATING
                                 </span>
-                                <span className="text-[#AFA58D]">
+                                <span className="text-[#AFA58D] text-right w-1/3 truncate">
                                   Rating {legendsComparison.statsB.rating}
                                 </span>
                               </div>
@@ -1893,7 +1862,7 @@ export function ArchiveCommandCenter({
                         </p>
                         <button
                           onClick={startNewQuiz}
-                          className="px-6 py-3.5 bg-[#D4AF37] text-[#050505] font-mono text-xs tracking-wider uppercase font-semibold hover:bg-white transition-all cursor-pointer"
+                          className="min-h-[44px] px-6 py-3.5 bg-[#D4AF37] text-[#050505] font-mono text-xs tracking-wider uppercase font-semibold hover:bg-white transition-all cursor-pointer"
                         >
                           COMMENCE RAPID TRIVIA FIELD
                         </button>
@@ -2048,6 +2017,41 @@ export function ArchiveCommandCenter({
                   </div>
                 )}
               </div>
+            </div>
+
+            {/* MOBILE ONLY BOTTOM NAVIGATION BAR */}
+            <div className="lg:hidden flex items-center bg-[#111111] border-t border-[#D4AF37]/20 p-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] gap-1 font-mono text-[9px] tracking-wider uppercase justify-around z-10 select-none">
+              <button
+                className={`flex-1 min-h-[44px] flex flex-col gap-1 items-center justify-center text-center rounded-[2px] ${activeTab === "directory" ? "text-[#D4AF37] font-semibold" : "text-[#69707A]"}`}
+                onClick={() => setActiveTab("directory")}
+              >
+                <span className="text-sm">🗺️</span>
+                <span>Index</span>
+              </button>
+              <button
+                className={`flex-1 min-h-[44px] flex flex-col gap-1 items-center justify-center text-center rounded-[2px] ${activeTab === "compare" ? "text-[#D4AF37] font-semibold" : "text-[#69707A]"}`}
+                onClick={() => {
+                  setActiveTab("compare");
+                  triggerCompareLabUnlock();
+                }}
+              >
+                <span className="text-sm">⚔️</span>
+                <span>Compare</span>
+              </button>
+              <button
+                className={`flex-1 min-h-[44px] flex flex-col gap-1 items-center justify-center text-center rounded-[2px] ${activeTab === "quiz" ? "text-[#D4AF37] font-semibold" : "text-[#69707A]"}`}
+                onClick={() => setActiveTab("quiz")}
+              >
+                <span className="text-sm">🏅</span>
+                <span>Quiz</span>
+              </button>
+              <button
+                className={`flex-1 min-h-[44px] flex flex-col gap-1 items-center justify-center text-center rounded-[2px] ${activeTab === "profile" ? "text-[#D4AF37] font-semibold" : "text-[#69707A]"}`}
+                onClick={() => setActiveTab("profile")}
+              >
+                <span className="text-sm">🛡️</span>
+                <span>Passport</span>
+              </button>
             </div>
           </motion.div>
         )}

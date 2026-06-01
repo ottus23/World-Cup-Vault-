@@ -945,7 +945,7 @@ export function TimeMachine({
             </motion.div>
 
             <motion.h1
-              className="font-serif text-3xl sm:text-5xl md:text-7xl font-black tracking-[0.2em] uppercase text-[#F5F2EA] mb-2 leading-none"
+              className="museum-level-1 mb-2 select-none drop-shadow-xl"
               initial={{ letterSpacing: "0.4em", opacity: 0 }}
               animate={{ letterSpacing: "0.2em", opacity: 1 }}
               transition={{ duration: 1.5, ease: "easeOut" }}
@@ -953,7 +953,7 @@ export function TimeMachine({
               THE WORLD CUP
             </motion.h1>
             <motion.h2
-              className="font-serif text-3xl sm:text-5xl md:text-7xl font-bold tracking-[0.25em] text-[#D4AF37] uppercase mb-12"
+              className="museum-level-1 text-vault-gold-1 mb-12"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1.5, delay: 0.4 }}
@@ -963,7 +963,7 @@ export function TimeMachine({
 
             {/* Statement of travels */}
             <motion.p
-              className="font-serif italic text-[#AFA58D] text-lg sm:text-xl md:text-2xl mb-16 font-light max-w-lg"
+              className="museum-level-4 italic text-vault-muted-1 !text-lg sm:!text-xl md:!text-2xl mb-16"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 0.9, y: 0 }}
               transition={{ delay: 0.7, duration: 1 }}
@@ -1024,7 +1024,7 @@ export function TimeMachine({
               <div className="flex items-center gap-4">
                 <button
                   onClick={onClose}
-                  className="flex items-center gap-2 group/back text-[#AFA58D] hover:text-[#D4AF37] font-mono text-[10px] uppercase tracking-widest leading-none"
+                  className="flex items-center gap-2 group/back text-[#AFA58D] hover:text-[#D4AF37] font-mono text-[10px] uppercase tracking-widest leading-none min-h-[44px]"
                   title="Return to Exhibition Hall"
                 >
                   <ArrowLeft
@@ -1049,7 +1049,7 @@ export function TimeMachine({
                   // TRAVEL ENVELOPE
                 </span>
                 <span
-                  className={`font-serif text-xs md:text-sm italic uppercase font-black tracking-widest ${currentSetup.styles.accentText} transition-all duration-500`}
+                  className={`museum-level-5 italic uppercase font-black tracking-widest ${currentSetup.styles.accentText} transition-all duration-500`}
                 >
                   {currentSetup.name} ({currentSetup.years})
                 </span>
@@ -1059,7 +1059,7 @@ export function TimeMachine({
               <div className="flex items-center gap-4">
                 <button
                   onClick={() => setShowHelp((prev) => !prev)}
-                  className={`w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-[#AFA58D] hover:text-[#D4AF37] hover:border-[#D4AF37]/35 transition-all bg-black/45 ${showHelp ? "border-[#D4AF37]/75 text-[#D4AF37]" : ""}`}
+                  className={`min-w-[44px] min-h-[44px] rounded-full border border-white/10 flex items-center justify-center text-[#AFA58D] hover:text-[#D4AF37] hover:border-[#D4AF37]/35 transition-all bg-black/45 ${showHelp ? "border-[#D4AF37]/75 text-[#D4AF37]" : ""}`}
                   title="Exhibition Key Commands Help"
                 >
                   <Info size={14} />
@@ -1068,7 +1068,7 @@ export function TimeMachine({
                 {/* ACCESSIBILITY / ACCURATE MOTION MODULATOR BUTTON */}
                 <button
                   onClick={() => setReducedMotion((prev) => !prev)}
-                  className={`px-3 py-1.5 border rounded-[3px] font-mono text-[8px] uppercase tracking-wider transition-all cursor-pointer ${
+                  className={`min-h-[44px] px-3 py-1.5 border rounded-[3px] font-mono text-[8px] uppercase tracking-wider transition-all cursor-pointer ${
                     reducedMotion
                       ? "border-[#D4AF37]/80 bg-[#D4AF37]/10 text-[#D4AF37] font-bold"
                       : "border-white/10 bg-white/[0.02] text-[#AFA58D] hover:text-white"
@@ -1103,7 +1103,7 @@ export function TimeMachine({
                         setActivePath(p.id);
                         setSelectedSubpath("all");
                       }}
-                      className={`px-3 py-1 rounded-[3px] font-mono text-[9px] uppercase tracking-wider transition-all duration-300 ${
+                      className={`min-h-[44px] px-3 py-1 rounded-[3px] font-mono text-[9px] uppercase tracking-wider transition-all duration-300 ${
                         activePath === p.id
                           ? "bg-[#D4AF37] text-black font-black"
                           : "text-[#AFA58D] hover:text-white hover:bg-white/5"
@@ -1121,7 +1121,7 @@ export function TimeMachine({
                   <button
                     key={sub.id}
                     onClick={() => setSelectedSubpath(sub.id)}
-                    className={`px-2 py-0.5 rounded-[2px] transition-all duration-300 text-[8px] font-mono uppercase border ${
+                    className={`min-h-[44px] px-2 py-0.5 rounded-[2px] transition-all duration-300 text-[8px] font-mono uppercase border ${
                       selectedSubpath === sub.id
                         ? "border-[#D4AF37]/60 bg-[#D4AF37]/15 text-[#D4AF37] font-semibold"
                         : "border-white/5 text-[#69707A] hover:text-[#AFA58D] hover:border-white/10"
@@ -1142,7 +1142,7 @@ export function TimeMachine({
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                 >
-                  <p className="font-bold text-[#D4AF37] mb-2 font-serif text-sm">
+                  <p className="font-bold text-[#D4AF37] mb-2 museum-level-5">
                     ARCHIVAL KEYBOARD CONTROLS
                   </p>
                   <ul className="space-y-1">
@@ -1242,7 +1242,7 @@ export function TimeMachine({
                         >
                           DESTINATION CARD NUMÉRO {activeYear}
                         </span>
-                        <h3 className="font-serif text-[#F5F2EA] text-2xl font-black">
+                        <h3 className="museum-level-3 text-2xl">
                           {activeYear}
                         </h3>
                       </div>
@@ -1272,7 +1272,7 @@ export function TimeMachine({
                         <span className="font-mono text-[8px] text-[#AFA58D] block uppercase tracking-widest leading-none mb-1">
                           HOST NATION
                         </span>
-                        <span className="font-serif font-black text-white text-md uppercase tracking-wider">
+                        <span className="museum-level-3 text-sm md:text-md uppercase tracking-wider">
                           {activeNode.host}
                         </span>
                       </div>
@@ -1289,7 +1289,7 @@ export function TimeMachine({
                           CROWNED CHAMPIONS
                         </span>
                       </div>
-                      <h4 className="font-serif text-xl font-bold text-white leading-tight uppercase">
+                      <h4 className="museum-level-3 text-xl uppercase">
                         {activeNode.champion}
                       </h4>
                       {activeYear !== 2026 && (
@@ -1328,7 +1328,7 @@ export function TimeMachine({
                     >
                       CHRONICLE DESTINATION AT THE TEMPLE
                     </span>
-                    <h2 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tight uppercase">
+                    <h2 className="museum-level-1 leading-none tracking-tight">
                       THE {activeYear} STORY
                     </h2>
                   </motion.div>
@@ -1336,7 +1336,7 @@ export function TimeMachine({
                   {/* LAYER 1: HISTORICAL STORY COMPASS */}
                   <motion.p
                     key={`story-${activeYear}`}
-                    className="font-sans text-[#DDD5C0] text-sm sm:text-base md:text-lg leading-relaxed font-light pr-4 max-w-2xl mb-6 opacity-95 transition-opacity"
+                    className="museum-level-4 pr-4 max-w-2xl mb-6 opacity-95 transition-opacity"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 0.95 }}
                     transition={{ duration: 0.8, delay: 0.1 }}
@@ -1362,7 +1362,7 @@ export function TimeMachine({
                           CHAPTER TITAN HERP
                         </span>
                       </div>
-                      <h4 className="font-serif text-md font-extrabold text-[#F5F2EA] leading-snug">
+                      <h4 className="museum-level-3 text-md text-vault-text-1">
                         {activeNode.hero.name}
                       </h4>
                       <p className="font-mono text-[9px] text-[#D4AF37] uppercase tracking-wide mt-0.5 mb-2 font-bold">
@@ -1390,7 +1390,7 @@ export function TimeMachine({
                           DEFINING CLASH
                         </span>
                       </div>
-                      <h4 className="font-serif text-md font-extrabold text-[#F5F2EA] leading-snug line-clamp-1">
+                      <h4 className="museum-level-3 text-md text-vault-text-1 line-clamp-1">
                         {activeNode.definingMatch.title}
                       </h4>
                       <p className="font-mono text-[9px] text-[#D4AF37] uppercase tracking-wide mt-0.5 mb-2 font-bold">
@@ -1413,7 +1413,7 @@ export function TimeMachine({
                     <span className="font-mono text-[8px] text-[#AFA58D] font-black uppercase tracking-wider block mb-1">
                       CHRONOLOGY LEGACY VERDICT
                     </span>
-                    <p className="font-serif text-xs leading-relaxed text-[#F5F2EA] italic font-light">
+                    <p className="museum-level-4 text-xs italic">
                       "{activeNode.legacy}"
                     </p>
                   </motion.div>
@@ -1498,7 +1498,7 @@ export function TimeMachine({
                           onExploreStadium(codeMap[activeYear] || "azteca");
                         }
                       }}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/[0.02] border border-white/5 rounded-[2px] font-mono text-[9px] uppercase text-[#AFA58D] hover:text-white hover:border-[#D4AF37]/50 hover:bg-white/5 transition-colors cursor-pointer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/[0.02] border border-white/5 rounded-[2px] font-mono text-[9px] uppercase text-[#AFA58D] hover:text-white hover:border-[#D4AF37]/50 hover:bg-white/5 transition-colors cursor-pointer min-h-[44px]"
                     >
                       <MapPin size={11} />
                       Coliseums Vault
@@ -1520,7 +1520,7 @@ export function TimeMachine({
                           onExploreLegend(legMap[activeYear] || "pele");
                         }
                       }}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/[0.02] border border-white/5 rounded-[2px] font-mono text-[9px] uppercase text-[#AFA58D] hover:text-white hover:border-[#D4AF37]/50 hover:bg-white/5 transition-colors cursor-pointer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/[0.02] border border-white/5 rounded-[2px] font-mono text-[9px] uppercase text-[#AFA58D] hover:text-white hover:border-[#D4AF37]/50 hover:bg-white/5 transition-colors cursor-pointer min-h-[44px]"
                     >
                       <Sparkles size={11} />
                       Legends Cabinets
@@ -1549,7 +1549,7 @@ export function TimeMachine({
                             );
                           }
                         }}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#D4AF37]/5 border border-[#D4AF37]/30 rounded-[2px] font-mono text-[9px] uppercase text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black hover:border-[#D4AF37] transition-all cursor-pointer font-bold"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#D4AF37]/5 border border-[#D4AF37]/30 rounded-[2px] font-mono text-[9px] uppercase text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black hover:border-[#D4AF37] transition-all cursor-pointer font-bold min-h-[44px]"
                       >
                         <PlayCircle size={11} />
                         MATCH SCREEN
@@ -1566,7 +1566,7 @@ export function TimeMachine({
                 {/* PREVIOUS CHRONICLE ARROW BUTTON */}
                 <button
                   onClick={handlePrev}
-                  className="inline-flex items-center gap-3 px-6 py-3.5 border border-white/10 hover:border-[#D4AF37]/65 hover:text-[#D4AF37] bg-white/[0.01] hover:bg-[#D4AF37]/5 rounded-[2px] font-sans font-bold text-xs uppercase tracking-widest transition-all cursor-pointer select-none group"
+                  className="inline-flex items-center gap-3 px-6 py-3.5 border border-white/10 hover:border-[#D4AF37]/65 hover:text-[#D4AF37] bg-white/[0.01] hover:bg-[#D4AF37]/5 rounded-[2px] font-sans font-bold text-xs uppercase tracking-widest transition-all cursor-pointer select-none group min-h-[44px]"
                 >
                   <ArrowLeft
                     size={16}
@@ -1584,7 +1584,7 @@ export function TimeMachine({
                       <button
                         key={year}
                         onClick={() => setActiveYear(year)}
-                        className={`flex flex-col items-center justify-center min-w-[36px] select-none py-1.5 rounded-sm transition-all cursor-pointer ${
+                        className={`flex flex-col items-center justify-center min-w-[44px] min-h-[44px] select-none py-1.5 rounded-sm transition-all cursor-pointer ${
                           isSelected
                             ? "bg-white/10 border border-[#D4AF37]/60 shadow-[0_0_15px_rgba(212,175,55,0.15)]"
                             : "hover:bg-white/5 border border-transparent"
@@ -1592,7 +1592,7 @@ export function TimeMachine({
                         title={`Travel to ${year} chronicle node`}
                       >
                         <span
-                          className={`font-serif text-[11px] font-black ${
+                          className={`museum-level-5 font-black ${
                             isSelected
                               ? eraSet.styles.accentText
                               : "text-[#69707A] hover:text-[#AFA58D]"
@@ -1617,7 +1617,7 @@ export function TimeMachine({
                 {/* NEXT CHRONICLE ARROW BUTTON */}
                 <button
                   onClick={handleNext}
-                  className="inline-flex items-center gap-3 px-6 py-3.5 border border-white/10 hover:border-[#D4AF37]/65 hover:text-[#D4AF37] bg-white/[0.01] hover:bg-[#D4AF37]/5 rounded-[2px] font-sans font-bold text-xs uppercase tracking-widest transition-all cursor-pointer select-none group"
+                  className="inline-flex items-center gap-3 px-6 py-3.5 border border-white/10 hover:border-[#D4AF37]/65 hover:text-[#D4AF37] bg-white/[0.01] hover:bg-[#D4AF37]/5 rounded-[2px] font-sans font-bold text-xs uppercase tracking-widest transition-all cursor-pointer select-none group min-h-[44px]"
                 >
                   <span>NEXT ERA GATEWAY</span>
                   <ArrowRight
@@ -1661,7 +1661,7 @@ export function TimeMachine({
                         TIME FRACTURE HIGH DEVIATION DETECTED
                       </div>
 
-                      <h2 className="font-serif text-3xl sm:text-4xl text-white font-black tracking-wide uppercase leading-tight">
+                      <h2 className="museum-level-2 tracking-wide uppercase leading-tight">
                         {activeFractureData.title}
                       </h2>
                       <span className="font-mono text-xs text-[#A9A091] block uppercase tracking-widest mt-2">
@@ -1688,7 +1688,7 @@ export function TimeMachine({
                             setActiveFracture(null);
                             onExploreLegend("pele");
                           }}
-                          className="flex-1 py-3 text-center border border-[#D4AF37]/40 bg-[#D4AF37]/5 hover:bg-[#D4AF37] hover:text-black font-mono text-[10px] tracking-wider uppercase font-bold transition-all cursor-pointer rounded-sm"
+                          className="flex-1 py-3 text-center border border-[#D4AF37]/40 bg-[#D4AF37]/5 hover:bg-[#D4AF37] hover:text-black font-mono text-[10px] tracking-wider uppercase font-bold transition-all cursor-pointer rounded-sm min-h-[44px]"
                         >
                           Observe Pelé Archive
                         </button>
@@ -1700,7 +1700,7 @@ export function TimeMachine({
                             setActiveFracture(null);
                             onExploreClassicMatch("1986-argentina-england");
                           }}
-                          className="flex-1 py-3 text-center border border-[#D4AF37]/40 bg-[#D4AF37]/5 hover:bg-[#D4AF37] hover:text-black font-mono text-[10px] tracking-wider uppercase font-bold transition-all cursor-pointer rounded-sm"
+                          className="flex-1 py-3 text-center border border-[#D4AF37]/40 bg-[#D4AF37]/5 hover:bg-[#D4AF37] hover:text-black font-mono text-[10px] tracking-wider uppercase font-bold transition-all cursor-pointer rounded-sm min-h-[44px]"
                         >
                           Relive The Match
                         </button>
@@ -1712,7 +1712,7 @@ export function TimeMachine({
                             setActiveFracture(null);
                             onExploreClassicMatch("2014-germany-brazil");
                           }}
-                          className="flex-1 py-3 text-center border border-[#D4AF37]/40 bg-[#D4AF37]/5 hover:bg-[#D4AF37] hover:text-black font-mono text-[10px] tracking-wider uppercase font-bold transition-all cursor-pointer rounded-sm"
+                          className="flex-1 py-3 text-center border border-[#D4AF37]/40 bg-[#D4AF37]/5 hover:bg-[#D4AF37] hover:text-black font-mono text-[10px] tracking-wider uppercase font-bold transition-all cursor-pointer rounded-sm min-h-[44px]"
                         >
                           Sift 7-1 Match Cinema
                         </button>
@@ -1724,7 +1724,7 @@ export function TimeMachine({
                             setActiveFracture(null);
                             onExploreLegend("messi");
                           }}
-                          className="flex-1 py-3 text-center border border-[#D4AF37]/40 bg-[#D4AF37]/5 hover:bg-[#D4AF37] hover:text-black font-mono text-[10px] tracking-wider uppercase font-bold transition-all cursor-pointer rounded-sm"
+                          className="flex-1 py-3 text-center border border-[#D4AF37]/40 bg-[#D4AF37]/5 hover:bg-[#D4AF37] hover:text-black font-mono text-[10px] tracking-wider uppercase font-bold transition-all cursor-pointer rounded-sm min-h-[44px]"
                         >
                           Messi's Legend Registry
                         </button>
@@ -1732,7 +1732,7 @@ export function TimeMachine({
 
                       <button
                         onClick={() => setActiveFracture(null)}
-                        className="flex-1 py-3 text-center border border-red-500 bg-red-500 hover:bg-white hover:border-white hover:text-black text-black font-mono text-[10px] tracking-wider uppercase font-extrabold transition-all cursor-pointer rounded-sm"
+                        className="flex-1 py-3 text-center border border-red-500 bg-red-500 hover:bg-white hover:border-white hover:text-black text-black font-mono text-[10px] tracking-wider uppercase font-extrabold transition-all cursor-pointer rounded-sm min-h-[44px]"
                       >
                         RESTORE TIMELINE CONTINUITY
                       </button>
