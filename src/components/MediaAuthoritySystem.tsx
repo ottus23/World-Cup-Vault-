@@ -630,7 +630,7 @@ export function MediaAuthoritySystem() {
                               {item.hasError || !item.url ? (
                                 <ShieldCheck size={16} className="text-[#D4AF37]/70" />
                               ) : (
-                                <img src={item.url} alt={item.alt} className="w-full h-full object-cover filter grayscale contrast-125 saturate-0" referrerPolicy="no-referrer" />
+                                <img src={item.url} alt={item.alt} loading="lazy" className="w-full h-full object-cover filter grayscale contrast-125 saturate-0" referrerPolicy="no-referrer" />
                               )}
                               <div className="absolute top-0.5 left-0.5 bg-black/80 p-0.5 rounded text-[5px] text-[#D4AF37] font-mono leading-none border border-[#D4AF37]/25 w-6 text-center">
                                 {item.score}%

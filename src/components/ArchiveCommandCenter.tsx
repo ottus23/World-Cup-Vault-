@@ -96,6 +96,15 @@ export function ArchiveCommandCenter({
 }: ArchiveCommandCenterProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [debouncedQuery, setDebouncedQuery] = useState("");
+
+  // Debounce search query to optimize performance
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedQuery(searchQuery);
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
   const [activeTab, setActiveTab] = useState<
     "directory" | "compare" | "quiz" | "profile"
   >("directory");
@@ -252,8 +261,8 @@ export function ArchiveCommandCenter({
 
   // Filter search items matching query
   const filteredSearchItems = useMemo(() => {
-    if (!searchQuery.trim()) return [];
-    const query = searchQuery.toLowerCase().trim();
+    if (!debouncedQuery.trim()) return [];
+    const query = debouncedQuery.toLowerCase().trim();
     return searchPool
       .filter(
         (item) =>
@@ -262,7 +271,7 @@ export function ArchiveCommandCenter({
           item.metadata?.toLowerCase().includes(query),
       )
       .slice(0, 5); // display top 5 matches
-  }, [searchQuery, searchPool]);
+  }, [debouncedQuery, searchPool]);
 
   // Track visit in memory and storage
   const trackVisit = (

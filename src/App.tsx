@@ -1,21 +1,26 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { Hero } from './components/Hero';
 import { Chronicle, completeTournaments } from './components/Chronicle';
-import { RecordsVault } from './components/Records';
-import { LegendsVault } from './components/Legends';
 import { VaultNav } from './components/VaultNav';
-import { EraNav } from './components/EraNav';
-import { HistoricMatchesVault } from './components/HistoricMatchesVault';
-import { NationsVault } from './components/NationsVault';
-import { FeaturedPreviews } from './components/FeaturedPreviews';
-import { StadiumsShowcase } from './components/StadiumsShowcase';
-import { TournamentArchive } from './components/TournamentArchive';
 import { ArchiveNavSystem } from './components/ArchiveNavSystem';
-import { TimeMachine } from './components/TimeMachine';
-import { FootballAtlas } from './components/FootballAtlas';
 import { motion, AnimatePresence } from 'motion/react';
-import { ArchiveCommandCenter } from './components/ArchiveCommandCenter';
 import { MediaAuthoritySystem } from './components/MediaAuthoritySystem';
+
+const RecordsVault = lazy(() => import('./components/Records').then(m => ({ default: m.RecordsVault })));
+const LegendsVault = lazy(() => import('./components/Legends').then(m => ({ default: m.LegendsVault })));
+const HistoricMatchesVault = lazy(() => import('./components/HistoricMatchesVault').then(m => ({ default: m.HistoricMatchesVault })));
+const NationsVault = lazy(() => import('./components/NationsVault').then(m => ({ default: m.NationsVault })));
+const StadiumsShowcase = lazy(() => import('./components/StadiumsShowcase').then(m => ({ default: m.StadiumsShowcase })));
+const TournamentArchive = lazy(() => import('./components/TournamentArchive').then(m => ({ default: m.TournamentArchive })));
+const TimeMachine = lazy(() => import('./components/TimeMachine').then(m => ({ default: m.TimeMachine })));
+const FootballAtlas = lazy(() => import('./components/FootballAtlas').then(m => ({ default: m.FootballAtlas })));
+const ArchiveCommandCenter = lazy(() => import('./components/ArchiveCommandCenter').then(m => ({ default: m.ArchiveCommandCenter })));
+
+const SuspenseFallback = () => (
+  <div className="min-h-screen flex items-center justify-center bg-[#050505] text-[#D4AF37] font-mono text-sm tracking-widest uppercase animate-pulse">
+    Unleashing Archival Records...
+  </div>
+);
 
 export default function App() {
   const [entered, setEntered] = useState(false);
@@ -210,18 +215,20 @@ export default function App() {
             exit={{ opacity: 0, x: '100%' }}
             transition={{ type: 'spring', stiffness: 220, damping: 26 }}
           >
-            <HistoricMatchesVault 
-              activeMatchId={activeClassicMatchId}
-              onClose={() => {
-                setMatchesVaultOpen(false);
-                setActiveClassicMatchId(undefined);
-              }}
-              onExploreMatches={handleExploreClassicMatch}
-              onExploreNations={handleExploreNation}
-              onExploreLegends={handleExploreLegend}
-              onExploreStadiums={handleExploreStadium}
-              onExploreTournament={setActiveTournamentYear}
-            />
+            <Suspense fallback={<SuspenseFallback />}>
+              <HistoricMatchesVault 
+                activeMatchId={activeClassicMatchId}
+                onClose={() => {
+                  setMatchesVaultOpen(false);
+                  setActiveClassicMatchId(undefined);
+                }}
+                onExploreMatches={handleExploreClassicMatch}
+                onExploreNations={handleExploreNation}
+                onExploreLegends={handleExploreLegend}
+                onExploreStadiums={handleExploreStadium}
+                onExploreTournament={setActiveTournamentYear}
+              />
+            </Suspense>
           </motion.div>
         )}
       </AnimatePresence>
@@ -236,18 +243,20 @@ export default function App() {
             exit={{ opacity: 0, x: '100%' }}
             transition={{ type: 'spring', stiffness: 220, damping: 26 }}
           >
-            <NationsVault 
-              onClose={() => {
-                setNationsVaultOpen(false);
-                setInitialNationId(undefined);
-              }}
-              initialNationId={initialNationId}
-              onExploreMatches={handleExploreClassicMatch}
-              onExploreNations={handleExploreNation}
-              onExploreLegends={handleExploreLegend}
-              onExploreStadiums={handleExploreStadium}
-              onExploreTournament={setActiveTournamentYear}
-            />
+            <Suspense fallback={<SuspenseFallback />}>
+              <NationsVault 
+                onClose={() => {
+                  setNationsVaultOpen(false);
+                  setInitialNationId(undefined);
+                }}
+                initialNationId={initialNationId}
+                onExploreMatches={handleExploreClassicMatch}
+                onExploreNations={handleExploreNation}
+                onExploreLegends={handleExploreLegend}
+                onExploreStadiums={handleExploreStadium}
+                onExploreTournament={setActiveTournamentYear}
+              />
+            </Suspense>
           </motion.div>
         )}
       </AnimatePresence>
@@ -262,18 +271,20 @@ export default function App() {
             exit={{ opacity: 0, x: '100%' }}
             transition={{ type: 'spring', stiffness: 220, damping: 26 }}
           >
-            <LegendsVault 
-              onClose={() => {
-                setLegendsVaultOpen(false);
-                setInitialLegendId(undefined);
-              }}
-              initialLegendId={initialLegendId}
-              onExploreMatches={handleExploreClassicMatch}
-              onExploreNations={handleExploreNation}
-              onExploreLegends={handleExploreLegend}
-              onExploreStadiums={handleExploreStadium}
-              onExploreTournament={setActiveTournamentYear}
-            />
+            <Suspense fallback={<SuspenseFallback />}>
+              <LegendsVault 
+                onClose={() => {
+                  setLegendsVaultOpen(false);
+                  setInitialLegendId(undefined);
+                }}
+                initialLegendId={initialLegendId}
+                onExploreMatches={handleExploreClassicMatch}
+                onExploreNations={handleExploreNation}
+                onExploreLegends={handleExploreLegend}
+                onExploreStadiums={handleExploreStadium}
+                onExploreTournament={setActiveTournamentYear}
+              />
+            </Suspense>
           </motion.div>
         )}
       </AnimatePresence>
@@ -288,9 +299,11 @@ export default function App() {
             exit={{ opacity: 0, x: '100%' }}
             transition={{ type: 'spring', stiffness: 220, damping: 26 }}
           >
-            <RecordsVault 
-              onClose={() => setRecordsVaultOpen(false)}
-            />
+            <Suspense fallback={<SuspenseFallback />}>
+              <RecordsVault 
+                onClose={() => setRecordsVaultOpen(false)}
+              />
+            </Suspense>
           </motion.div>
         )}
       </AnimatePresence>
@@ -305,18 +318,20 @@ export default function App() {
             exit={{ opacity: 0, x: '100%' }}
             transition={{ type: 'spring', stiffness: 220, damping: 26 }}
           >
-            <StadiumsShowcase 
-              onClose={() => {
-                setStadiumsVaultOpen(false);
-                setInitialStadiumId(undefined);
-              }}
-              initialStadiumId={initialStadiumId}
-              onExploreMatches={handleExploreClassicMatch}
-              onExploreNations={handleExploreNation}
-              onExploreLegends={handleExploreLegend}
-              onExploreStadiums={handleExploreStadium}
-              onExploreTournament={setActiveTournamentYear}
-            />
+            <Suspense fallback={<SuspenseFallback />}>
+              <StadiumsShowcase 
+                onClose={() => {
+                  setStadiumsVaultOpen(false);
+                  setInitialStadiumId(undefined);
+                }}
+                initialStadiumId={initialStadiumId}
+                onExploreMatches={handleExploreClassicMatch}
+                onExploreNations={handleExploreNation}
+                onExploreLegends={handleExploreLegend}
+                onExploreStadiums={handleExploreStadium}
+                onExploreTournament={setActiveTournamentYear}
+              />
+            </Suspense>
           </motion.div>
         )}
       </AnimatePresence>
@@ -324,15 +339,17 @@ export default function App() {
       {/* Cinematic Center-Scale Drawer for global Tournament Archives */}
       <AnimatePresence>
         {activeTournamentYear && (
-          <TournamentArchive 
-            tournament={completeTournaments.find(t => t.year === activeTournamentYear)!} 
-            onClose={() => setActiveTournamentYear(null)} 
-            onExploreClassicMatch={handleExploreClassicMatch} 
-            onExploreLegend={handleExploreLegend}
-            onExploreNation={handleExploreNation}
-            onExploreStadium={handleExploreStadium}
-            onExploreTournament={setActiveTournamentYear}
-          />
+          <Suspense fallback={<SuspenseFallback />}>
+            <TournamentArchive 
+              tournament={completeTournaments.find(t => t.year === activeTournamentYear)!} 
+              onClose={() => setActiveTournamentYear(null)} 
+              onExploreClassicMatch={handleExploreClassicMatch} 
+              onExploreLegend={handleExploreLegend}
+              onExploreNation={handleExploreNation}
+              onExploreStadium={handleExploreStadium}
+              onExploreTournament={setActiveTournamentYear}
+            />
+          </Suspense>
         )}
       </AnimatePresence>
 
@@ -346,14 +363,16 @@ export default function App() {
             exit={{ opacity: 0, x: '100%' }}
             transition={{ type: 'spring', stiffness: 220, damping: 26 }}
           >
-            <TimeMachine 
-              onClose={() => setTimeMachineOpen(false)}
-              onExploreClassicMatch={handleExploreClassicMatch}
-              onExploreLegend={handleExploreLegend}
-              onExploreNation={handleExploreNation}
-              onExploreStadium={handleExploreStadium}
-              onExploreRecords={handleExploreRecords}
-            />
+            <Suspense fallback={<SuspenseFallback />}>
+              <TimeMachine 
+                onClose={() => setTimeMachineOpen(false)}
+                onExploreClassicMatch={handleExploreClassicMatch}
+                onExploreLegend={handleExploreLegend}
+                onExploreNation={handleExploreNation}
+                onExploreStadium={handleExploreStadium}
+                onExploreRecords={handleExploreRecords}
+              />
+            </Suspense>
           </motion.div>
         )}
       </AnimatePresence>
@@ -368,33 +387,37 @@ export default function App() {
             exit={{ opacity: 0, x: '100%' }}
             transition={{ type: 'spring', stiffness: 220, damping: 26 }}
           >
-            <FootballAtlas 
-              onClose={() => setFootballAtlasOpen(false)}
-              onExploreClassicMatch={handleExploreClassicMatch}
-              onExploreLegend={handleExploreLegend}
-              onExploreNation={handleExploreNation}
-              onExploreStadium={handleExploreStadium}
-              onExploreTournament={setActiveTournamentYear}
-              onExploreHistory={() => {
-                setFootballAtlasOpen(false);
-                setTimeMachineOpen(true);
-              }}
-            />
+            <Suspense fallback={<SuspenseFallback />}>
+              <FootballAtlas 
+                onClose={() => setFootballAtlasOpen(false)}
+                onExploreClassicMatch={handleExploreClassicMatch}
+                onExploreLegend={handleExploreLegend}
+                onExploreNation={handleExploreNation}
+                onExploreStadium={handleExploreStadium}
+                onExploreTournament={setActiveTournamentYear}
+                onExploreHistory={() => {
+                  setFootballAtlasOpen(false);
+                  setTimeMachineOpen(true);
+                }}
+              />
+            </Suspense>
           </motion.div>
         )}
       </AnimatePresence>
 
       {/* GLOBAL PERSISTENT ARCHIVE COMMAND CENTER */}
-      <ArchiveCommandCenter 
-        onExploreMatches={handleOpenMatchesFromNav}
-        onExploreNations={handleExploreNation}
-        onExploreLegends={handleExploreLegend}
-        onExploreRecords={handleExploreRecords}
-        onExploreStadiums={handleExploreStadium}
-        onExploreTournament={setActiveTournamentYear}
-        onExploreHistory={handleBeginJourney}
-        onExploreAtlas={() => setFootballAtlasOpen(true)}
-      />
+      <Suspense fallback={null}>
+        <ArchiveCommandCenter 
+          onExploreMatches={handleOpenMatchesFromNav}
+          onExploreNations={handleExploreNation}
+          onExploreLegends={handleExploreLegend}
+          onExploreRecords={handleExploreRecords}
+          onExploreStadiums={handleExploreStadium}
+          onExploreTournament={setActiveTournamentYear}
+          onExploreHistory={handleBeginJourney}
+          onExploreAtlas={() => setFootballAtlasOpen(true)}
+        />
+      </Suspense>
 
       {/* OFFICIAL MEDIA INTEGRITY & SECURITY SYSTEM */}
       <MediaAuthoritySystem />

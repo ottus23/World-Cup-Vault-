@@ -101,7 +101,7 @@ interface VerifiedImageProps {
   entityType?: 'player' | 'stadium' | 'match' | 'trophy' | 'document';
 }
 
-export function VerifiedImage({
+export const VerifiedImage = React.memo(function VerifiedImage({
   src,
   alt,
   className = '',
@@ -639,4 +639,4 @@ export function VerifiedImage({
       </AnimatePresence>
     </>
   );
-}
+});

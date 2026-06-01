@@ -68,7 +68,16 @@ export function ArchiveNavSystem({
   const [indexOpen, setIndexOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [debouncedQuery, setDebouncedQuery] = useState('');
   const [scrolled, setScrolled] = useState(false);
+
+  // Search debouncing logic
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedQuery(searchQuery);
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
 
   // Archive Search Engine specific state variables
   const [searchMode, setSearchMode] = useState<'everything' | 'player' | 'nation' | 'match' | 'record' | 'stadium' | 'tournament'>('everything');
@@ -208,7 +217,7 @@ export function ArchiveNavSystem({
 
   const getFilteredResults = (): SearchResult[] => {
     const results: SearchResult[] = [];
-    const query = searchQuery.toLowerCase().trim();
+    const query = debouncedQuery.toLowerCase().trim();
 
     // 1. Players / Legends
     legends.forEach(l => {

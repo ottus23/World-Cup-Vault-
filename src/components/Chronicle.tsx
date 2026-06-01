@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
-import { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Trophy, ArrowRight, Star, History, Award, PlayCircle, BarChart3, Clock, MapPin, Sparkles } from 'lucide-react';
 import { tournaments as originalTournaments, Tournament } from '../data';
 import { TournamentArchive } from './TournamentArchive';
@@ -543,7 +543,7 @@ interface ChapterProps {
   onExploreTournament?: (year: number) => void;
 }
 
-function TournamentChapter({ tournament, isLeft, onExploreClassicMatch, onExploreTournament }: ChapterProps) {
+const TournamentChapter = React.memo(function TournamentChapter({ tournament, isLeft, onExploreClassicMatch, onExploreTournament }: ChapterProps) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const visuals = getEraVisuals(tournament.year);
   const addons = timelineAddons[tournament.year] || {
@@ -581,6 +581,7 @@ function TournamentChapter({ tournament, isLeft, onExploreClassicMatch, onExplor
             <motion.img 
               src={tournament.image} 
               alt={`${tournament.year} FIFA World Cup`} 
+              loading="lazy"
               className={`w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 ${visuals.filter}`}
               initial={{ scale: 1.1, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
@@ -767,7 +768,7 @@ function TournamentChapter({ tournament, isLeft, onExploreClassicMatch, onExplor
       </AnimatePresence>
     </motion.section>
   );
-}
+});
 
 export function Chronicle({ onExploreClassicMatch, onExploreTournament }: { onExploreClassicMatch?: (matchId: string) => void; onExploreTournament?: (year: number) => void }) {
   const containerRef = useRef<HTMLDivElement>(null);

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   X, 
@@ -139,6 +139,34 @@ export function FootballAtlas({
   // Migration playback state
   const [playbackActive, setPlaybackActive] = useState(false);
   const [migrationIndex, setMigrationIndex] = useState(0);
+  
+  // Zoom and Pan State for Map Optimization
+  const [zoom, setZoom] = useState(1);
+  const [pan, setPan] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const mapRef = useRef<SVGSVGElement>(null);
+
+  const handleZoomIn = () => setZoom(prev => Math.min(prev + 0.5, 4));
+  const handleZoomOut = () => setZoom(prev => Math.max(prev - 0.5, 1));
+  const handleResetZoom = () => {
+    setZoom(1);
+    setPan({ x: 0, y: 0 });
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (zoom > 1) setIsDragging(true);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (isDragging && zoom > 1) {
+      setPan(prev => ({
+        x: prev.x + e.movementX,
+        y: prev.y + e.movementY
+      }));
+    }
+  };
+
+  const handleMouseUp = () => setIsDragging(false);
 
   // Sound generator
   const triggerAudioTick = () => {
@@ -511,6 +539,31 @@ export function FootballAtlas({
           </div>
 
           <div className="absolute top-4 right-4 z-10 flex flex-col gap-1.5">
+            {/* ZOOM CONTROLS */}
+            <div className="flex bg-black/55 p-1 rounded border border-white/5 mb-2">
+              <button 
+                onClick={handleZoomIn}
+                className="w-10 h-10 flex items-center justify-center hover:bg-[#D4AF37]/10 text-white transition-all border-r border-white/5"
+                title="Zoom In"
+              >
+                <Sparkles size={14} className="text-[#D4AF37]" />
+              </button>
+              <button 
+                onClick={handleZoomOut}
+                className="w-10 h-10 flex items-center justify-center hover:bg-[#D4AF37]/10 text-white transition-all border-r border-white/5"
+                title="Zoom Out"
+              >
+                <div className="w-3 h-[2px] bg-[#D4AF37]" />
+              </button>
+              <button 
+                onClick={handleResetZoom}
+                className="w-10 h-10 flex items-center justify-center hover:bg-[#D4AF37]/10 text-white transition-all"
+                title="Reset View"
+              >
+                <RotateCcw size={14} className="text-[#AFA58D]" />
+              </button>
+            </div>
+
             {/* LAYER PANEL FILTER */}
             <div className="relative">
               <button 
@@ -551,12 +604,22 @@ export function FootballAtlas({
           </div>
 
           {/* HISTORICAL CARTOGRAPHY MAP PLOT (DYNAMIC SVG DESIGNED TO BE AN ARTWORK) */}
-          <div className="flex-1 w-full relative overflow-auto scrollbar-none flex items-center justify-start lg:justify-center touch-pan-x touch-pan-y">
+          <div 
+            className={`flex-1 w-full relative overflow-hidden flex items-center justify-start lg:justify-center touch-none ${isDragging ? 'cursor-grabbing' : zoom > 1 ? 'cursor-grab' : ''}`}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseUp}
+          >
             
             <svg 
+              ref={mapRef}
               viewBox="0 0 1000 500" 
-              className="min-w-[900px] lg:min-w-0 lg:w-full h-auto select-none max-h-full"
-              style={{ background: 'radial-gradient(circle, #0e0f14 0%, #060608 100%)' }}
+              className="min-w-[900px] lg:min-w-0 lg:w-full h-auto select-none max-h-full transition-transform duration-200 ease-out"
+              style={{ 
+                background: 'radial-gradient(circle, #0e0f14 0%, #060608 100%)',
+                transform: `scale(${zoom}) translate(${pan.x / zoom}px, ${pan.y / zoom}px)`
+              }}
             >
               {/* VINTAGE MERIDIAN AND LONGITUDE DRAWINGS */}
               {Array.from({ length: 9 }).map((_, idx) => (

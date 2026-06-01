@@ -24,6 +24,7 @@ import {
   Zap,
   Info,
 } from "lucide-react";
+import { tournaments } from "../data";
 import { completeTournaments } from "./Chronicle";
 import { Tournament } from "../data";
 import { VerifiedImage } from "./VerifiedImage";
@@ -911,6 +912,17 @@ export function TimeMachine({
         <div className="absolute inset-0 bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:24px_24px]" />
       </div>
 
+      {/* IMAGE PRELOADER FOR ADJACENT NODES (PERFORMANCE OPTIMIZATION) */}
+      <div className="fixed opacity-0 pointer-events-none w-0 h-0 overflow-hidden" aria-hidden="true">
+        {activeYears
+          .filter(y => Math.abs(y - activeYear) === 4 || Math.abs(y - activeYear) === 2) // Common jump gaps
+          .map(y => {
+            const t = tournaments.find(tourn => tourn.year === y);
+            return t?.image ? <img key={`preload-${y}`} src={t.image} /> : null;
+          })
+        }
+      </div>
+
       <AnimatePresence mode="wait">
         {status === "intro" ? (
           /* SEQUENCE 1: INTRODUCTION STAGE */
@@ -1575,43 +1587,49 @@ export function TimeMachine({
                   <span>PREV ERA GATEWAY</span>
                 </button>
 
-                {/* THE ACTIVE HORIZONTAL ROAD TICK TIMELINE */}
+                {/* THE ACTIVE HORIZONTAL ROAD TICK TIMELINE (Virtualized Decade Rails) */}
                 <div className="flex-1 max-w-2xl px-6 py-2 overflow-x-auto scrollbar-none flex justify-between gap-4 items-center border border-white/5 bg-black/35 rounded-xs p-1">
-                  {activeYears.map((year) => {
-                    const isSelected = year === activeYear;
-                    const eraSet = getEraStyles(year);
-                    return (
-                      <button
-                        key={year}
-                        onClick={() => setActiveYear(year)}
-                        className={`flex flex-col items-center justify-center min-w-[44px] min-h-[44px] select-none py-1.5 rounded-sm transition-all cursor-pointer ${
-                          isSelected
-                            ? "bg-white/10 border border-[#D4AF37]/60 shadow-[0_0_15px_rgba(212,175,55,0.15)]"
-                            : "hover:bg-white/5 border border-transparent"
-                        }`}
-                        title={`Travel to ${year} chronicle node`}
-                      >
-                        <span
-                          className={`museum-level-5 font-black ${
+                  {activeYears
+                    .filter((year) => {
+                      // Only render years within +20/-20 of active year to prevent heavy DOM
+                      const diff = Math.abs(year - activeYear);
+                      return diff <= 24;
+                    })
+                    .map((year) => {
+                      const isSelected = year === activeYear;
+                      const eraSet = getEraStyles(year);
+                      return (
+                        <button
+                          key={year}
+                          onClick={() => setActiveYear(year)}
+                          className={`flex flex-col items-center justify-center min-w-[44px] min-h-[44px] select-none py-1.5 rounded-sm transition-all cursor-pointer ${
                             isSelected
-                              ? eraSet.styles.accentText
-                              : "text-[#69707A] hover:text-[#AFA58D]"
+                              ? "bg-white/10 border border-[#D4AF37]/60 shadow-[0_0_15px_rgba(212,175,55,0.15)]"
+                              : "hover:bg-white/5 border border-transparent"
                           }`}
+                          title={`Travel to ${year} chronicle node`}
                         >
-                          {year}
-                        </span>
+                          <span
+                            className={`museum-level-5 font-black ${
+                              isSelected
+                                ? eraSet.styles.accentText
+                                : "text-[#69707A] hover:text-[#AFA58D]"
+                            }`}
+                          >
+                            {year}
+                          </span>
 
-                        {/* Selected Indicator Pin point */}
-                        <div
-                          className={`w-1 h-1 rounded-full mt-1 ${
-                            isSelected
-                              ? "bg-[#D4AF37] animate-pulse"
-                              : "bg-transparent"
-                          }`}
-                        />
-                      </button>
-                    );
-                  })}
+                          {/* Selected Indicator Pin point */}
+                          <div
+                            className={`w-1 h-1 rounded-full mt-1 ${
+                              isSelected
+                                ? "bg-[#D4AF37] animate-pulse"
+                                : "bg-transparent"
+                            }`}
+                          />
+                        </button>
+                      );
+                    })}
                 </div>
 
                 {/* NEXT CHRONICLE ARROW BUTTON */}
