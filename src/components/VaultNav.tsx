@@ -9,20 +9,36 @@ const archives = [
   { id: 'stadiums', title: 'Stadiums', icon: '🏟️', desc: 'The Grand Stages' }
 ];
 
-export function VaultNav({ onExploreMatches }: { onExploreMatches?: () => void }) {
+export function VaultNav({ 
+  onExploreMatches, 
+  onExploreNations,
+  onExploreLegends,
+  onExploreRecords,
+  onExploreStadiums
+}: { 
+  onExploreMatches?: () => void; 
+  onExploreNations?: () => void; 
+  onExploreLegends?: () => void; 
+  onExploreRecords?: () => void; 
+  onExploreStadiums?: () => void; 
+}) {
   const handleArchiveClick = (archiveId: string) => {
     if (archiveId === 'matches' && onExploreMatches) {
       onExploreMatches();
-    } else {
-      // Smooth scroll to relevant elements of the general page based on other buttons if desired
-      const idMap: Record<string, string> = {
-        tournaments: 'era-vintage',
-        legends: 'legend-pele',
-        records: 'records-vault-section'
-      };
-      if (idMap[archiveId]) {
-        const el = document.getElementById(idMap[archiveId]);
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
+    } else if (archiveId === 'nations' && onExploreNations) {
+      onExploreNations();
+    } else if (archiveId === 'legends' && onExploreLegends) {
+      onExploreLegends();
+    } else if (archiveId === 'records' && onExploreRecords) {
+      onExploreRecords();
+    } else if (archiveId === 'stadiums' && onExploreStadiums) {
+      onExploreStadiums();
+    } else if (archiveId === 'tournaments') {
+      const el = document.getElementById('era-vintage');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
       }
     }
   };

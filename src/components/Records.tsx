@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { useRef } from 'react';
 import { recordHalls, RecordMonolith } from '../data';
+import { X } from 'lucide-react';
 
 function Monolith({ record, idx }: { record: RecordMonolith; idx: number; key?: string }) {
   return (
@@ -57,11 +58,25 @@ function Monolith({ record, idx }: { record: RecordMonolith; idx: number; key?: 
   );
 }
 
-export function RecordsVault() {
+export function RecordsVault({ onClose }: { onClose?: () => void }) {
   const containerRef = useRef<HTMLDivElement>(null);
   
   return (
-    <section id="records-vault-section" ref={containerRef} className="relative w-full bg-[#111111] pb-48 pt-32 border-y border-[#4E5661]/20 overflow-hidden">
+    <div className="relative w-full bg-[#111111] min-h-screen">
+       {onClose && (
+         <div className="sticky top-0 z-[100] bg-[#111111]/90 backdrop-blur-md px-6 py-4 border-b border-[#4E5661]/20 flex justify-between items-center">
+           <button 
+             onClick={onClose} 
+             className="text-[#69707A] hover:text-[#F5F2EA] transition-colors flex items-center gap-2 cursor-pointer"
+           >
+             <X size={20} />
+             <span className="font-sans text-xs uppercase tracking-widest">Return to Lobby</span>
+           </button>
+           <span className="font-serif text-sm tracking-widest uppercase text-[#D4AF37]">Records Vault</span>
+         </div>
+       )}
+       
+       <section id="records-vault-section" ref={containerRef} className="relative w-full pb-48 pt-32 border-y border-[#4E5661]/20 overflow-hidden">
       
       {/* Entry Statement */}
       <div className="min-h-[80vh] flex flex-col items-center justify-center text-center px-6 relative mb-24">
@@ -124,5 +139,6 @@ export function RecordsVault() {
         ))}
       </div>
     </section>
+    </div>
   );
 }

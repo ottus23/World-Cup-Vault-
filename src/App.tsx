@@ -6,11 +6,18 @@ import { LegendsVault } from './components/Legends';
 import { VaultNav } from './components/VaultNav';
 import { EraNav } from './components/EraNav';
 import { HistoricMatchesVault } from './components/HistoricMatchesVault';
+import { NationsVault } from './components/NationsVault';
+import { FeaturedPreviews } from './components/FeaturedPreviews';
+import { StadiumsShowcase } from './components/StadiumsShowcase';
 import { motion, AnimatePresence } from 'motion/react';
 
 export default function App() {
   const [entered, setEntered] = useState(false);
   const [matchesVaultOpen, setMatchesVaultOpen] = useState(false);
+  const [nationsVaultOpen, setNationsVaultOpen] = useState(false);
+  const [legendsVaultOpen, setLegendsVaultOpen] = useState(false);
+  const [recordsVaultOpen, setRecordsVaultOpen] = useState(false);
+  const [stadiumsVaultOpen, setStadiumsVaultOpen] = useState(false);
   const [activeClassicMatchId, setActiveClassicMatchId] = useState<string | undefined>(undefined);
 
   useEffect(() => {
@@ -61,9 +68,22 @@ export default function App() {
       >
         <EraNav />
         <Chronicle onExploreClassicMatch={handleExploreClassicMatch} />
-        <RecordsVault />
-        <LegendsVault />
-        <VaultNav onExploreMatches={handleOpenMatchesFromNav} />
+        
+        {/* Curated Previews & Teasers */}
+        <FeaturedPreviews 
+          onExploreLegends={() => setLegendsVaultOpen(true)}
+          onExploreRecords={() => setRecordsVaultOpen(true)}
+          onExploreMatches={handleOpenMatchesFromNav}
+        />
+
+        {/* Directory Navigation */}
+        <VaultNav 
+          onExploreMatches={handleOpenMatchesFromNav} 
+          onExploreNations={() => setNationsVaultOpen(true)}
+          onExploreLegends={() => setLegendsVaultOpen(true)}
+          onExploreRecords={() => setRecordsVaultOpen(true)}
+          onExploreStadiums={() => setStadiumsVaultOpen(true)}
+        />
         
         <footer className="bg-[#090909] text-center py-12 border-t border-[#4E5661]/20">
           <p className="font-serif text-[#69707A] text-sm tracking-widest uppercase">
@@ -90,6 +110,66 @@ export default function App() {
               }}
             />
           </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Cinematic Slide-in Overlay for Nations Vault Mappe-Monde */}
+      <AnimatePresence>
+        {nationsVaultOpen && (
+          <motion.div 
+            className="fixed inset-0 z-[500] bg-[#070707] overflow-y-auto"
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            transition={{ type: 'spring', stiffness: 220, damping: 26 }}
+          >
+            <NationsVault 
+              onClose={() => setNationsVaultOpen(false)}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Cinematic Slide-in Overlay for Legends Vault Exhibit */}
+      <AnimatePresence>
+        {legendsVaultOpen && (
+          <motion.div 
+            className="fixed inset-0 z-[500] bg-[#090909] overflow-y-auto"
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            transition={{ type: 'spring', stiffness: 220, damping: 26 }}
+          >
+            <LegendsVault 
+              onClose={() => setLegendsVaultOpen(false)}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Cinematic Slide-in Overlay for Records Vault Exhibit */}
+      <AnimatePresence>
+        {recordsVaultOpen && (
+          <motion.div 
+            className="fixed inset-0 z-[500] bg-[#111111] overflow-y-auto"
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            transition={{ type: 'spring', stiffness: 220, damping: 26 }}
+          >
+            <RecordsVault 
+              onClose={() => setRecordsVaultOpen(false)}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Cinematic Slide-in Overlay for Stadiums Exhibit */}
+      <AnimatePresence>
+        {stadiumsVaultOpen && (
+          <StadiumsShowcase 
+            onClose={() => setStadiumsVaultOpen(false)}
+          />
         )}
       </AnimatePresence>
     </div>

@@ -252,7 +252,7 @@ function LegacyConstellation() {
   );
 }
 
-export function LegendsVault() {
+export function LegendsVault({ onClose }: { onClose?: () => void }) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [showCompare, setShowCompare] = useState(false);
@@ -270,6 +270,18 @@ export function LegendsVault() {
 
   return (
     <section className="relative w-full bg-[#090909] pb-32">
+       {onClose && (
+         <div className="sticky top-0 z-[100] bg-[#090909]/90 backdrop-blur-md px-6 py-4 border-b border-[#4E5661]/20 flex justify-between items-center">
+           <button 
+             onClick={onClose} 
+             className="text-[#69707A] hover:text-[#F5F2EA] transition-colors flex items-center gap-2 cursor-pointer"
+           >
+             <X size={20} />
+             <span className="font-sans text-xs uppercase tracking-widest">Return to Lobby</span>
+           </button>
+           <span className="font-serif text-sm tracking-widest uppercase text-[#D4AF37]">Legends Vault</span>
+         </div>
+       )}
        
       {/* Entry Title Statement */}
       <div className="relative min-h-[70vh] flex flex-col items-center justify-center text-center px-6 overflow-hidden">
