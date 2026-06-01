@@ -617,7 +617,7 @@ function TournamentChapter({ tournament, isLeft, onExploreClassicMatch, onExplor
           {/* Year and Location header */}
           <div className="mb-6">
             <motion.h3 
-              className={`${visuals.fontClass} text-6xl sm:text-7xl lg:text-9xl font-black text-[#F5F2EA] tracking-tighter leading-none mb-2`}
+              className="museum-level-1 text-6xl sm:text-7xl lg:text-9xl tracking-tighter leading-none mb-2"
               initial={{ opacity: 0, x: isLeft ? -40 : 40 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -628,7 +628,7 @@ function TournamentChapter({ tournament, isLeft, onExploreClassicMatch, onExplor
             
             <div className="flex items-center gap-3">
               <span className={`w-8 h-[2px] ${visuals.borderAccent} bg-current`} />
-              <div className="flex items-center gap-1.5 font-sans font-bold text-xs uppercase tracking-[0.25em] text-[#D4AF37]">
+              <div className="flex items-center gap-1.5 museum-level-5 text-vault-gold-1">
                 <MapPin size={12} className={visuals.accentColor} />
                 <span>{tournament.host.toUpperCase()}</span>
               </div>
@@ -643,11 +643,11 @@ function TournamentChapter({ tournament, isLeft, onExploreClassicMatch, onExplor
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.1 }}
           >
-            <p className="font-mono text-[9px] text-[#9C927E] tracking-widest uppercase mb-1">CROWNED CHAMPIONS</p>
-            <h4 className="font-serif text-2xl md:text-3xl font-black text-[#F5F2EA] tracking-wide mb-1 flex items-baseline gap-2">
+            <p className="museum-level-5 text-vault-muted-1 mb-1">CROWNED CHAMPIONS</p>
+            <h4 className="museum-level-3 tracking-wide mb-1 flex items-baseline gap-2">
               {tournament.champion}
               {tournament.year !== 2026 && (
-                <span className="font-sans text-xs text-[#8AA2C2] font-normal italic">
+                <span className="font-sans text-xs text-vault-muted-2 font-normal italic">
                   Defeated {tournament.runnerUp}
                 </span>
               )}
@@ -656,7 +656,7 @@ function TournamentChapter({ tournament, isLeft, onExploreClassicMatch, onExplor
 
           {/* Emotion and narrative story */}
           <motion.p 
-            className="font-sans text-[#DDD7C8] text-base md:text-lg leading-relaxed mb-8 font-light max-w-xl"
+            className="museum-level-4 mb-8 font-light max-w-xl"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 0.9 }}
             viewport={{ once: true }}
@@ -667,7 +667,7 @@ function TournamentChapter({ tournament, isLeft, onExploreClassicMatch, onExplor
 
           {/* Defining Moment Plaque (interactive museum piece) */}
           <motion.div 
-            className={`p-5 mb-8 border border-dashed ${visuals.borderAccent} bg-white/[0.02] rounded-sm max-w-xl`}
+            className={`museum-card border-dashed ${visuals.borderAccent} mb-8 max-w-xl`}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -675,46 +675,46 @@ function TournamentChapter({ tournament, isLeft, onExploreClassicMatch, onExplor
           >
             <div className="flex items-center gap-2 mb-2">
               <Clock size={14} className={visuals.accentColor} />
-              <span className={`font-sans font-bold text-[9px] tracking-widest uppercase ${visuals.accentColor}`}>DEFINING MOMENT</span>
+              <span className={`museum-level-5 ${visuals.accentColor}`}>DEFINING MOMENT</span>
             </div>
-            <h5 className="font-serif text-lg font-black text-[#F5F2EA] mb-2">"{addons.definingMoment.title}"</h5>
-            <p className="font-sans text-xs leading-relaxed text-[#69707A]">{addons.definingMoment.description}</p>
+            <h5 className="museum-level-3 text-lg mb-2">"{addons.definingMoment.title}"</h5>
+            <p className="museum-level-4 text-xs">{addons.definingMoment.description}</p>
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-xl mb-10">
             {/* Record Integration */}
             {addons.record && (
               <motion.div 
-                className="p-4 border border-[#4E5661]/15 bg-black/30 rounded-[3px]"
+                className="museum-card flex flex-col justify-between"
                 whileHover={{ y: -4 }}
               >
                 <div className="flex items-center gap-1.5 mb-1.5">
-                  <BarChart3 size={13} className="text-[#D4AF37]" />
-                  <span className="font-mono text-[8px] text-[#AFA58D] uppercase tracking-widest">RECORD BREAK</span>
+                  <BarChart3 size={13} className="text-vault-gold-1" />
+                  <span className="museum-level-5">RECORD BREAK</span>
                 </div>
                 <div className="flex items-baseline gap-2 mb-1">
-                  <span className="font-serif text-xl font-bold text-[#D4AF37]">{addons.record.value}</span>
-                  <span className="font-sans text-[10px] text-white font-bold tracking-wider truncate uppercase">{addons.record.holder}</span>
+                  <span className="museum-level-3 text-xl text-vault-gold-1">{addons.record.value}</span>
+                  <span className="museum-level-5 text-vault-text-1 truncate">{addons.record.holder}</span>
                 </div>
-                <p className="font-sans text-[10px] leading-relaxed text-[#69707A] line-clamp-2">{addons.record.description}</p>
+                <p className="museum-level-4 text-[10px] line-clamp-2">{addons.record.description}</p>
               </motion.div>
             )}
 
             {/* Featured Legend Panel */}
             {addons.featuredLegend && (
               <motion.div 
-                className="p-4 border border-[#4E5661]/15 bg-black/30 rounded-[3px] flex flex-col justify-between"
+                className="museum-card flex flex-col justify-between"
                 whileHover={{ y: -4 }}
               >
                 <div>
                   <div className="flex items-center gap-1.5 mb-1.5">
-                    <Award size={13} className="text-[#D4AF37]" />
-                    <span className="font-mono text-[8px] text-[#AFA58D] uppercase tracking-widest">FEATURED TITAN</span>
+                    <Award size={13} className="text-vault-gold-1" />
+                    <span className="museum-level-5">FEATURED TITAN</span>
                   </div>
-                  <h6 className="font-serif text-sm font-bold text-white mb-0.5">{addons.featuredLegend.name}</h6>
-                  <span className="text-[8px] font-mono text-[#D4AF37] uppercase tracking-[0.15em] block mb-2">{addons.featuredLegend.badge}</span>
+                  <h6 className="museum-level-3 text-sm mb-0.5">{addons.featuredLegend.name}</h6>
+                  <span className="museum-level-5 text-vault-gold-1 mb-2 block">{addons.featuredLegend.badge}</span>
                 </div>
-                <p className="font-sans text-[10px] leading-relaxed text-[#69707A] line-clamp-2">{addons.featuredLegend.description}</p>
+                <p className="museum-level-4 text-[10px] line-clamp-2">{addons.featuredLegend.description}</p>
               </motion.div>
             )}
           </div>

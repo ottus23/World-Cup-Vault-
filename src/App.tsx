@@ -141,12 +141,30 @@ export default function App() {
       {/* NEW STORYTELLING STREAMLINED HOMEPAGE */}
       <div className="w-full relative">
         {/* SECTION 2 — THE HISTORY OF THE FIFA WORLD CUP */}
+        <div className="w-full flex justify-center py-24 bg-vault-bg-1 relative z-10 border-t border-vault-gold-1/10">
+           <div className="max-w-7xl mx-auto px-6 text-center">
+             <div className="museum-chapter-number text-vault-gold-1 mb-6">01</div>
+             <h2 className="museum-level-2 uppercase">The Chronicle</h2>
+             <p className="museum-level-4 mt-6 max-w-2xl mx-auto italic text-vault-muted-1">
+               Trace the cinematic evolution of the grandest stage in the beautiful game, from the vintage steamship era of 1930 to the pan-continental expansion of 2026.
+             </p>
+           </div>
+        </div>
         <Chronicle 
           onExploreClassicMatch={handleExploreClassicMatch} 
           onExploreTournament={setActiveTournamentYear} 
         />
         
         {/* SECTION 3 — EXPLORE THE VAULT */}
+        <div className="w-full flex justify-center py-32 bg-vault-bg-2 relative z-10 border-t border-white/5">
+           <div className="max-w-7xl mx-auto px-6 text-center">
+             <div className="museum-chapter-number text-vault-gold-1 mb-6">02</div>
+             <h2 className="museum-level-2 uppercase">The Curated Archives</h2>
+             <p className="museum-level-4 mt-6 max-w-2xl mx-auto italic text-vault-muted-1">
+               Immerse yourself within five dedicated thematic exhibitions housing the deepest records and tactical relics.
+             </p>
+           </div>
+        </div>
         <VaultNav 
           onExploreMatches={handleOpenMatchesFromNav} 
           onExploreNations={handleExploreNation}
@@ -157,10 +175,10 @@ export default function App() {
         />
         
         {/* SECTION 4 — FOOTER */}
-        <footer className="relative bg-[#050505] py-24 px-6 border-t border-[#D4AF37]/10 flex flex-col items-center justify-center text-center overflow-hidden">
+        <footer className="relative bg-vault-bg-1 py-24 px-6 border-t border-vault-gold-1/10 flex flex-col items-center justify-center text-center overflow-hidden">
           <div className="absolute inset-0 opacity-[0.015] bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
           
-          <div className="mb-6 opacity-30 text-[#D4AF37] animate-pulse">
+          <div className="mb-6 opacity-30 text-vault-gold-1 animate-pulse">
             <svg className="w-8 h-8 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M12 14l9-5-9-5-9 5 9 5z"></path>
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
@@ -168,15 +186,15 @@ export default function App() {
             </svg>
           </div>
           
-          <h2 className="font-serif text-[#F5F2EA] text-sm tracking-[0.4em] uppercase mb-4 leading-none select-none">WORLD CUP VAULT</h2>
+          <h2 className="museum-level-5 mb-4 leading-none select-none">WORLD CUP VAULT</h2>
           
-          <div className="h-[1px] w-16 bg-[#D4AF37]/35 my-4" />
+          <div className="museum-divider" />
           
-          <p className="font-serif text-[#AFA58D] text-xs italic max-w-sm mb-8 leading-relaxed opacity-75">
+          <p className="museum-level-4 text-xs italic max-w-sm mt-8 mb-8 leading-relaxed opacity-75">
             "Immortalizing the triumphs, structural landmarks, and cinematic titans that shaped the grandest stage of the beautiful game."
           </p>
           
-          <p className="font-mono text-[#69707A] text-[9px] uppercase tracking-[0.25em]">
+          <p className="museum-level-5">
             © {new Date().getFullYear()} FIFA World Cup Vault • Pre-eminent Museum Exhibition
           </p>
         </footer>

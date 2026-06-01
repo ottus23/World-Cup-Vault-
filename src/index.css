@@ -1,22 +1,81 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=JetBrains+Mono:wght@400;500;700&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --color-vault-bg-1: #090909;
-  --color-vault-bg-2: #111111;
-  --color-vault-bg-3: #171717;
+  --color-vault-bg-1: #050505;
+  --color-vault-bg-2: #090909;
+  --color-vault-bg-3: #0D0D0D;
   
   --color-vault-text-1: #F5F2EA;
   --color-vault-text-2: #DDD7C8;
+  --color-vault-text-3: #FFFFFF;
   
   --color-vault-gold-1: #D4AF37;
   --color-vault-gold-2: #C9A227;
   
-  --color-vault-muted-1: #4E5661;
-  --color-vault-muted-2: #69707A;
+  --color-vault-muted-1: #AFA58D;
+  --color-vault-muted-2: #8C95A3;
+  --color-vault-muted-3: #69707A;
+  --color-vault-muted-4: #4E5661;
 
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Playfair Display", ui-serif, Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer components {
+  /* Level 1 — Exhibition Display */
+  .museum-level-1 {
+    @apply font-serif text-5xl md:text-7xl lg:text-8xl font-bold uppercase tracking-wider leading-none text-[#F5F2EA];
+  }
+  
+  /* Level 2 — Chapter Titles */
+  .museum-level-2 {
+    @apply font-serif text-3xl md:text-4xl lg:text-5xl font-bold uppercase tracking-widest text-[#F5F2EA] leading-tight;
+  }
+  
+  /* Level 3 — Story Headlines */
+  .museum-level-3 {
+    @apply font-serif text-xl md:text-2xl lg:text-3xl font-bold text-[#F5F2EA] leading-snug;
+  }
+  
+  /* Level 4 — Body Reading */
+  .museum-level-4 {
+    @apply font-serif text-base md:text-lg text-[#DDD7C8] leading-relaxed max-w-[65ch];
+  }
+  
+  /* Level 5 — Archive Metadata */
+  .museum-level-5 {
+    @apply font-mono text-xs md:text-sm text-[#AFA58D] uppercase tracking-[0.2em];
+  }
+
+  /* Chapter Number */
+  .museum-chapter-number {
+    @apply font-serif text-[#D4AF37] text-xl md:text-2xl font-black tracking-widest opacity-80;
+  }
+
+  /* Component Container Standard */
+  .museum-container {
+    @apply max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-24;
+  }
+
+  /* Card Standard */
+  .museum-card {
+    @apply bg-[#090909] border border-[#2A2A2A] rounded-sm relative overflow-hidden transition-all duration-700 ease-out;
+  }
+  
+  .museum-card:hover {
+    @apply border-[#D4AF37]/50;
+  }
+
+  /* Divider Standard */
+  .museum-divider {
+    @apply w-full h-[1px] bg-gradient-to-r from-transparent via-[#2A2A2A] to-transparent my-12;
+  }
+
+  .museum-button {
+    @apply inline-flex items-center justify-center gap-3 px-8 py-4 border border-[#4E5661]/50 hover:border-[#D4AF37] rounded-sm text-[#F5F2EA] uppercase tracking-[0.2em] font-mono text-xs transition-all duration-300 bg-[#090909]/80 hover:bg-[#D4AF37] hover:text-[#050505];
+  }
 }
 
 body {
@@ -28,13 +87,13 @@ body {
 
 /* Hide scrollbar for cleaner look in the vault */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
   background: var(--color-vault-bg-1); 
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-vault-muted-1); 
+  background: var(--color-vault-muted-4); 
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-vault-gold-1); 

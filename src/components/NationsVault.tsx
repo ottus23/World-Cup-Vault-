@@ -139,10 +139,10 @@ export function NationsVault({
             >
               {/* Header */}
               <div className="text-center space-y-3 max-w-2xl mx-auto">
-                <p className="font-mono text-[9px] tracking-[0.4em] text-[#D4AF37] uppercase font-semibold animate-pulse">WORLD RECORDS DEPOSITARY</p>
-                <h1 className="font-serif text-3xl md:text-5xl font-black text-white tracking-tight">The Civilizations of Football</h1>
-                <div className="h-px w-24 bg-[#D4AF37] mx-auto opacity-50 my-4" />
-                <p className="font-serif italic text-[#A3AAB2] text-sm md:text-base leading-relaxed">
+                <p className="museum-level-5 text-vault-gold-1 animate-pulse">WORLD RECORDS DEPOSITARY</p>
+                <h1 className="museum-level-2 text-white">The Civilizations of Football</h1>
+                <div className="museum-divider" />
+                <p className="museum-level-4 italic">
                   "Every World Cup tells a story. Every nation writes a chapter." Explore the heritage, systems, and empires that captured global silver.
                 </p>
               </div>

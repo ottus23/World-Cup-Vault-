@@ -60,27 +60,27 @@ export function Hero({ onBegin }: HeroProps) {
 
         {/* Elegant Headline */}
         <motion.h1 
-          className="font-serif text-5xl sm:text-7xl lg:text-9xl font-black uppercase tracking-[0.25em] text-[#F5F2EA] mb-4 text-center leading-none select-none drop-shadow-xl"
+          className="museum-level-1 text-center mb-4 select-none drop-shadow-xl"
           initial={{ letterSpacing: '0.4em', opacity: 0 }}
           animate={{ letterSpacing: '0.2em', opacity: 1 }}
           transition={{ duration: 1.8, ease: 'easeOut' }}
         >
           WORLD CUP <br />
-          <span className="text-[#D4AF37] font-medium tracking-[0.3em]">VAULT</span>
+          <span className="text-vault-gold-1 font-medium tracking-[0.3em]">VAULT</span>
         </motion.h1>
         
         <motion.div 
-          className="h-[2px] w-32 bg-[#D4AF37] my-8 opacity-45 relative"
+          className="h-[2px] w-32 bg-vault-gold-1 my-8 opacity-45 relative"
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 1.2, delay: 0.8 }}
         >
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[#D4AF37]" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-vault-gold-1" />
         </motion.div>
 
         {/* Cinematic Split Multi-Line Subheadline */}
         <motion.div 
-          className="font-sans text-[#DDD7C8] text-base sm:text-lg lg:text-xl tracking-[0.4em] uppercase mb-16 space-y-2 opacity-75 font-light"
+          className="museum-level-5 text-vault-text-2 sm:text-lg lg:text-xl tracking-[0.4em] mb-16 space-y-2 opacity-75"
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.85 }}
           transition={{ delay: 1.2, duration: 1 }}
@@ -93,7 +93,7 @@ export function Hero({ onBegin }: HeroProps) {
         {/* Pure Professional CTA */}
         <motion.button 
           onClick={onBegin}
-          className="font-serif text-[#D4AF37] border-2 border-[#D4AF37]/45 px-12 py-5 tracking-[0.3em] uppercase text-xs sm:text-sm hover:bg-[#D4AF37] hover:text-[#090909] hover:border-[#D4AF37] transition-all duration-500 ease-out cursor-pointer bg-black/40 shadow-xl overflow-hidden group select-none relative"
+          className="museum-button-outline px-12 py-5 tracking-[0.3em] uppercase text-xs sm:text-sm bg-black/40 shadow-xl overflow-hidden group select-none relative"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.6, duration: 0.8 }}
@@ -101,21 +101,21 @@ export function Hero({ onBegin }: HeroProps) {
           whileTap={{ scale: 0.95 }}
         >
           <span className="relative z-10 font-bold">BEGIN THE JOURNEY</span>
-          <div className="absolute inset-0 bg-[#D4AF37] scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 -z-0" />
+          <div className="absolute inset-0 bg-vault-gold-1 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 -z-0" />
         </motion.button>
       </motion.div>
 
       {/* Scroll Down Hint Emblem at footer of hero */}
       <motion.div 
-        className="absolute bottom-10 flex flex-col items-center opacity-40 hover:opacity-100 transition-opacity cursor-pointer text-[#DDD7C8]"
+        className="absolute bottom-10 flex flex-col items-center opacity-40 hover:opacity-100 transition-opacity cursor-pointer text-vault-text-2"
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.4 }}
         transition={{ delay: 2.2, duration: 1 }}
         onClick={onBegin}
       >
-        <span className="font-mono text-[8px] tracking-[0.3em] uppercase mb-2">SCROLL DOWN TO INITIATE</span>
+        <span className="museum-level-5 mb-2">SCROLL DOWN TO INITIATE</span>
         <motion.div 
-          className="w-1.5 h-1.5 bg-[#D4AF37] rounded-full"
+          className="w-1.5 h-1.5 bg-vault-gold-1 rounded-full"
           animate={{ y: [0, 8, 0] }}
           transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
         />
