@@ -36,34 +36,282 @@ export const tournaments: Tournament[] = [
 ];
 
 export interface Legend {
+  id: string;
   name: string;
   nation: string;
   era: string;
-  achievements: string;
   quote: string;
   image: string;
+  legacyNumber: string;
+  legacyLabel: string;
+  legacyStatement: string;
+  worldCupJourney: number[];
+  hallOfAchievements: string[];
+  eraStyle: 'vintage' | 'contrast' | 'editorial' | 'modern';
 }
 
 export const legends: Legend[] = [
-  { name: 'Pelé', nation: 'Brazil', era: '1958-1970', achievements: '3x World Cup Winner', quote: 'Success is no accident. It is hard work, perseverance, learning, studying, sacrifice and most of all, love of what you are doing.', image: 'https://images.unsplash.com/photo-1551061985-021c5b8b939e?q=80&w=1000&auto=format&fit=crop' },
-  { name: 'Diego Maradona', nation: 'Argentina', era: '1982-1994', achievements: '1x World Cup Winner', quote: 'I am Maradona, who makes goals, who makes mistakes. I can take it all, I have shoulders big enough to fight with everybody.', image: 'https://images.unsplash.com/photo-1563299723-86b6a03ff8fd?q=80&w=1000&auto=format&fit=crop' },
-  { name: 'Johan Cruyff', nation: 'Netherlands', era: '1974', achievements: '1x Finalist', quote: 'Playing football is very simple, but playing simple football is the hardest thing there is.', image: 'https://images.unsplash.com/photo-1589487391730-58f20eb2c308?q=80&w=1000&auto=format&fit=crop' },
-  { name: 'Zinedine Zidane', nation: 'France', era: '1998-2006', achievements: '1x World Cup Winner, 1x Finalist', quote: 'Magic is sometimes very close to nothing at all.', image: 'https://images.unsplash.com/photo-1605335198948-2612741ef063?q=80&w=1000&auto=format&fit=crop' },
-  { name: 'Lionel Messi', nation: 'Argentina', era: '2006-2022', achievements: '1x World Cup Winner, 1x Finalist', quote: 'I start early and I stay late, day after day, year after year. It took me 17 years and 114 days to become an overnight success.', image: 'https://images.unsplash.com/photo-1583095116742-99d750fa46cb?q=80&w=1000&auto=format&fit=crop' }
+  { 
+    id: 'pele',
+    name: 'Pelé', 
+    nation: 'Brazil', 
+    era: '1958-1970', 
+    quote: 'Success is no accident. It is hard work, perseverance, learning, studying, sacrifice and most of all, love of what you are doing.', 
+    image: 'https://images.unsplash.com/photo-1551061985-021c5b8b939e?q=80&w=1000&auto=format&fit=crop',
+    legacyNumber: '3',
+    legacyLabel: 'World Cup Titles',
+    legacyStatement: 'The King of Football.',
+    worldCupJourney: [1958, 1962, 1966, 1970],
+    hallOfAchievements: ['3x World Cup Winner', 'Best Young Player 1958', 'Golden Ball 1970', 'TIME Player of the Century'],
+    eraStyle: 'vintage'
+  },
+  { 
+    id: 'maradona',
+    name: 'Diego Maradona', 
+    nation: 'Argentina', 
+    era: '1982-1994', 
+    quote: 'I am Maradona, who makes goals, who makes mistakes. I can take it all, I have shoulders big enough to fight with everybody.', 
+    image: 'https://images.unsplash.com/photo-1563299723-86b6a03ff8fd?q=80&w=1000&auto=format&fit=crop',
+    legacyNumber: '86',
+    legacyLabel: 'The Year of D10S',
+    legacyStatement: 'The Magician of Mexico 86.',
+    worldCupJourney: [1982, 1986, 1990, 1994],
+    hallOfAchievements: ['World Cup Winner 1986', 'Golden Ball 1986', 'Goal of the Century', 'World Cup Runner-up 1990'],
+    eraStyle: 'contrast'
+  },
+  { 
+    id: 'cruyff',
+    name: 'Johan Cruyff', 
+    nation: 'Netherlands', 
+    era: '1974', 
+    quote: 'Playing football is very simple, but playing simple football is the hardest thing there is.', 
+    image: 'https://images.unsplash.com/photo-1589487391730-58f20eb2c308?q=80&w=1000&auto=format&fit=crop',
+    legacyNumber: '14',
+    legacyLabel: 'Revolutionary Icons',
+    legacyStatement: 'The Architect of Total Football.',
+    worldCupJourney: [1974],
+    hallOfAchievements: ['Golden Ball 1974', 'World Cup Finalist 1974', 'Dutch Player of the Century', 'European Player of the Century'],
+    eraStyle: 'vintage'
+  },
+  {
+    id: 'ronaldo',
+    name: 'Ronaldo Nazário',
+    nation: 'Brazil',
+    era: '1994-2006',
+    quote: 'I love scoring goals; it is the best feeling in the world.',
+    image: 'https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=1000&auto=format&fit=crop',
+    legacyNumber: '15',
+    legacyLabel: 'World Cup Goals',
+    legacyStatement: 'O Fenômeno.',
+    worldCupJourney: [1994, 1998, 2002, 2006],
+    hallOfAchievements: ['2x World Cup Winner', 'Golden Ball 1998', 'Golden Shoe 2002', '3x FIFA World Player of the Year'],
+    eraStyle: 'editorial'
+  },
+  { 
+    id: 'zidane',
+    name: 'Zinedine Zidane', 
+    nation: 'France', 
+    era: '1998-2006', 
+    quote: 'Magic is sometimes very close to nothing at all.', 
+    image: 'https://images.unsplash.com/photo-1605335198948-2612741ef063?q=80&w=1000&auto=format&fit=crop',
+    legacyNumber: '2',
+    legacyLabel: 'Final Headers',
+    legacyStatement: 'Elegance personified on the world stage.',
+    worldCupJourney: [1998, 2002, 2006],
+    hallOfAchievements: ['World Cup Winner 1998', 'Golden Ball 2006', 'Man of the Match 1998 Final', '3x FIFA World Player of the Year'],
+    eraStyle: 'editorial'
+  },
+  { 
+    id: 'messi',
+    name: 'Lionel Messi', 
+    nation: 'Argentina', 
+    era: '2006-2022', 
+    quote: 'I start early and I stay late, day after day, year after year. It took me 17 years and 114 days to become an overnight success.', 
+    image: 'https://images.unsplash.com/photo-1583095116742-99d750fa46cb?q=80&w=1000&auto=format&fit=crop',
+    legacyNumber: '26',
+    legacyLabel: 'World Cup Matches',
+    legacyStatement: 'The Man Who Completed Football.',
+    worldCupJourney: [2006, 2010, 2014, 2018, 2022],
+    hallOfAchievements: ['World Cup Winner 2022', '2x Golden Ball (2014, 2022)', 'Most Appearances (26)', 'Most Man of the Match awards (11)'],
+    eraStyle: 'modern'
+  }
 ];
 
-export interface Record {
+export interface RecordMonolith {
   title: string;
   value: string;
   holder: string;
+  nation: string;
+  year: string;
+  story: string;
+  evolution?: { year: string; value: string; holder: string }[];
 }
 
-export const records: Record[] = [
-  { title: 'Most Goals', value: '16', holder: 'Miroslav Klose (GER)' },
-  { title: 'Most Appearances', value: '26', holder: 'Lionel Messi (ARG)' },
-  { title: 'Most Titles', value: '5', holder: 'Brazil' },
-  { title: 'Youngest Scorer', value: '17y 239d', holder: 'Pelé (BRA)' },
-  { title: 'Fastest Goal', value: '10.8s', holder: 'Hakan Şükür (TUR)' }
+export interface RecordCategory {
+  id: string;
+  title: string;
+  description: string;
+  records: RecordMonolith[];
+}
+
+export const recordHalls: RecordCategory[] = [
+  {
+    id: "goal-scorers",
+    title: "The Goal Scorers",
+    description: "The most lethal finishers in the history of the tournament.",
+    records: [
+      {
+        title: "Most World Cup Goals",
+        value: "16",
+        holder: "Miroslav Klose",
+        nation: "Germany",
+        year: "2002-2014",
+        story: "A testament to longevity and predatory instinct, Klose surpassed Ronaldo's record in 2014 against Brazil in the infamous 7-1 semi-final.",
+        evolution: [
+          { year: "1958", value: "13", holder: "Just Fontaine (FRA)" },
+          { year: "1974", value: "14", holder: "Gerd Müller (FRG)" },
+          { year: "2006", value: "15", holder: "Ronaldo (BRA)" },
+          { year: "2014", value: "16", holder: "Miroslav Klose (GER)" }
+        ]
+      },
+      {
+        title: "Most Goals in a Single Tournament",
+        value: "13",
+        holder: "Just Fontaine",
+        nation: "France",
+        year: "1958",
+        story: "An unbreakable milestone. Fontaine scored 13 goals in just 6 matches in Sweden, a feat that has never been remotely challenged.",
+      },
+      {
+        title: "Fastest Goal",
+        value: "10.8s",
+        holder: "Hakan Şükür",
+        nation: "Turkey",
+        year: "2002",
+        story: "Straight from the third-place playoff kickoff, Şükür dispossessed the South Korean defense and struck history in under 11 seconds.",
+      }
+    ]
+  },
+  {
+    id: "champions",
+    title: "The Champions Hall",
+    description: "Nations that conquered the world.",
+    records: [
+      {
+        title: "Most Titles",
+        value: "5",
+        holder: "Brazil",
+        nation: "Brazil",
+        year: "1958, 1962, 1970, 1994, 2002",
+        story: "The only nation to participate in every World Cup, and the pentacampeões who defined the beautiful game.",
+      },
+      {
+        title: "Most Finals Reached",
+        value: "8",
+        holder: "Germany",
+        nation: "Germany",
+        year: "1954-2014",
+        story: "A machine of consistency, reaching the ultimate match in eight different tournaments, lifting the trophy four times.",
+      }
+    ]
+  },
+  {
+    id: "appearances",
+    title: "Legendary Appearances",
+    description: "Endurance and longevity on the grandest stage.",
+    records: [
+      {
+        title: "Most Appearances",
+        value: "26",
+        holder: "Lionel Messi",
+        nation: "Argentina",
+        year: "2006-2022",
+        story: "Spanning five tournaments, Messi broke Lothar Matthäus's record during the 2022 final, ending his journey with the ultimate prize.",
+        evolution: [
+          { year: "1970", value: "21", holder: "Uwe Seeler (FRG)" },
+          { year: "1998", value: "25", holder: "Lothar Matthäus (GER)" },
+          { year: "2022", value: "26", holder: "Lionel Messi (ARG)" }
+        ]
+      },
+      {
+        title: "Most Tournaments Played",
+        value: "5",
+        holder: "Multiple Players",
+        nation: "Various",
+        year: "1950-2022",
+        story: "Including Antonio Carbajal, Lothar Matthäus, Rafael Márquez, Lionel Messi, Cristiano Ronaldo, and Andrés Guardado, demonstrating incredible multi-decade endurance.",
+      }
+    ]
+  },
+  {
+    id: "goalkeeper",
+    title: "Goalkeeper Fortress",
+    description: "The last line of defense entering immortality.",
+    records: [
+      {
+        title: "Most Clean Sheets",
+        value: "10",
+        holder: "Rui Patrício & Hugo Lloris & Fabien Barthez & Peter Shilton",
+        nation: "Various",
+        year: "1970-2022",
+        story: "The ultimate defensive metric. Barthez and Shilton both recorded 10 clean sheets, forming impassable walls for their respective nations.",
+      },
+      {
+        title: "Longest Streak Without Conceding",
+        value: "517m",
+        holder: "Walter Zenga",
+        nation: "Italy",
+        year: "1990",
+        story: "On home soil in 1990, Zenga went over five full matches without conceding a single goal until Canniggia's semi-final header.",
+      }
+    ]
+  },
+  {
+    id: "youth",
+    title: "Records of Youth",
+    description: "Teenage prodigies who stunned the world.",
+    records: [
+      {
+        title: "Youngest Scorer",
+        value: "17y 239d",
+        holder: "Pelé",
+        nation: "Brazil",
+        year: "1958",
+        story: "A boy against men. Pelé introduced himself to the world with a goal against Wales, leading Brazil to their first World Cup.",
+      },
+      {
+        title: "Youngest Captain",
+        value: "21y 109d",
+        holder: "Tony Meola",
+        nation: "USA",
+        year: "1990",
+        story: "Entrusted with leadership against Czechoslovakia, Meola became the youngest leader in World Cup history for a rising US team.",
+      }
+    ]
+  },
+  {
+    id: "longevity",
+    title: "Records of Longevity",
+    description: "Defying time at the highest level.",
+    records: [
+      {
+        title: "Oldest Goalscorer",
+        value: "42y 39d",
+        holder: "Roger Milla",
+        nation: "Cameroon",
+        year: "1994",
+        story: "Milla shocked the world again in 1994, scoring against Russia to become the oldest to ever find the net in a World Cup.",
+      },
+      {
+        title: "Oldest Player",
+        value: "45y 161d",
+        holder: "Essam El-Hadary",
+        nation: "Egypt",
+        year: "2018",
+        story: "A true marvel of longevity, the Egyptian goalkeeper not only played at 45 but also saved a penalty in his historic match against Saudi Arabia.",
+      }
+    ]
+  }
 ];
 
 export interface HistoricalMoment {

@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Hero } from './components/Hero';
 import { Chronicle } from './components/Chronicle';
-import { Records } from './components/Records';
-import { Legends } from './components/Legends';
+import { RecordsVault } from './components/Records';
+import { LegendsVault } from './components/Legends';
 import { VaultNav } from './components/VaultNav';
 import { EraNav } from './components/EraNav';
 import { motion, AnimatePresence } from 'motion/react';
@@ -47,8 +47,8 @@ export default function App() {
       >
         <EraNav />
         <Chronicle />
-        <Records />
-        <Legends />
+        <RecordsVault />
+        <LegendsVault />
         <VaultNav />
         
         <footer className="bg-[#090909] text-center py-12 border-t border-[#4E5661]/20">
